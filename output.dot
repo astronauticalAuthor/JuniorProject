@@ -1,0 +1,6 @@
+java/lang/Integer [ label = "{java/lang/Integer|}"]
+java/lang/Number [ label = "{java/lang/Number|}"]
+java/lang/Integer -> java/lang/Number
+java/lang/Comparable [ label = "{java/lang/Comparable|}"]
+edge [ arrowhead = "empty" ]
+java/lang/Integer -> java/lang/Comparable
