@@ -5,12 +5,13 @@ import org.objectweb.asm.FieldVisitor;
 import org.objectweb.asm.Type;
 
 public class ClassFieldVisitor extends ClassVisitor {
-	
-	FieldField fieldInfo;
+	ClassField clas;
+//	FieldField fieldInfo;
 
-	public ClassFieldVisitor(int arg0, ClassVisitor arg1) {
+	public ClassFieldVisitor(int arg0, ClassVisitor arg1, ClassField current) {
 		super(arg0, arg1);
-		fieldInfo = new FieldField();
+		clas = current;
+//		fieldInfo = new FieldField();
 	}
 	
 	@Override
@@ -18,15 +19,17 @@ public class ClassFieldVisitor extends ClassVisitor {
 		FieldVisitor toDecorate = super.visitField(access, name, desc, signature, value);
 		String type = Type.getType(desc).getClassName();
 		System.out.println("     " +type+" "+name);
-		
-		fieldInfo.setName(name);
-		fieldInfo.setType(type);
+		clas.fieldNames.add(name);
+		clas.fieldTypes.add(type);
+//		fieldInfo.setName(name);
+//		fieldInfo.setType(type);
+//		ClassRepresentation.addField
 		
 		return toDecorate;
 	}
 	
-	public FieldField getFieldInfo() {
-		return fieldInfo;
-	}
+//	public FieldField getFieldInfo() {
+//		return fieldInfo;
+//	}
 
 }

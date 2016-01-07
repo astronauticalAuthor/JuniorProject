@@ -8,39 +8,20 @@ public class ClassDeclarationVisitor extends ClassVisitor {
 	
 	ClassField clas;
 	
-	public ClassDeclarationVisitor(int arg0, ClassRepresentation current) {
+	public ClassDeclarationVisitor(int arg0, ClassField current) {
 		super(arg0);
-		clas = new ClassField();
+		clas = current;
 	}
 	
 	@Override
 	public void visit(int version, int access, String name, String signature, String superName, String[] interfaces){
 		System.out.println("Class: "+name+" extends "+superName+" implements "+Arrays.toString(interfaces));
-//		classInfo += name + " [ label = \"{" + name + "|}\"]\n";
-//		if(!superName.equals("")){
-//			classInfo += superName + " [ label = \"{" + superName + "|}\"]\n";
-//			classInfo += name + " -> " + superName +"\n";
-//		}
-//		if(interfaces.length != 0){
-//			for(String i:interfaces){
-//				classInfo += i + " [ label = \"{" + i + "|}\"]\n";
-//			}
-//			classInfo += "edge [ arrowhead = \"empty\" ]\n";
-//			for(String i:interfaces){
-//				classInfo += name + " -> " + i +"\n";
-//			}
-//		}
 		
 		clas.setClassName(name);
 		clas.setSuperClass(superName);
 		clas.setInterfaces(interfaces);
-		
+//		ClassRepresentation.addClass(clas);
 		
 		super.visit(version, access, name, signature, superName, interfaces);
 	}
-	
-	public ClassField getClassInfo(){
-		return clas;
-	}
-
 }

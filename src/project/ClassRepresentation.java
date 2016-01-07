@@ -12,6 +12,7 @@ public class ClassRepresentation {
 	
 	public static void addField(int index, FieldField field) {
 		classes.get(index).addField(field.getName(), field.getType());
+		System.out.println(field.getName());
 	}
 	
 	public static void addClass(ClassField classField) {
@@ -41,7 +42,7 @@ public class ClassRepresentation {
 				ans += "|";
 			}
 			for (int z = 0; z < methods.size(); z++) {
-				ans += "+ " + methods.get(x).getName();
+				ans += "+ " + methods.get(z).getName();
 				//for each field in a method
 				ArrayList<String> parameters = methods.get(x).getParameters();
 				for (int a = 0; a < parameters.size(); a++) {

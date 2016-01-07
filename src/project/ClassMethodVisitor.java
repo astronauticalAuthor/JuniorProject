@@ -12,7 +12,7 @@ public class ClassMethodVisitor extends ClassVisitor {
 	
 	MethodField method;
 
-	public ClassMethodVisitor(int arg0, ClassVisitor arg1) {
+	public ClassMethodVisitor(int arg0, ClassVisitor arg1, ClassField current) {
 		super(arg0, arg1);
 		method = new MethodField();
 	}
