@@ -6,11 +6,11 @@ import org.objectweb.asm.Type;
 
 public class ClassFieldVisitor extends ClassVisitor {
 	
-	String fieldInfo;
+	FieldField fieldInfo;
 
 	public ClassFieldVisitor(int arg0, ClassVisitor arg1) {
 		super(arg0, arg1);
-		fieldInfo = "";
+		fieldInfo = new FieldField();
 	}
 	
 	@Override
@@ -19,12 +19,13 @@ public class ClassFieldVisitor extends ClassVisitor {
 		String type = Type.getType(desc).getClassName();
 		System.out.println("     " +type+" "+name);
 		
-		fieldInfo += "|" + name + " : " + desc;
+		fieldInfo.setName(name);
+		fieldInfo.setType(type);
 		
 		return toDecorate;
 	}
 	
-	public String getFieldInfo() {
+	public FieldField getFieldInfo() {
 		return fieldInfo;
 	}
 

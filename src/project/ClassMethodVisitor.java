@@ -1,5 +1,6 @@
 package project;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.objectweb.asm.ClassVisitor;
@@ -8,9 +9,12 @@ import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 
 public class ClassMethodVisitor extends ClassVisitor {
+	
+	MethodField method;
 
 	public ClassMethodVisitor(int arg0, ClassVisitor arg1) {
 		super(arg0, arg1);
+		method = new MethodField();
 	}
 	
 	@Override
@@ -27,8 +31,20 @@ public class ClassMethodVisitor extends ClassVisitor {
 			symbol="+";
 		}
 		
+		
+		method.setName(name);
+		method.setType(signature);
+		
+		for (int x = 0; x < classNames.length; x++) {
+			method.addParameter(classNames[x]);
+		}
+		
 		System.out.println("       method: "+name+" "+Arrays.toString(classNames)+" "+Type.getReturnType(desc).getClassName());
 		return toDecorate;
+	}
+	
+	public MethodField getMethodInfo() {
+		return method;
 	}
 
 }

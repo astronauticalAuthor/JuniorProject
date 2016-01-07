@@ -6,10 +6,11 @@ import org.objectweb.asm.ClassVisitor;
 
 public class ClassDeclarationVisitor extends ClassVisitor {
 	
-	ClassRepresentation classed;
+	ClassField clas;
 	
 	public ClassDeclarationVisitor(int arg0, ClassRepresentation current) {
 		super(arg0);
+		clas = new ClassField();
 	}
 	
 	@Override
@@ -29,11 +30,17 @@ public class ClassDeclarationVisitor extends ClassVisitor {
 //				classInfo += name + " -> " + i +"\n";
 //			}
 //		}
+		
+		clas.setClassName(name);
+		clas.setSuperClass(superName);
+		clas.setInterfaces(interfaces);
+		
+		
 		super.visit(version, access, name, signature, superName, interfaces);
 	}
 	
-	public String getClassInfo(){
-		return "";
+	public ClassField getClassInfo(){
+		return clas;
 	}
 
 }
