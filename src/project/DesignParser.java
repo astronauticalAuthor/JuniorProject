@@ -18,6 +18,7 @@ public class DesignParser {
 			
 			
 			ClassReader reader = new ClassReader(className);
+//			System.out.println(className);
 			
 			ClassDeclarationVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, current);
 			ClassFieldVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor, current);

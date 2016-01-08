@@ -3,8 +3,8 @@ package project;
 import java.util.ArrayList;
 
 public class ClassField {
-	String className;
-	String superClassName;
+	public String className;
+	public String superClassName;
 	ArrayList<MethodField> methods;
 	ArrayList<FieldField> fields;
 	
