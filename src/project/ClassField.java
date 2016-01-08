@@ -137,7 +137,8 @@ public class ClassField {
 		
 		
 		if (this.superClassName != "") {
-			parsing += this.className + " -> " + this.superClassName + "[arrowhead=\"onormal\", style=\"solid\"];\n";
+			if(!this.superClassName.equals("Object"))
+				parsing += this.className + " -> " + this.superClassName + "[arrowhead=\"onormal\", style=\"solid\"];\n";
 		}
 		//interfaces
 		ArrayList<String> interfaces = this.getInterfaces();
