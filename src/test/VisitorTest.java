@@ -19,10 +19,10 @@ public class VisitorTest{
 		ClassDeclarationVisitor cdv = new ClassDeclarationVisitor(Opcodes.ASM5, tester);
 		creader.accept(cdv, ClassReader.EXPAND_FRAMES);
 		
-		assertEquals(tester.className, "test/TestClass");
-		assertEquals(tester.superClassName, "java/lang/Object");
+		assertEquals(tester.className, "TestClass");
+		assertEquals(tester.superClassName, "Object");
 		assertEquals(tester.getInterfaces().size(), 1);
-		assertEquals(tester.getInterfaces().get(0), "test/TestInterface");		
+		assertEquals(tester.getInterfaces().get(0), "TestInterface");		
 	}
 	
 	@Test
@@ -41,7 +41,7 @@ public class VisitorTest{
 		assertEquals(fields.get(2).getName(), "var3");
 		assertEquals(fields.get(0).getType(), "int");
 		assertEquals(fields.get(1).getType(), "int");
-		assertEquals(fields.get(2).getType(), "java.lang.String");
+		assertEquals(fields.get(2).getType(), "String");
 	}
 	
 	@Test
@@ -56,7 +56,7 @@ public class VisitorTest{
 		creader.accept(cmv, ClassReader.EXPAND_FRAMES);
 		
 		ArrayList<MethodField> methods = tester.getMethods();
-		String[] m = {"<init>", "testMethod1", "testMethod2", "testMethod3", "thisIsAReallyLongMethod"};
+		String[] m = {"TestClass", "testMethod1", "testMethod2", "testMethod3", "thisIsAReallyLongMethod"};
 		String[][] variables = {{}, {}, {"java.lang.String"}, {"int"}, {"java.lang.String", "int", "double", "float"}};
 		for (int x = 0; x < methods.size(); x++) {
 			assertEquals(methods.get(x).methodName, m[x]);
@@ -71,6 +71,7 @@ public class VisitorTest{
 	@Test
 	public void testClassFieldString() throws IOException{
 		ClassField tester = new ClassField();
+		ArrayList<ClassField> t = new ArrayList<ClassField>();
 		
 		ClassReader creader = new ClassReader("test.TestClass");
 		ClassDeclarationVisitor cdv = new ClassDeclarationVisitor(Opcodes.ASM5, tester);
@@ -79,8 +80,62 @@ public class VisitorTest{
 		
 		creader.accept(cmv, ClassReader.EXPAND_FRAMES);
 		
-		String ans = "shape=\"record\"\ntest/TestClass [\nlabel= \"{test/TestClass|var1 : int\\l\nvar2 : int\\l\nvar3 : java.lang.String\\l\n|+ <init>() : void\\l\n+ testMethod1() : void\\l\n+ testMethod2(java.lang.String) : void\\l\n+ testMethod3(int) : java.lang.String\\l\n+ thisIsAReallyLongMethod(java.lang.String,int,double,float) : void\\l\n}\n];";
-		assertEquals(ans, tester.toString());
+		t.add(tester);
+		String ans = "TestClass [shape=\"record\"\nlabel= \"{TestClass|var1 : int\\l\nvar2 : int\\l\nvar3 : String\\l\n|+ TestClass() : void\\l\n+ testMethod1() : void\\l\n+ testMethod2(String) : void\\l\n+ testMethod3(int) : String\\l\n+ thisIsAReallyLongMethod(String,int,double,float) : void\\l\n}\"\n];";
+		
+		assertTrue(tester.toString(t).contains(ans));
+	}
+	
+	@Test
+	public void testAssociations() throws IOException {
+		ArrayList<ClassField> t = new ArrayList<ClassField>();
+		
+		ClassField tester = new ClassField();
+		ClassReader creader = new ClassReader("test.TestUseAndAssociation");
+		ClassDeclarationVisitor cdv = new ClassDeclarationVisitor(Opcodes.ASM5, tester);
+		ClassFieldVisitor cfv = new ClassFieldVisitor(Opcodes.ASM5, cdv, tester);
+		ClassMethodVisitor cmv = new ClassMethodVisitor(Opcodes.ASM5, cfv, tester);
+		
+		creader.accept(cmv, ClassReader.EXPAND_FRAMES);
+		t.add(tester);
+		
+		ClassField tester2 = new ClassField();
+		ClassReader creader2 = new ClassReader("test.TestAssociation");
+		ClassDeclarationVisitor cdv2 = new ClassDeclarationVisitor(Opcodes.ASM5, tester2);
+		ClassFieldVisitor cfv2 = new ClassFieldVisitor(Opcodes.ASM5, cdv, tester2);
+		ClassMethodVisitor cmv2 = new ClassMethodVisitor(Opcodes.ASM5, cfv, tester2);
+		
+		creader2.accept(cmv2, ClassReader.EXPAND_FRAMES);
+		t.add(tester2);
+		
+		String ans = "[arrowhead=\"onormal\", style=\"solid\"]";
+		assertTrue(tester.toString(t).contains(ans));
+	}
+	
+	@Test
+	public void testUses() throws IOException {
+		ArrayList<ClassField> t = new ArrayList<ClassField>();
+		
+		ClassField tester = new ClassField();
+		ClassReader creader = new ClassReader("test.TestUseAndAssociation");
+		ClassDeclarationVisitor cdv = new ClassDeclarationVisitor(Opcodes.ASM5, tester);
+		ClassFieldVisitor cfv = new ClassFieldVisitor(Opcodes.ASM5, cdv, tester);
+		ClassMethodVisitor cmv = new ClassMethodVisitor(Opcodes.ASM5, cfv, tester);
+		
+		creader.accept(cmv, ClassReader.EXPAND_FRAMES);
+		t.add(tester);
+		
+		ClassField tester2 = new ClassField();
+		ClassReader creader2 = new ClassReader("test.TestUse");
+		ClassDeclarationVisitor cdv2 = new ClassDeclarationVisitor(Opcodes.ASM5, tester2);
+		ClassFieldVisitor cfv2 = new ClassFieldVisitor(Opcodes.ASM5, cdv, tester2);
+		ClassMethodVisitor cmv2 = new ClassMethodVisitor(Opcodes.ASM5, cfv, tester2);
+		
+		creader2.accept(cmv2, ClassReader.EXPAND_FRAMES);
+		t.add(tester2);
+		
+		String ans = "[arrowhead=\"ovee\", style=\"dashed\"]";
+		assertTrue(tester.toString(t).contains(ans));
 	}
 	
 
