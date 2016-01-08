@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ClassField {
-	String className;
-	String superClassName;
+	public String className;
+	public String superClassName;
 	ArrayList<MethodField> methods;
 	ArrayList<FieldField> fields;
 	
