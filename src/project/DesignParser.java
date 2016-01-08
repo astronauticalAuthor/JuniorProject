@@ -31,7 +31,7 @@ public class DesignParser {
 		System.out.println("digraph G{\n rankdir=BT;");
 		for(ClassField c: classes){
 			
-			System.out.println("\n" + c.toString(args));
+			System.out.println("\n" + c.toString(classes));
 			
 		}
 		System.out.println("}");

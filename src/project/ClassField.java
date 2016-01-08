@@ -73,7 +73,13 @@ public class ClassField {
 		return interfaces;
 	}
 	
-	public String toString(String[] classNames){
+	public String toString(ArrayList<ClassField> classes){
+		
+		ArrayList<String> classNames = new ArrayList<String>();
+		
+		for(ClassField c:classes){
+			classNames.add(c.className);
+		}
 		
 		if(this.isInterface)
 			parsing += this.className + " [shape=\"record\"\n label= \"{\\<\\<interface\\>\\>\\n" + this.className + "|\n";
@@ -105,23 +111,27 @@ public class ClassField {
 		
 		parsing += "}\"\n];\n";
 		
-		//do association
-		for (FieldField f:fields) {
-			if (Arrays.asList(classNames).contains(f.fieldName)) {
-				parsing += this.className + " -> " + f.fieldName + "[arrowhead=\"ovee\", style=\"solid\"];\n";
-			}
-		}
 		
-		//do uses (return types and parameter types)
-		for (MethodField m:methods) {
-			if (Arrays.asList(classNames).contains(m.methodType)) {
-				parsing += this.className + " -> " + m.methodType + "[arrowhead=\"ovee\", style=\"dashed\"];\n";
-			}
-			
-			for (String p:m.getParameters()) {
-				if (Arrays.asList(classNames).contains(p)) {
-					parsing += this.className + " -> " + p + "[arrowhead=\"ovee\", style=\"dashed\"];\n";
+		if(!this.isInterface){
+			//do association
+			for (FieldField f:fields) {
+				if (classNames.contains(f.fieldType)) {
+					parsing += this.className + " -> " + f.fieldType + "[arrowhead=\"ovee\", style=\"solid\"];\n";
 				}
+			}
+		
+		
+			//do uses (return types and parameter types)
+			for (MethodField m:methods) {
+				if (classNames.contains(m.getReturnType())) {
+					parsing += this.className + " -> " + m.getReturnType() + "[arrowhead=\"ovee\", style=\"dashed\"];\n";
+				}
+				ArrayList<String> params = m.getParameters();
+			for (String p:params) {
+				if (classNames.contains(p)) {
+						parsing += this.className + " -> " + p + "[arrowhead=\"ovee\", style=\"dashed\"];\n";
+				}
+			}
 			}
 		}
 		
