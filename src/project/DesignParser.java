@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import org.objectweb.asm.ClassReader;
-import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
 
 import java.io.*;
@@ -30,17 +29,19 @@ public class DesignParser {
 			
 			classes.add(current);
 		}
-		
-		for(ClassField c: classes){
-			System.out.println("\n" + c.toString());
-		}
 	
-//		try {
-//			PrintWriter writer = new PrintWriter(new File("output.dot"));
-//			writer.write(ClassRepresentation.convert());
-//			writer.close();
-//		}
-//		catch(Exception e) {}
+		try {
+			PrintWriter writer = new PrintWriter(new File("./output.txt"));
+			writer.write("digraph G{\n rankdir=BT;");
+			for(ClassField c:classes){
+				writer.write("\n" + c.toString());
+			}
+			writer.write("}");
+			writer.close();
+		}
+		catch(Exception e) {}
 
+		
+		
 	}
 }

@@ -1,8 +1,5 @@
 package project;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
@@ -48,7 +45,6 @@ public class ClassMethodVisitor extends ClassVisitor {
 		
 		clas.addMethod(method);
 		
-		System.out.println("       method: "+name+" "+Arrays.toString(classNames)+" "+Type.getReturnType(desc).getClassName());
 		return toDecorate;
 	}
 	

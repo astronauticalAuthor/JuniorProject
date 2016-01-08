@@ -35,7 +35,6 @@ public class ClassFieldVisitor extends ClassVisitor {
 		
 		field.setAccess(symbol);
 		
-		System.out.println("     " +type+" "+name);
 		clas.addField(field);
 		
 		return toDecorate;
