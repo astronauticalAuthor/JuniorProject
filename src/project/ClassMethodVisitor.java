@@ -48,7 +48,6 @@ public class ClassMethodVisitor extends ClassVisitor {
 		
 		clas.addMethod(method);
 		
-		System.out.println("       method: "+name+" "+Arrays.toString(classNames)+" "+Type.getReturnType(desc).getClassName());
 		return toDecorate;
 	}
 	

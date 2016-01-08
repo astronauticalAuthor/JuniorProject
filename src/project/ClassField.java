@@ -38,15 +38,18 @@ public class ClassField {
 	}
 	
 	public void setClassName(String className) {
+		className = className.substring(className.lastIndexOf("/")+1);
 		this.className = className;
 	}
 	
 	public void setSuperClass(String superClass) {
+		superClass = superClass.substring(superClass.lastIndexOf("/")+1);
 		this.superClassName = superClass;
 	}
 	
 	public void setInterfaces(String[] inters) {
 		for (int x = 0; x < inters.length; x++) {
+			inters[x] = inters[x].substring(inters[x].lastIndexOf("/")+1);
 			interfaces.add(inters[x]);
 		}
 	}
@@ -72,11 +75,11 @@ public class ClassField {
 	}
 	
 	public String toString(){
-		parsing += "shape=\"record\"\n";
+		
 		if(this.isInterface)
-			parsing += this.className + " [\nlabel= \"{\\<\\<interface\\>\\>\\n" + this.className + "|\n";
+			parsing += this.className + " [shape=\"record\"\n label= \"{\\<\\<interface\\>\\>\\n" + this.className + "|\n";
 		else
-			parsing += this.className + " [\nlabel= \"{" + this.className +"|";
+			parsing += this.className + " [shape=\"record\"\nlabel= \"{" + this.className +"|";
 		
 		//for each field in a class
 		ArrayList<FieldField> fields = this.getFields();
@@ -100,7 +103,17 @@ public class ClassField {
 		}
 
 		
-		parsing += "}\n];";		
+		parsing += "}\"\n];\n";
+		
+		if (this.superClassName != "") {
+			parsing += this.className + " -> " + this.superClassName + "[arrowhead=\"onormal\", style=\"solid\"];\n";
+		}
+		//interfaces
+		ArrayList<String> interfaces = this.getInterfaces();
+		for (int y = 0; y < interfaces.size(); y++) {
+			parsing += this.className + " -> " + interfaces.get(y) + "[arrowhead=\"onormal\", style=\"dashed\"];\n";
+		}
+		
 		return parsing;
 	}
 
