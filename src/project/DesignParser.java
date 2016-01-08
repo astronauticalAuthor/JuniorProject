@@ -18,7 +18,6 @@ public class DesignParser {
 			
 			
 			ClassReader reader = new ClassReader(className);
-//			System.out.println(className);
 			
 			ClassDeclarationVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, current);
 			ClassFieldVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor, current);
@@ -32,7 +31,7 @@ public class DesignParser {
 		System.out.println("digraph G{\n rankdir=BT;");
 		for(ClassField c: classes){
 			
-			System.out.println("\n" + c.toString());
+			System.out.println("\n" + c.toString(args));
 			
 		}
 		System.out.println("}");

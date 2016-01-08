@@ -1,6 +1,7 @@
 package project;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ClassField {
 	public String className;
@@ -72,7 +73,7 @@ public class ClassField {
 		return interfaces;
 	}
 	
-	public String toString(){
+	public String toString(String[] classNames){
 		
 		if(this.isInterface)
 			parsing += this.className + " [shape=\"record\"\n label= \"{\\<\\<interface\\>\\>\\n" + this.className + "|\n";
@@ -103,6 +104,27 @@ public class ClassField {
 
 		
 		parsing += "}\"\n];\n";
+		
+		//do association
+		for (FieldField f:fields) {
+			if (Arrays.asList(classNames).contains(f.fieldName)) {
+				parsing += this.className + " -> " + f.fieldName + "[arrowhead=\"ovee\", style=\"solid\"];\n";
+			}
+		}
+		
+		//do uses (return types and parameter types)
+		for (MethodField m:methods) {
+			if (Arrays.asList(classNames).contains(m.methodType)) {
+				parsing += this.className + " -> " + m.methodType + "[arrowhead=\"ovee\", style=\"dashed\"];\n";
+			}
+			
+			for (String p:m.getParameters()) {
+				if (Arrays.asList(classNames).contains(p)) {
+					parsing += this.className + " -> " + p + "[arrowhead=\"ovee\", style=\"dashed\"];\n";
+				}
+			}
+		}
+		
 		
 		if (this.superClassName != "") {
 			parsing += this.className + " -> " + this.superClassName + "[arrowhead=\"onormal\", style=\"solid\"];\n";
