@@ -1,7 +1,0 @@
-digraph computer_generated{
-rankdir=BT;
-java/lang/Integer -> java/lang/Number[arrowhead="onormal", style="solid"];
-java/lang/Integer -> java/lang/Comparable[arrowhead="onormal", style="dashed"];
-java/lang/Integer -> java/lang/Comparable[arrowhead="onormal", style="dashed"];
-java/lang/Integer -> java/lang/Comparable[arrowhead="onormal", style="dashed"];
-}

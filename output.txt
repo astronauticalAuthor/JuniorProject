@@ -1,0 +1,94 @@
+digraph G{
+ rankdir=BT;
+ClassDeclarationVisitor [shape="record"
+label= "{ClassDeclarationVisitor|clas : project.ClassField\l
+|+ <init>(int,project.ClassField) : void\l
++ visit(int,int,java.lang.String,java.lang.String,java.lang.String,java.lang.String[]) : void\l
+}"
+];
+ClassDeclarationVisitor -> ClassVisitor[arrowhead="onormal", style="solid"];
+
+ClassField [shape="record"
+label= "{ClassField|className : java.lang.String\l
+superClassName : java.lang.String\l
+methods : java.util.ArrayList\l
+fields : java.util.ArrayList\l
+interfaces : java.util.ArrayList\l
+parsing : java.lang.String\l
+-isInterface : java.lang.Boolean\l
+|+ <init>() : void\l
++ addMethod(project.MethodField) : void\l
++ addField(project.FieldField) : void\l
++ setClassName(java.lang.String) : void\l
++ setSuperClass(java.lang.String) : void\l
++ setInterfaces(java.lang.String[]) : void\l
++ getFields() : java.util.ArrayList\l
++ getMethods() : java.util.ArrayList\l
++ getInterfaces() : java.util.ArrayList\l
++ toString() : java.lang.String\l
++ setIsInterface(boolean) : void\l
+}"
+];
+ClassField -> Object[arrowhead="onormal", style="solid"];
+
+ClassFieldVisitor [shape="record"
+label= "{ClassFieldVisitor|clas : project.ClassField\l
+field : project.FieldField\l
+|+ <init>(int,org.objectweb.asm.ClassVisitor,project.ClassField) : void\l
++ visitField(int,java.lang.String,java.lang.String,java.lang.String,java.lang.Object) : org.objectweb.asm.FieldVisitor\l
+}"
+];
+ClassFieldVisitor -> ClassVisitor[arrowhead="onormal", style="solid"];
+
+ClassMethodVisitor [shape="record"
+label= "{ClassMethodVisitor|clas : project.ClassField\l
+method : project.MethodField\l
+|+ <init>(int,org.objectweb.asm.ClassVisitor,project.ClassField) : void\l
++ visitMethod(int,java.lang.String,java.lang.String,java.lang.String,java.lang.String[]) : org.objectweb.asm.MethodVisitor\l
+}"
+];
+ClassMethodVisitor -> ClassVisitor[arrowhead="onormal", style="solid"];
+
+DesignParser [shape="record"
+label= "{DesignParser||+ <init>() : void\l
++ main(java.lang.String[]) : void\l
+}"
+];
+DesignParser -> Object[arrowhead="onormal", style="solid"];
+
+FieldField [shape="record"
+label= "{FieldField|fieldName : java.lang.String\l
+fieldType : java.lang.String\l
+access : java.lang.String\l
+|+ <init>() : void\l
++ setName(java.lang.String) : void\l
++ setType(java.lang.String) : void\l
++ setAccess(java.lang.String) : void\l
++ getName() : java.lang.String\l
++ getType() : java.lang.String\l
++ getAccess() : java.lang.String\l
+}"
+];
+FieldField -> Object[arrowhead="onormal", style="solid"];
+
+MethodField [shape="record"
+label= "{MethodField|+methodName : java.lang.String\l
++methodType : java.lang.String\l
++parameters : java.util.ArrayList\l
++returnType : java.lang.String\l
+-access : java.lang.String\l
+|+ <init>() : void\l
++ setName(java.lang.String) : void\l
++ setType(java.lang.String) : void\l
++ setReturnType(java.lang.String) : void\l
++ addParameter(java.lang.String) : void\l
++ getName() : java.lang.String\l
++ getType() : java.lang.String\l
++ getParameters() : java.util.ArrayList\l
++ getReturnType() : java.lang.String\l
++ setAccess(java.lang.String) : void\l
++ getAccess() : java.lang.String\l
+}"
+];
+MethodField -> Object[arrowhead="onormal", style="solid"];
+}
