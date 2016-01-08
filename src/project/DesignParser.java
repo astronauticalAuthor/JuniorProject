@@ -28,17 +28,24 @@ public class DesignParser {
 			
 			classes.add(current);
 		}
-	
-		try {
-			PrintWriter writer = new PrintWriter(new File("./output.txt"));
-			writer.write("digraph G{\n rankdir=BT;");
-			for(ClassField c:classes){
-				writer.write("\n" + c.toString());
-			}
-			writer.write("}");
-			writer.close();
+		System.out.println("digraph G{\n rankdir=BT;");
+		for(ClassField c: classes){
+			
+			System.out.println("\n" + c.toString());
+			
 		}
-		catch(Exception e) {}
+		System.out.println("}");
+	
+//		try {
+//			PrintWriter writer = new PrintWriter(new File("./output.txt"));
+//			writer.write("digraph G{\n rankdir=BT;");
+//			for(ClassField c:classes){
+//				writer.write("\n" + c.toString());
+//			}
+//			writer.write("}");
+//			writer.close();
+//		}
+//		catch(Exception e) {}
 
 		
 		

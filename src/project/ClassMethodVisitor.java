@@ -34,8 +34,11 @@ public class ClassMethodVisitor extends ClassVisitor {
 			symbol = "#";
 		}
 		
-		
-		method.setName(name);
+		if(name.equals("<init>")){
+			method.setName(clas.className);
+		}else{
+			method.setName(name);
+		}
 		method.setType(signature);
 		method.setAccess(symbol);
 		for (int x = 0; x < classNames.length; x++) {

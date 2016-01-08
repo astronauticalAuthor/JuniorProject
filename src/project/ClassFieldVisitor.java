@@ -22,7 +22,7 @@ public class ClassFieldVisitor extends ClassVisitor {
 		String type = Type.getType(desc).getClassName();
 		
 		field.setName(name);
-		field.setType(type);
+		field.setType(type.substring(type.lastIndexOf(".")+1));
 		
 		String symbol = "";
 		if((access & Opcodes.ACC_PRIVATE) != 0){

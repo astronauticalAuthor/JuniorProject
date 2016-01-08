@@ -94,7 +94,8 @@ public class ClassField {
 			parsing += "+ " + m.getName() + "(";
 			ArrayList<String> parameters = m.getParameters();
 			while(parameters.size() != 0){
-				parsing += parameters.remove(0);
+				String p = parameters.remove(0);
+				parsing += p.substring(p.lastIndexOf(".")+1);
 				if(parameters.size() != 0) parsing += ",";
 			}
 			parsing += ") : " + m.getReturnType() + "\\l\n";
