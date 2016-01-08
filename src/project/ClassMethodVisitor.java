@@ -44,7 +44,8 @@ public class ClassMethodVisitor extends ClassVisitor {
 		for (int x = 0; x < classNames.length; x++) {
 			method.addParameter(classNames[x]);
 		}
-		method.setReturnType(Type.getReturnType(desc).getClassName());
+		String retType = Type.getReturnType(desc).getClassName();
+		method.setReturnType(retType.substring(retType.lastIndexOf(".")+1));
 		
 		clas.addMethod(method);
 		
