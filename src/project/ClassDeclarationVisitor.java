@@ -3,6 +3,7 @@ package project;
 import java.util.Arrays;
 
 import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.Opcodes;
 
 public class ClassDeclarationVisitor extends ClassVisitor {
 	
@@ -20,7 +21,10 @@ public class ClassDeclarationVisitor extends ClassVisitor {
 		clas.setClassName(name);
 		clas.setSuperClass(superName);
 		clas.setInterfaces(interfaces);
-//		ClassRepresentation.addClass(clas);
+		
+		if((access & Opcodes.ACC_INTERFACE) != 0){
+			clas.setIsInterface(true);
+		}
 		
 		super.visit(version, access, name, signature, superName, interfaces);
 	}

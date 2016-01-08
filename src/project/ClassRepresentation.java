@@ -11,7 +11,7 @@ public class ClassRepresentation {
 	}
 	
 	public static void addField(int index, FieldField field) {
-		classes.get(index).addField(field.getName(), field.getType());
+//		classes.get(index).addField(field.getName(), field.getType());
 		System.out.println(field.getName());
 	}
 	

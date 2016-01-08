@@ -8,16 +8,21 @@ public class ClassField {
 	String className;
 	String superClassName;
 	ArrayList<MethodField> methods;
-	ArrayList<String> fieldNames;
-	ArrayList<String> fieldTypes;
+	ArrayList<FieldField> fields;
+	
+//	ArrayList<String> fieldNames;
+//	ArrayList<String> fieldTypes;
+	
 	ArrayList<String> interfaces;
 	String parsing = "";
+	private Boolean isInterface = false;
 	
 	public ClassField() {
-		fieldNames = new ArrayList<String>();
+//		fieldNames = new ArrayList<String>();
 		methods = new ArrayList<MethodField>();
 		interfaces = new ArrayList<String>();
-		fieldTypes = new ArrayList<String>();
+//		fieldTypes = new ArrayList<String>();
+		fields = new ArrayList<FieldField>();
 		className = "";
 		superClassName = "";
 	}
@@ -26,9 +31,10 @@ public class ClassField {
 		methods.add(method);
 	}
 	
-	public void addField(String fieldName, String fieldType) {
-		fieldNames.add(fieldName);
-		fieldTypes.add(fieldType);
+	public void addField(FieldField field) {
+//		fieldNames.add(fieldName);
+//		fieldTypes.add(fieldType);
+		fields.add(field);
 	}
 	
 	public void setClassName(String className) {
@@ -45,12 +51,16 @@ public class ClassField {
 		}
 	}
 	
-	public ArrayList<String> getFieldNames() {
-		return fieldNames;
-	}
+//	public ArrayList<String> getFieldNames() {
+//		return fieldNames;
+//	}
+//	
+//	public ArrayList<String> getFieldTypes() {
+//		return fieldTypes;
+//	}
 	
-	public ArrayList<String> getFieldTypes() {
-		return fieldTypes;
+	public ArrayList<FieldField> getFields(){
+		return fields;
 	}
 	
 	public ArrayList<MethodField> getMethods() {
@@ -63,13 +73,15 @@ public class ClassField {
 	
 	public String toString(){
 		parsing += "shape=\"record\"\n";
-		parsing += this.className + " [\nlabel= \"{";
+		if(this.isInterface)
+			parsing += this.className + " [\nlabel= \"{\\<\\<interface\\>\\>\\n" + this.className + "|\n";
+		else
+			parsing += this.className + " [\nlabel= \"{" + this.className +"|";
 		
 		//for each field in a class
-		ArrayList<String> fieldNames = this.getFieldNames();
-		ArrayList<String> fieldTypes = this.getFieldTypes();
-		for (int y = 0; y < fieldNames.size(); y++) {
-			parsing += "- " + fieldNames.get(y) + " : " + fieldTypes.get(y) + "\\l\n";
+		ArrayList<FieldField> fields = this.getFields();
+		for(FieldField f:fields){
+			parsing += f.getAccess() + f.getName() + " : " + f.getType() + "\\l\n";
 		}
 		
 		//for each method in a class
@@ -78,20 +90,21 @@ public class ClassField {
 			parsing += "|";
 		}
 		for(MethodField m:methods){
-			parsing += "+ " + m.getName() + m.getParameters() + "\n";
+			parsing += "+ " + m.getName() + "(";
+			ArrayList<String> parameters = m.getParameters();
+			while(parameters.size() != 0){
+				parsing += parameters.remove(0);
+				if(parameters.size() != 0) parsing += ",";
+			}
+			parsing += ") : " + m.getReturnType() + "\\l\n";
 		}
-//		for (int z = 0; z < methods.size(); z++) {
-//			parsing += "+ " + methods.get(z).getName();
-//			//for each field in a method
-////			ArrayList<String> parameters = methods.get(z).getParameters();
-////			for (int a = 0; a < parameters.size(); a++) {
-////				parsing += parameters.get(a);
-////				if (a != parameters.size() - 1) parsing += ",";
-////			}
-//			parsing += methods.get(z).getParameters() + "\n";
-//		}
+
 		
 		parsing += "}\n];";		
 		return parsing;
+	}
+
+	public void setIsInterface(boolean b) {
+		this.isInterface  = true;
 	}
 }

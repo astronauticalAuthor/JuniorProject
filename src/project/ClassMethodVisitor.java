@@ -28,25 +28,29 @@ public class ClassMethodVisitor extends ClassVisitor {
 		}
 		method = new MethodField();
 		String symbol = "";
+		
 		if((access & Opcodes.ACC_PUBLIC) != 0){
 			symbol="+";
+		}else if((access & Opcodes.ACC_PRIVATE) !=0){
+			symbol = "-";
+		}else if((access & Opcodes.ACC_PROTECTED) != 0){
+			symbol = "#";
 		}
 		
 		
 		method.setName(name);
 		method.setType(signature);
-		method.addParameter(Arrays.toString(classNames));
-//		for (int x = 0; x < classNames.length; x++) {
-//			method.addParameter(classNames[x]);
-//		}
+		method.setAccess(symbol);
+		for (int x = 0; x < classNames.length; x++) {
+			method.addParameter(classNames[x]);
+		}
+		method.setReturnType(Type.getReturnType(desc).getClassName());
 		
 		clas.addMethod(method);
+		
 		System.out.println("       method: "+name+" "+Arrays.toString(classNames)+" "+Type.getReturnType(desc).getClassName());
 		return toDecorate;
 	}
 	
-//	public MethodField getMethodInfo() {
-//		return method;
-//	}
 
 }
