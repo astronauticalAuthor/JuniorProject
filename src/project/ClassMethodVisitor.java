@@ -42,7 +42,7 @@ public class ClassMethodVisitor extends ClassVisitor {
 		method.setType(signature);
 		method.setAccess(symbol);
 		for (int x = 0; x < classNames.length; x++) {
-			method.addParameter(classNames[x]);
+			method.addParameter(classNames[x].substring(classNames[x].lastIndexOf(".")+1));
 		}
 		String retType = Type.getReturnType(desc).getClassName();
 		method.setReturnType(retType.substring(retType.lastIndexOf(".")+1));

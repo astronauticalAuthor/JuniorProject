@@ -99,7 +99,7 @@ public class ClassField {
 		}
 		for(MethodField m:methods){
 			parsing += "+ " + m.getName() + "(";
-			ArrayList<String> parameters = m.getParameters();
+			ArrayList<String> parameters = new ArrayList<String>(m.getParameters());
 			while(parameters.size() != 0){
 				String p = parameters.remove(0);
 				parsing += p.substring(p.lastIndexOf(".")+1);
@@ -127,11 +127,11 @@ public class ClassField {
 					parsing += this.className + " -> " + m.getReturnType() + "[arrowhead=\"ovee\", style=\"dashed\"];\n";
 				}
 				ArrayList<String> params = m.getParameters();
-			for (String p:params) {
-				if (classNames.contains(p)) {
+				for (String p:params) {
+					if (classNames.contains(p)) {
 						parsing += this.className + " -> " + p + "[arrowhead=\"ovee\", style=\"dashed\"];\n";
+					}
 				}
-			}
 			}
 		}
 		
