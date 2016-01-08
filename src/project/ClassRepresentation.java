@@ -22,7 +22,7 @@ public class ClassRepresentation {
 	public static String convert() {
 		String ans = "";
 		
-		ans += "digraph computer_generated{\nrankdir=BT";
+		ans += "digraph computer_generated{\nrankdir=BT;\n";
 		//for each class
 //		for (int x = 0; x < classes.size(); x++) {
 //			ClassField clas = classes.get(x);
