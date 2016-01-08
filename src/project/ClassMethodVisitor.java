@@ -16,7 +16,6 @@ public class ClassMethodVisitor extends ClassVisitor {
 	public ClassMethodVisitor(int arg0, ClassVisitor arg1, ClassField current) {
 		super(arg0, arg1);
 		clas = current;
-		method = new MethodField();
 	}
 	
 	@Override
@@ -27,7 +26,7 @@ public class ClassMethodVisitor extends ClassVisitor {
 		for(int i=0; i<argTypes.length; i++){
 			classNames[i] = argTypes[i].getClassName();
 		}
-		
+		method = new MethodField();
 		String symbol = "";
 		if((access & Opcodes.ACC_PUBLIC) != 0){
 			symbol="+";
@@ -41,7 +40,7 @@ public class ClassMethodVisitor extends ClassVisitor {
 //			method.addParameter(classNames[x]);
 //		}
 		
-		clas.methods.add(method);
+		clas.addMethod(method);
 		System.out.println("       method: "+name+" "+Arrays.toString(classNames)+" "+Type.getReturnType(desc).getClassName());
 		return toDecorate;
 	}

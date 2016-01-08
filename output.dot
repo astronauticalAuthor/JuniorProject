@@ -1,9 +1,6 @@
 digraph computer_generated{
 rankdir=BT;
-shape="record"
-java/lang/Integer [
-label= "{- MIN_VALUE : int\l- MAX_VALUE : int\l- TYPE : java.lang.Class\l- digits : char[]\l- DigitTens : char[]\l- DigitOnes : char[]\l- sizeTable : int[]\l- value : int\l- SIZE : int\l- BYTES : int\l- serialVersionUID : long\l- MIN_VALUE : int\l- MAX_VALUE : int\l- TYPE : java.lang.Class\l- digits : char[]\l- DigitTens : char[]\l- DigitOnes : char[]\l- sizeTable : int[]\l- value : int\l- SIZE : int\l- BYTES : int\l- serialVersionUID : long\l}
-];java/lang/Integer -> java/lang/Number[arrowhead="onormal", style="solid"];
+java/lang/Integer -> java/lang/Number[arrowhead="onormal", style="solid"];
 java/lang/Integer -> java/lang/Comparable[arrowhead="onormal", style="dashed"];
 java/lang/Integer -> java/lang/Comparable[arrowhead="onormal", style="dashed"];
 java/lang/Integer -> java/lang/Comparable[arrowhead="onormal", style="dashed"];
