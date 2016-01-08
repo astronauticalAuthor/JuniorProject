@@ -24,35 +24,35 @@ public class ClassRepresentation {
 		
 		ans += "digraph computer_generated{\nrankdir=BT";
 		//for each class
-		for (int x = 0; x < classes.size(); x++) {
-			ClassField clas = classes.get(x);
-			ans += "shape=\"record\"\n";
-			ans += clas.className + " [\nlabel= \"{";
-			
-			//for each field in a class
-			ArrayList<String> fieldNames = clas.getFieldNames();
-			ArrayList<String> fieldTypes = clas.getFieldTypes();
-			for (int y = 0; y < fieldNames.size(); y++) {
-				ans += "- " + fieldNames.get(y) + " : " + fieldTypes.get(y) + "\\l";
-			}
-			
-			//for each method in a class
-			ArrayList<MethodField> methods = clas.getMethods();
-			if (methods.size() > 0) {
-				ans += "|";
-			}
-			for (int z = 0; z < methods.size(); z++) {
-				ans += "+ " + methods.get(z).getName();
-				//for each field in a method
-				ArrayList<String> parameters = methods.get(x).getParameters();
-				for (int a = 0; a < parameters.size(); a++) {
-					ans += parameters.get(a);
-					if (a != parameters.size() - 1) ans += ",";
-				}
-			}
-			
-			ans += "}\n];";			
-		}
+//		for (int x = 0; x < classes.size(); x++) {
+//			ClassField clas = classes.get(x);
+//			ans += "shape=\"record\"\n";
+//			ans += clas.className + " [\nlabel= \"{";
+//			
+//			//for each field in a class
+//			ArrayList<String> fieldNames = clas.getFieldNames();
+//			ArrayList<String> fieldTypes = clas.getFieldTypes();
+//			for (int y = 0; y < fieldNames.size(); y++) {
+//				ans += "- " + fieldNames.get(y) + " : " + fieldTypes.get(y) + "\\l";
+//			}
+//			
+//			//for each method in a class
+//			ArrayList<MethodField> methods = clas.getMethods();
+//			if (methods.size() > 0) {
+//				ans += "|";
+//			}
+//			for (int z = 0; z < methods.size(); z++) {
+//				ans += "+ " + methods.get(z).getName();
+//				//for each field in a method
+//				ArrayList<String> parameters = methods.get(x).getParameters();
+//				for (int a = 0; a < parameters.size(); a++) {
+//					ans += parameters.get(a);
+//					if (a != parameters.size() - 1) ans += ",";
+//				}
+//			}
+//			
+//			ans += "}\n];";			
+//		}
 		
 		//now list the relationships
 		for (int x = 0; x < classes.size(); x++) {

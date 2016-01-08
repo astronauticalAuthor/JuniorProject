@@ -10,10 +10,12 @@ import org.objectweb.asm.Type;
 
 public class ClassMethodVisitor extends ClassVisitor {
 	
+	ClassField clas;
 	MethodField method;
 
 	public ClassMethodVisitor(int arg0, ClassVisitor arg1, ClassField current) {
 		super(arg0, arg1);
+		clas = current;
 		method = new MethodField();
 	}
 	
@@ -34,17 +36,18 @@ public class ClassMethodVisitor extends ClassVisitor {
 		
 		method.setName(name);
 		method.setType(signature);
+		method.addParameter(Arrays.toString(classNames));
+//		for (int x = 0; x < classNames.length; x++) {
+//			method.addParameter(classNames[x]);
+//		}
 		
-		for (int x = 0; x < classNames.length; x++) {
-			method.addParameter(classNames[x]);
-		}
-		
+		clas.methods.add(method);
 		System.out.println("       method: "+name+" "+Arrays.toString(classNames)+" "+Type.getReturnType(desc).getClassName());
 		return toDecorate;
 	}
 	
-	public MethodField getMethodInfo() {
-		return method;
-	}
+//	public MethodField getMethodInfo() {
+//		return method;
+//	}
 
 }

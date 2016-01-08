@@ -5,12 +5,14 @@ import java.util.ArrayList;
 public class MethodField {
 	public String methodName;
 	public String methodType;
-	public ArrayList<String> parameters;
+//	public ArrayList<String> parameters;
+	public String parameters;
 	
 	public MethodField() {
 		methodName = "";
 		methodType = "";
-		parameters = new ArrayList<String>();
+//		parameters = new ArrayList<String>();
+		parameters = "";
 	}
 	
 	public void setName(String name) {
@@ -22,7 +24,8 @@ public class MethodField {
 	}
 	
 	public void addParameter(String parameter) {
-		parameters.add(parameter);
+//		parameters.add(parameter);
+		parameters = parameter;
 	}
 	
 	public String getName() {
@@ -33,7 +36,7 @@ public class MethodField {
 		return methodType;
 	}
 	
-	public ArrayList<String> getParameters() {
+	public String getParameters() {
 		return parameters;
 	}
 	

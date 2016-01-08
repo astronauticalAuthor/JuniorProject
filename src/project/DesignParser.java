@@ -23,7 +23,7 @@ public class DesignParser {
 			ClassFieldVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor, current);
 			ClassMethodVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor, current);
 			
-			reader.accept(declVisitor, ClassReader.EXPAND_FRAMES);			
+			reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);			
 			
 			classes.add(current);
 //			ClassRepresentation.addClass(declVisitor.getClassInfo());
@@ -31,7 +31,8 @@ public class DesignParser {
 //			ClassRepresentation.addMethod(index, methodVisitor.getMethodInfo());
 			index++;
 		}
-		
-		System.out.println("\n\n\n");
+		for(ClassField c: classes){
+			System.out.println("\n" +c.toString());
+		}
 	}
 }
