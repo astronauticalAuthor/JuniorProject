@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="12.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>110</x>
+      <y>210</y>
+      <w>310</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>ClassDeclarationVisitor
+--
++clas : ClassField 
+--
++ClassDeclarationVisitor(int,ClassField) : void 
++visit(int,int,String,String,String,String[]) : void </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>460</x>
+      <y>210</y>
+      <w>360</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>ClassFieldVisitor
+--
++clas : ClassField 
++field : FieldField 
+--
++ClassFieldVisitor(int,ClassVisitor,ClassField) : void 
++visitField(int,String,String,String,Object) : FieldVisitor </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>580</x>
+      <y>660</y>
+      <w>180</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>FieldField
+--
++fieldName : String 
++fieldType : String 
++access : String 
+--
++FieldField() : void 
++setName(String) : void 
++setType(String) : void 
++setAccess(String) : void 
++getName() : String 
++getType() : String 
++getAccess() : String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>870</x>
+      <y>720</y>
+      <w>170</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>DesignParser
+--
++DesignParser() : void 
++main(String[]) : void </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>850</x>
+      <y>210</y>
+      <w>390</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>ClassMethodVisitor
+--
++clas : ClassField 
++method : MethodField 
+--
++ClassMethodVisitor(int,ClassVisitor,ClassField) : void 
++visitMethod(int,String,String,String,String[]) : MethodVisitor </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>230</x>
+      <y>580</y>
+      <w>240</w>
+      <h>340</h>
+    </coordinates>
+    <panel_attributes>ClassField
+--
++className : String 
++superClassName : String 
++methods : ArrayList 
++fields : ArrayList 
++interfaces : ArrayList 
++parsing : String 
+-isInterface : Boolean 
+--
++ClassField() : void 
++addMethod(MethodField) : void 
++addField(FieldField) : void 
++setClassName(String) : void 
++setSuperClass(String) : void 
++setInterfaces(String[]) : void 
++getFields() : ArrayList 
++getMethods() : ArrayList 
++getInterfaces() : ArrayList 
++toString() : String 
++setIsInterface(boolean) : void </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>1150</x>
+      <y>600</y>
+      <w>200</w>
+      <h>310</h>
+    </coordinates>
+    <panel_attributes>MethodField
+--
++methodName : String 
++methodType : String 
++parameters : ArrayList 
++returnType : String 
+-access : String 
+--
++ MethodField() : void 
++ setName(String) : void 
++ setType(String) : void 
++ setReturnType(String) : void 
++ addParameter(String) : void 
++ getName() : String 
++ getType() : String 
++ getParameters() : ArrayList 
++ getReturnType() : String 
++ setAccess(String) : void 
++ getAccess() : String </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>650</x>
+      <y>80</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>/ClassVisitor/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>720</x>
+      <y>80</y>
+      <w>340</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>30;30;320;130</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>600</x>
+      <y>80</y>
+      <w>110</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>90;30;30;130</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>310</x>
+      <y>80</y>
+      <w>360</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>340;30;30;130</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>760</x>
+      <y>420</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>/Object/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>830</x>
+      <y>420</y>
+      <w>340</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>30;30;320;180</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>800</x>
+      <y>420</y>
+      <w>150</w>
+      <h>320</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>30;30;130;300</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>670</x>
+      <y>420</y>
+      <w>140</w>
+      <h>260</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>120;30;30;240</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>440</x>
+      <y>410</y>
+      <w>340</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>320;30;30;170</additional_attributes>
+  </element>
+</diagram>
