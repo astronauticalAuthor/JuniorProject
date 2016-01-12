@@ -138,5 +138,5 @@ public class VisitorTest{
 		assertTrue(tester.toString(t).contains(ans));
 	}
 	
-
+//test concrete factory for concrete class use
 }

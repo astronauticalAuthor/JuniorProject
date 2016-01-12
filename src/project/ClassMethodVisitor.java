@@ -17,6 +17,8 @@ public class ClassMethodVisitor extends ClassVisitor {
 	
 	@Override
 	public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions){
+		//decorate this? no
+		//new class visitor
 		MethodVisitor toDecorate = super.visitMethod(access, name, desc, signature, exceptions);
 		Type[] argTypes = Type.getArgumentTypes(desc);
 		String[] classNames = new String[argTypes.length];
