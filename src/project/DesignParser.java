@@ -6,15 +6,16 @@ import java.util.ArrayList;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.Opcodes;
 
-import java.io.*;
+import project.classes.ClassRep;
+import project.interfaces.IClass;
 
 public class DesignParser {
 	public static void main(String[] args) throws IOException{
 
-		ArrayList<ClassField> classes = new ArrayList<ClassField>();
+		ArrayList<IClass> classes = new ArrayList<IClass>();
 		
 		for(String className: args){
-			ClassField current = new ClassField();
+			IClass current = new ClassRep();
 			
 			
 			ClassReader reader = new ClassReader(className);
@@ -29,25 +30,13 @@ public class DesignParser {
 			classes.add(current);
 		}
 		System.out.println("digraph G{\n rankdir=BT;");
-		for(ClassField c: classes){
+		for(IClass c: classes){
 			
 			System.out.println("\n" + c.toString(classes));
 			
 		}
 		System.out.println("}");
-	
-//		try {
-//			PrintWriter writer = new PrintWriter(new File("./output.txt"));
-//			writer.write("digraph G{\n rankdir=BT;");
-//			for(ClassField c:classes){
-//				writer.write("\n" + c.toString());
-//			}
-//			writer.write("}");
-//			writer.close();
-//		}
-//		catch(Exception e) {}
-
-		
+			
 		
 	}
 }

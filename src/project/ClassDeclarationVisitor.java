@@ -3,23 +3,25 @@ package project;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
 
+import project.interfaces.IClass;
+
 public class ClassDeclarationVisitor extends ClassVisitor {
 	
-	ClassField clas;
+	public IClass currentClass;
 	
-	public ClassDeclarationVisitor(int arg0, ClassField current) {
+	public ClassDeclarationVisitor(int arg0, IClass current) {
 		super(arg0);
-		clas = current;
+		currentClass = current;
 	}
 	
 	@Override
 	public void visit(int version, int access, String name, String signature, String superName, String[] interfaces){
-		clas.setClassName(name);
-		clas.setSuperClass(superName);
-		clas.setInterfaces(interfaces);
+		currentClass.setName(name);
+		currentClass.setSuper(superName);
+		currentClass.setInterfaces(interfaces);
 		
 		if((access & Opcodes.ACC_INTERFACE) != 0){
-			clas.setIsInterface(true);
+			currentClass.setIsInterface(true);
 		}
 		
 		super.visit(version, access, name, signature, superName, interfaces);

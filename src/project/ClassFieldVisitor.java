@@ -5,24 +5,28 @@ import org.objectweb.asm.FieldVisitor;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 
-public class ClassFieldVisitor extends ClassVisitor {
-	ClassField clas;
-	FieldField field;
+import project.classes.Field;
+import project.interfaces.IClass;
+import project.interfaces.IField;
 
-	public ClassFieldVisitor(int arg0, ClassVisitor arg1, ClassField current) {
+public class ClassFieldVisitor extends ClassVisitor {
+	public IClass currentClass;
+	public IField currentField;
+
+	public ClassFieldVisitor(int arg0, ClassVisitor arg1, IClass current) {
 		super(arg0, arg1);
-		clas = current;
+		currentClass = current;
 	}
 	
 	@Override
 	public FieldVisitor visitField(int access, String name, String desc, String signature, Object value){
 		FieldVisitor toDecorate = super.visitField(access, name, desc, signature, value);
-		field = new FieldField();
+		currentField = new Field();
 		
 		String type = Type.getType(desc).getClassName();
 		
-		field.setName(name);
-		field.setType(type.substring(type.lastIndexOf(".")+1));
+		currentField.setName(name);
+		currentField.setType(type.substring(type.lastIndexOf(".")+1));
 		
 		String symbol = "";
 		if((access & Opcodes.ACC_PRIVATE) != 0){
@@ -33,9 +37,9 @@ public class ClassFieldVisitor extends ClassVisitor {
 			symbol = "#";
 		}
 		
-		field.setAccess(symbol);
+		currentField.setAccess(symbol);
 		
-		clas.addField(field);
+		currentClass.addField(currentField);
 		
 		return toDecorate;
 	}

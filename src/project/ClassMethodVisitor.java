@@ -5,27 +5,35 @@ import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 
+import project.classes.Method;
+import project.interfaces.IClass;
+import project.interfaces.IMethod;
+
 public class ClassMethodVisitor extends ClassVisitor {
 	
-	ClassField clas;
-	MethodField method;
+	IClass currentClass;
+	IMethod currentMethod;
 
-	public ClassMethodVisitor(int arg0, ClassVisitor arg1, ClassField current) {
+	public ClassMethodVisitor(int arg0, ClassVisitor arg1, IClass current) {
 		super(arg0, arg1);
-		clas = current;
+		currentClass = current;
 	}
 	
 	@Override
 	public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions){
 		//decorate this? no
 		//new class visitor
+		//visitMehtodInsn?
+		//Signature Reader?
 		MethodVisitor toDecorate = super.visitMethod(access, name, desc, signature, exceptions);
 		Type[] argTypes = Type.getArgumentTypes(desc);
 		String[] classNames = new String[argTypes.length];
+		
 		for(int i=0; i<argTypes.length; i++){
 			classNames[i] = argTypes[i].getClassName();
 		}
-		method = new MethodField();
+		
+		currentMethod = new Method();
 		String symbol = "";
 		
 		if((access & Opcodes.ACC_PUBLIC) != 0){
@@ -36,22 +44,28 @@ public class ClassMethodVisitor extends ClassVisitor {
 			symbol = "#";
 		}
 		
+		
+		
 		if(name.equals("<init>")){
-			method.setName(clas.className);
+			currentMethod.setName(currentClass.getName());
 		}else{
-			method.setName(name);
+			currentMethod.setName(name);
 		}
-		method.setType(signature);
-		method.setAccess(symbol);
+		
+		currentMethod.setType(signature);
+		currentMethod.setAccess(symbol);
+		
 		for (int x = 0; x < classNames.length; x++) {
-			method.addParameter(classNames[x].substring(classNames[x].lastIndexOf(".")+1));
+			currentMethod.addParameter(classNames[x].substring(classNames[x].lastIndexOf(".")+1));
 		}
 		String retType = Type.getReturnType(desc).getClassName();
-		method.setReturnType(retType.substring(retType.lastIndexOf(".")+1));
+		currentMethod.setReturnType(retType.substring(retType.lastIndexOf(".")+1));
 		
-		clas.addMethod(method);
+		currentClass.addMethod(currentMethod);
 		
-		return toDecorate;
+		MethodVisitor mine = new MethodTraverser(Opcodes.ASM5, toDecorate, currentClass, currentMethod);
+		
+		return mine;
 	}
 	
 
