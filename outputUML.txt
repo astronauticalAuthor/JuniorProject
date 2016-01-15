@@ -5,6 +5,10 @@ label="{DesignParser||+DesignParser() : void\l
 +main(String[]) : void\l
 }"
 ];
+DesignParser -> ClassRep[arrowhead="ovee", style="dashed"];
+DesignParser -> ClassDeclarationVisitor[arrowhead="ovee", style="dashed"];
+DesignParser -> ClassFieldVisitor[arrowhead="ovee", style="dashed"];
+DesignParser -> ClassMethodVisitor[arrowhead="ovee", style="dashed"];
 DesignParser -> Generator[arrowhead="ovee", style="dashed"];
 ClassDeclarationVisitor [shape="record"
 label="{ClassDeclarationVisitor|+currentClass : IClass\l
@@ -13,7 +17,12 @@ label="{ClassDeclarationVisitor|+currentClass : IClass\l
 +visit(int,int,String,String,String,String[]) : void\l
 }"
 ];
+ClassDeclarationVisitor -> ClassVisitor[arrowhead="onormal", style="solid"];
+ClassDeclarationVisitor -> IClass[arrowhead="ovee", style="solid"];
 ClassDeclarationVisitor -> IClass[arrowhead="ovee", style="dashed"];
+ClassDeclarationVisitor -> ExtendArrow[arrowhead="ovee", style="dashed"];
+ClassDeclarationVisitor -> IArrow[arrowhead="ovee", style="dashed"];
+ClassDeclarationVisitor -> ImplArrow[arrowhead="ovee", style="dashed"];
 ClassFieldVisitor [shape="record"
 label="{ClassFieldVisitor|+currentClass : IClass\l
 +currentField : IField\l
@@ -22,7 +31,14 @@ label="{ClassFieldVisitor|+currentClass : IClass\l
 +visitField(int,String,String,String,Object) : FieldVisitor\l
 }"
 ];
+ClassFieldVisitor -> ClassVisitor[arrowhead="onormal", style="solid"];
+ClassFieldVisitor -> IClass[arrowhead="ovee", style="solid"];
+ClassFieldVisitor -> IField[arrowhead="ovee", style="solid"];
+ClassFieldVisitor -> Field[arrowhead="ovee", style="dashed"];
+ClassFieldVisitor -> IField[arrowhead="ovee", style="dashed"];
 ClassFieldVisitor -> IClass[arrowhead="ovee", style="dashed"];
+ClassFieldVisitor -> AssocArrow[arrowhead="ovee", style="dashed"];
+ClassFieldVisitor -> IArrow[arrowhead="ovee", style="dashed"];
 ClassMethodVisitor [shape="record"
 label="{ClassMethodVisitor|+currentClass : IClass\l
 +currentMethod : IMethod\l
@@ -31,6 +47,12 @@ label="{ClassMethodVisitor|+currentClass : IClass\l
 +visitMethod(int,String,String,String,String[]) : MethodVisitor\l
 }"
 ];
+ClassMethodVisitor -> ClassVisitor[arrowhead="onormal", style="solid"];
+ClassMethodVisitor -> IClass[arrowhead="ovee", style="solid"];
+ClassMethodVisitor -> IMethod[arrowhead="ovee", style="solid"];
+ClassMethodVisitor -> Method[arrowhead="ovee", style="dashed"];
+ClassMethodVisitor -> IClass[arrowhead="ovee", style="dashed"];
+ClassMethodVisitor -> IMethod[arrowhead="ovee", style="dashed"];
 ClassMethodVisitor -> MethodTraverser[arrowhead="ovee", style="dashed"];
 MethodTraverser [shape="record"
 label="{MethodTraverser|+currentMethod : IMethod\l
@@ -41,7 +63,12 @@ label="{MethodTraverser|+currentMethod : IMethod\l
 +visitMethodInsn(int,String,String,String,boolean) : void\l
 }"
 ];
+MethodTraverser -> MethodVisitor[arrowhead="onormal", style="solid"];
+MethodTraverser -> IMethod[arrowhead="ovee", style="solid"];
+MethodTraverser -> IClass[arrowhead="ovee", style="solid"];
 MethodTraverser -> IClass[arrowhead="ovee", style="dashed"];
+MethodTraverser -> UseArrow[arrowhead="ovee", style="dashed"];
+MethodTraverser -> IArrow[arrowhead="ovee", style="dashed"];
 AssocArrow [shape="record"
 label="{AssocArrow|+sourceClass : String\l
 +destinClass : String\l
@@ -55,9 +82,13 @@ AssocArrow -> IArrow[arrowhead="onormal", style="dashed"];
 ClassRep [shape="record"
 label="{ClassRep|-className : String\l
 -superClassName : String\l
--methods : ArrayList[java.util.ArrayList<Lproject.interfaces.IMethod] -fields : ArrayList[java.util.ArrayList<Lproject.interfaces.IField] -interfaces : ArrayList[java.util.ArrayList<Ljava.lang.String] -parsing : String\l
+-methods : ArrayList\l
+-fields : ArrayList\l
+-interfaces : ArrayList\l
+-parsing : String\l
 -isInterface : Boolean\l
--arrows : ArrayList[java.util.ArrayList<Lproject.interfaces.IArrow] |+ClassRep() : void\l
+-arrows : ArrayList\l
+|+ClassRep() : void\l
 +addMethod(IMethod) : void\l
 +addField(IField) : void\l
 +setName(String) : void\l
@@ -112,6 +143,9 @@ label="{Generator||+Generator() : void\l
 +generateUML(ArrayList) : void\l
 }"
 ];
+Generator -> IClass[arrowhead="ovee", style="dashed"];
+Generator -> IField[arrowhead="ovee", style="dashed"];
+Generator -> IMethod[arrowhead="ovee", style="dashed"];
 Generator -> IArrow[arrowhead="ovee", style="dashed"];
 ImplArrow [shape="record"
 label="{ImplArrow|+sourceClass : String\l
@@ -126,7 +160,8 @@ ImplArrow -> IArrow[arrowhead="onormal", style="dashed"];
 Method [shape="record"
 label="{Method|-methodName : String\l
 -methodType : String\l
--parameters : ArrayList[java.util.ArrayList<Ljava.lang.String] -returnType : String\l
+-parameters : ArrayList\l
+-returnType : String\l
 -access : String\l
 |+Method() : void\l
 +setName(String) : void\l

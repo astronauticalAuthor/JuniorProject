@@ -3,6 +3,7 @@ package project.classes;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 
 import project.interfaces.IArrow;
 import project.interfaces.IClass;
@@ -32,11 +33,7 @@ public class Generator {
 			//for each field in a class
 			ArrayList<IField> fields = c.getFields();
 			for(IField f:fields){
-				if(f.getSignature() == null){
-					out.write(f.getAccess() + f.getName() + " : " + f.getType() + "\\l\n");
-				}else{
-					out.write(f.getAccess() + f.getName() + " : " + f.getType() + "[" + f.getSignature() + "] ");
-				}
+				out.write(f.getAccess() + f.getName() + " : " + f.getType() + "\\l\n");
 //				parsing += f.getAccess() + f.getName() + " : " + f.getType() + "\\l\n";
 			}
 		
@@ -67,8 +64,13 @@ public class Generator {
 
 			out.write("}\"\n];\n");
 //			parsing += "}\"\n];\n";
+			List<String> arrowsToPrint = new ArrayList<String>();
 			for(IArrow a:c.getArrows()){
-				out.write(a.toString());
+				if(!arrowsToPrint.contains(a.toString()))
+					arrowsToPrint.add(a.toString());
+			}
+			for(String a:arrowsToPrint){
+				out.write(a);
 			}
 		}
 		

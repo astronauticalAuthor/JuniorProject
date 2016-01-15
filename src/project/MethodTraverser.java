@@ -3,6 +3,7 @@ package project;
 import java.util.ArrayList;
 
 import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.Type;
 
 import project.classes.Method;
 import project.classes.UseArrow;
@@ -32,7 +33,6 @@ public class MethodTraverser extends MethodVisitor {
 //		name = name.substring(name.lastIndexOf(ch)
 //		System.out.println("Owner: " + owner);
 //		System.out.println("Name: " + name);
-//		System.out.println("Descriptor: " + desc);
 		
 		
 		for(String className : this.classes){
@@ -45,15 +45,8 @@ public class MethodTraverser extends MethodVisitor {
 				IArrow arrow = new UseArrow();
 				arrow.setSource(this.currentClass.getName());
 				arrow.setDestination(owner);
-				if(arrows.size() == 0){
-					this.currentClass.addArrow(arrow);
-				}else{
-					while(arrows.size() != 0){
-						if(!arrows.remove(0).equals(arrow)){
-							this.currentClass.addArrow(arrow);
-						}
-					}
-				}
+//				System.out.println(arrow.toString());
+				this.currentClass.addArrow(arrow);
 			}
 		}
 	}
