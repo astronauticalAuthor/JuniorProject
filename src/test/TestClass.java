@@ -12,7 +12,9 @@ public class TestClass implements TestInterface{
 		var3 = "";
 	}
 	
-	public void testMethod1() {}
+	public void testMethod1() {
+		this.testMethod2("");
+	}
 	public void testMethod2(String s) {}
 	public String testMethod3(int i) { return ""; }
 	public void thisIsAReallyLongMethod(String a, int b, double c, float d) {}
