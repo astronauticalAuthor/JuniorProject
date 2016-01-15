@@ -13,24 +13,40 @@ import project.interfaces.IClass;
 public class DesignParser {
 	public static void main(String[] args) throws IOException{
 
-		ArrayList<IClass> classes = new ArrayList<IClass>();
-		
-		for(String className: args){
-			IClass current = new ClassRep();
-			
-			ClassReader reader = new ClassReader(className);
-			
-			ClassDeclarationVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, current, args);
-			ClassFieldVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor, current, args);
-			ClassMethodVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor, current, args);
-			
+//		 ArrayList<IClass> classes = new ArrayList<IClass>();
+//		
+//		 for(String className: args){
+//		 	IClass current = new ClassRep();
+//			
+//		 	ClassReader reader = new ClassReader(className);
+//			
+//		 	ClassDeclarationVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, current, args);
+//		 	ClassFieldVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor, current, args);
+//		 	ClassMethodVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor, current, args);
+//			
+//
+//		 	reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);			
+//			
+//		 	classes.add(current);
+//		 }
+//		
+//		 Generator.generateUML(classes);
 
-			reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);			
-			
-			classes.add(current);
-		}
+		String className = "java.util.Collections";
+		String methodName = "shuffle";
+		String[] arguments = {"java.util.List"};
 		
-		Generator.generateUML(classes);
+		MethodInformation mi = new MethodInformation(methodName, arguments, className);
+		ClassRep cr = new ClassRep();
+		
+		String method = "java.util.Collections.shuffle(List<T> list)";
+
+		ClassReader reader = new ClassReader(className);
+		ClassDeclarationVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, cr);
+		ClassMethodVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, declVisitor, cr, mi, 1);
+		
+		reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
+
 //		System.out.println("digraph G{\n rankdir=BT;");
 		
 //		for(IClass c: classes){
