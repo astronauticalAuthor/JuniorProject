@@ -5,6 +5,7 @@ import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 
+import project.classes.ClassRep;
 import project.classes.Method;
 import project.interfaces.IClass;
 import project.interfaces.IMethod;
@@ -14,11 +15,20 @@ public class ClassMethodVisitor extends ClassVisitor {
 	public IClass currentClass;
 	public IMethod currentMethod;
 	public String[] classes;
+	public MethodInformation methodInformation;
+	int level;
 
 	public ClassMethodVisitor(int arg0, ClassVisitor arg1, IClass current, String[] args) {
 		super(arg0, arg1);
 		this.currentClass = current;
 		this.classes = args;
+	}
+
+	public ClassMethodVisitor(int arg0, ClassVisitor arg1, ClassRep current, MethodInformation m, int level) {
+		super(arg0, arg1);
+		methodInformation = m;
+		this.level = level;
+		currentClass = current;
 	}
 	
 	public ClassMethodVisitor(int arg0, ClassVisitor arg1, IClass current) {
@@ -40,6 +50,20 @@ public class ClassMethodVisitor extends ClassVisitor {
 		
 		for(int i=0; i<argTypes.length; i++){
 			classNames[i] = argTypes[i].getClassName();
+		}
+
+		if (methodInformation != null && methodInformation.methodName.equals(name)) {
+			boolean isCorrect = classNames.length == methodInformation.arguments.length;
+			for (int x = 0; x < classNames.length && isCorrect; x++) {
+				if (!classNames[x].equals(methodInformation.arguments[x])) isCorrect = false;
+			}
+			
+			if (isCorrect && toDecorate == null) {
+				toDecorate = new MethodInformationVisitor(Opcodes.ASM5, methodInformation, level);
+			}
+			else if (isCorrect){
+				toDecorate = new MethodInformationVisitor(Opcodes.ASM5, toDecorate, methodInformation, level);
+			}
 		}
 		
 		this.currentMethod = new Method();

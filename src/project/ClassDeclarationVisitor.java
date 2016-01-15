@@ -22,8 +22,12 @@ public class ClassDeclarationVisitor extends ClassVisitor {
 	public ClassDeclarationVisitor(int arg0, IClass current) {
 		super(arg0);
 		this.currentClass = current;
-	}
 
+
+		String[] empty = {};
+		this.classes = empty;
+	}
+	
 	@Override
 	public void visit(int version, int access, String name, String signature, String superName, String[] interfaces){
 				
