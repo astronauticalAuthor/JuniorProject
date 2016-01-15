@@ -6,10 +6,10 @@ import project.interfaces.IMethod;
 
 public class Method implements IMethod {
 
-	public String methodName;
-	public String methodType;
-	public ArrayList<String> parameters;
-	public String returnType;
+	private String methodName;
+	private String methodType;
+	private ArrayList<String> parameters;
+	private String returnType;
 	private String access;
 	
 	public Method(){
@@ -29,12 +29,12 @@ public class Method implements IMethod {
 
 	@Override
 	public void setReturnType(String rType) {
-		this.returnType = rType;
+		this.returnType = rType.substring(rType.lastIndexOf(".")+1);
 	}
 
 	@Override
 	public void addParameter(String parameter) {
-		this.parameters.add(parameter);
+		this.parameters.add(parameter.substring(parameter.lastIndexOf(".")+1));
 	}
 
 	@Override

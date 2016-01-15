@@ -4,9 +4,10 @@ import project.interfaces.IField;
 
 public class Field implements IField {
 
-	public String fieldName;
-	public String fieldType;
-	public String access;
+	private String fieldName;
+	private String fieldType;
+	private String access;
+	private String sign;
 	
 	public Field(){
 		this.fieldName = "";
@@ -20,7 +21,7 @@ public class Field implements IField {
 
 	@Override
 	public void setType(String fieldType) {
-		this.fieldType = fieldType;
+		this.fieldType = fieldType.substring(fieldType.lastIndexOf(".")+1);
 	}
 
 	@Override
@@ -41,6 +42,15 @@ public class Field implements IField {
 	@Override
 	public String getAccess() {
 		return this.access;
+	}
+	@Override
+	public void setSignature(String sign) {
+		this.sign = sign;
+		
+	}
+	@Override
+	public String getSignature() {
+		return this.sign;
 	}
 
 }

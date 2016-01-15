@@ -17,12 +17,11 @@ public class DesignParser {
 		for(String className: args){
 			IClass current = new ClassRep();
 			
-			
 			ClassReader reader = new ClassReader(className);
 			
-			ClassDeclarationVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, current);
-			ClassFieldVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor, current);
-			ClassMethodVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor, current);
+			ClassDeclarationVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, current, args);
+			ClassFieldVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor, current, args);
+			ClassMethodVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor, current, args);
 			
 
 			reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);			

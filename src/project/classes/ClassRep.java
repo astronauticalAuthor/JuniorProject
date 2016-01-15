@@ -2,46 +2,50 @@ package project.classes;
 
 import java.util.ArrayList;
 
+import project.interfaces.IArrow;
 import project.interfaces.IClass;
 import project.interfaces.IField;
 import project.interfaces.IMethod;
 
 public class ClassRep implements IClass {
 	
-	public String className;
-	public String superClassName;
-	public ArrayList<IMethod> methods;
-	public ArrayList<IField> fields;
-	public ArrayList<String> interfaces;
-	public String parsing = "";
+	private String className;
+	private String superClassName;
+	private ArrayList<IMethod> methods;
+	private ArrayList<IField> fields;
+	private ArrayList<String> interfaces;
+	private String parsing = "";
 	private Boolean isInterface = false;
 	
+	private ArrayList<IArrow> arrows;
+	
 	public ClassRep(){
-		methods = new ArrayList<IMethod>();
-		fields = new ArrayList<IField>();
-		interfaces = new ArrayList<String>();
-		className = "";
-		superClassName = "";
+		this.methods = new ArrayList<IMethod>();
+		this.fields = new ArrayList<IField>();
+		this.interfaces = new ArrayList<String>();
+		this.arrows = new ArrayList<IArrow>();
+		this.className = "";
+		this.superClassName = "";
 	}
 	
 	@Override
 	public void addMethod(IMethod method) {
-		this.methods.add((Method) method);
+		this.methods.add(method);
 	}
 
 	@Override
 	public void addField(IField field) {
-		this.fields.add((Field) field);		
+		this.fields.add(field);		
 	}
 
 	@Override
 	public void setName(String className) {
-		this.className = className;
+		this.className = className.substring(className.lastIndexOf("/")+1);
 	}
 
 	@Override
 	public void setSuper(String superClass) {
-		this.superClassName = superClass;
+		this.superClassName = superClass.substring(superClass.lastIndexOf("/")+1);
 		
 	}
 
@@ -70,8 +74,41 @@ public class ClassRep implements IClass {
 
 	@Override
 	public void setIsInterface(boolean b) {
-		this.isInterface = true;
+		this.isInterface = b;
 	}
+	
+
+	@Override
+	public String getName() {
+		return this.className;
+	}
+	
+	@Override
+	public String getSuper() {
+		return this.superClassName;
+	}
+
+	@Override
+	public void setParsing(String s) {
+		this.parsing += s;
+	}
+
+	@Override
+	public String getParsing() {
+		return this.parsing;
+	}
+
+	@Override
+	public void addArrow(IArrow arrow) {
+		this.arrows.add(arrow);
+	}
+
+	@Override
+	public ArrayList<IArrow> getArrows() {
+		// TODO Auto-generated method stub
+		return this.arrows;
+	}
+	
 
 	@Override
 	public String toString(ArrayList<IClass> classes) {
@@ -149,9 +186,6 @@ public class ClassRep implements IClass {
 		return parsing;
 	}
 
-	@Override
-	public String getName() {
-		return this.className;
-	}
+	
 
 }

@@ -8,4 +8,6 @@ public interface IField {
 	public String getName();
 	public String getType();
 	public String getAccess();
+	public void setSignature(String sign);
+	public String getSignature();
 }
