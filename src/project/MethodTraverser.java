@@ -1,8 +1,12 @@
 package project;
 
+import java.util.ArrayList;
+
 import org.objectweb.asm.MethodVisitor;
 
 import project.classes.Method;
+import project.classes.UseArrow;
+import project.interfaces.IArrow;
 import project.interfaces.IClass;
 import project.interfaces.IMethod;
 
@@ -24,8 +28,33 @@ public class MethodTraverser extends MethodVisitor {
 	}
 
 	public void visitMethodInsn(int opcode, String owner, String name, String desc, boolean itf){
+		owner = owner.substring(owner.lastIndexOf("/")+1);
+//		name = name.substring(name.lastIndexOf(ch)
+//		System.out.println("Owner: " + owner);
+//		System.out.println("Name: " + name);
+//		System.out.println("Descriptor: " + desc);
+		
+		
 		for(String className : this.classes){
-			
+			ArrayList<IArrow> arrows = this.currentClass.getArrows();
+			String trimClassName = className.substring(className.lastIndexOf(".")+1);
+			if(trimClassName.equals(owner)){
+				if(trimClassName.equals(this.currentClass.getName())){
+					return;
+				}
+				IArrow arrow = new UseArrow();
+				arrow.setSource(this.currentClass.getName());
+				arrow.setDestination(owner);
+				if(arrows.size() == 0){
+					this.currentClass.addArrow(arrow);
+				}else{
+					while(arrows.size() != 0){
+						if(!arrows.remove(0).equals(arrow)){
+							this.currentClass.addArrow(arrow);
+						}
+					}
+				}
+			}
 		}
 	}
 	

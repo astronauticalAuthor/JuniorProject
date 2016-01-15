@@ -19,8 +19,9 @@ public class ExtendArrow implements IArrow {
 		this.destinClass = dest;
 	}
 
+	@Override
 	public String toString(){
-		return null;
+		return this.sourceClass + " -> " + this.destinClass + "[arrowhead=\"onormal\", style=\"solid\"];\n";
 	}
 
 }

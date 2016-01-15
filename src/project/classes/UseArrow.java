@@ -19,8 +19,9 @@ public class UseArrow implements IArrow {
 		this.destinClass = dest;
 	}
 	
+	@Override
 	public String toString(){
-		return null;
+		return this.sourceClass + " -> " + this.destinClass + "[arrowhead=\"ovee\", style=\"dashed\"];\n";
 	}
 
 }

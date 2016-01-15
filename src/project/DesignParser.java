@@ -7,6 +7,7 @@ import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.Opcodes;
 
 import project.classes.ClassRep;
+import project.classes.Generator;
 import project.interfaces.IClass;
 
 public class DesignParser {
@@ -28,13 +29,16 @@ public class DesignParser {
 			
 			classes.add(current);
 		}
-		System.out.println("digraph G{\n rankdir=BT;");
-		for(IClass c: classes){
-			
-			System.out.println("\n" + c.toString(classes));
-			
-		}
-		System.out.println("}");
+		
+		Generator.generateUML(classes);
+//		System.out.println("digraph G{\n rankdir=BT;");
+		
+//		for(IClass c: classes){
+//			
+//			System.out.println("\n" + c.toString(classes));
+//			
+//		}
+//		System.out.println("}");
 			
 		
 	}

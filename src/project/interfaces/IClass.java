@@ -15,9 +15,9 @@ public interface IClass {
 	public ArrayList<IMethod> getMethods();
 	public ArrayList<String> getInterfaces();
 	public void setIsInterface(boolean b);
+	public boolean getIsInterface();
 	public void setParsing(String s);
 	public String getParsing();
 	public void addArrow(IArrow arrow);
 	public ArrayList<IArrow> getArrows();
-	String toString(ArrayList<IClass> classes);
 }
