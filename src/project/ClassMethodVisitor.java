@@ -21,6 +21,12 @@ public class ClassMethodVisitor extends ClassVisitor {
 		this.classes = args;
 	}
 	
+	public ClassMethodVisitor(int arg0, ClassVisitor arg1, IClass current) {
+		super(arg0, arg1);
+		this.currentClass = current;
+		this.classes = new String[0];
+	}
+
 	@Override
 	public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions){
 		//decorate this? no

@@ -23,6 +23,12 @@ public class ClassFieldVisitor extends ClassVisitor {
 		this.classes = args;
 	}
 	
+	public ClassFieldVisitor(int arg0, ClassDeclarationVisitor arg1, IClass current) {
+		super(arg0, arg1);
+		this.currentClass = current;
+		this.classes = new String[0];
+	}
+
 	@Override
 	public FieldVisitor visitField(int access, String name, String desc, String signature, Object value){
 		FieldVisitor toDecorate = super.visitField(access, name, desc, signature, value);
