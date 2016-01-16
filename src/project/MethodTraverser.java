@@ -28,28 +28,28 @@ public class MethodTraverser extends MethodVisitor {
 		this.classes = args;
 	}
 
-	public void visitMethodInsn(int opcode, String owner, String name, String desc, boolean itf){
-		owner = owner.substring(owner.lastIndexOf("/")+1);
-//		name = name.substring(name.lastIndexOf(ch)
-//		System.out.println("Owner: " + owner);
-//		System.out.println("Name: " + name);
-		
-		
-		for(String className : this.classes){
-			ArrayList<IArrow> arrows = this.currentClass.getArrows();
-			String trimClassName = className.substring(className.lastIndexOf(".")+1);
-			if(trimClassName.equals(owner)){
-				if(trimClassName.equals(this.currentClass.getName())){
-					return;
-				}
-				IArrow arrow = new UseArrow();
-				arrow.setSource(this.currentClass.getName());
-				arrow.setDestination(owner);
-//				System.out.println(arrow.toString());
-				this.currentClass.addArrow(arrow);
-			}
-		}
-	}
+//	public void visitMethodInsn(int opcode, String owner, String name, String desc, boolean itf){
+//		owner = owner.substring(owner.lastIndexOf("/")+1);
+////		name = name.substring(name.lastIndexOf(ch)
+////		System.out.println("Owner: " + owner);
+////		System.out.println("Name: " + name);
+//		
+//		
+//		for(String className : this.classes){
+//			ArrayList<IArrow> arrows = this.currentClass.getArrows();
+//			String trimClassName = className.substring(className.lastIndexOf(".")+1);
+//			if(trimClassName.equals(owner)){
+//				if(trimClassName.equals(this.currentClass.getName())){
+//					return;
+//				}
+//				IArrow arrow = new UseArrow();
+//				arrow.setSource(this.currentClass.getName());
+//				arrow.setDestination(owner);
+////				System.out.println(arrow.toString());
+//				this.currentClass.addArrow(arrow);
+//			}
+//		}
+//	}
 	
 	
 	//visitTypeInsn
