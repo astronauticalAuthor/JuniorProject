@@ -77,33 +77,35 @@ public class VisitorTest{
 	
 	@Test
 	public void testUsesAndAssociations() throws IOException {
-		ArrayList<IClass> t = new ArrayList<IClass>();
+		String[] t = new String[2];
+		t[0] = "TestAssociation";
+		t[1] = "TestUse";
 		
-		IClass tester2 = new ClassRep();
-		ClassReader creader2 = new ClassReader("test.TestAssociation");
-		ClassDeclarationVisitor cdv2 = new ClassDeclarationVisitor(Opcodes.ASM5, tester2);
-		ClassFieldVisitor cfv2 = new ClassFieldVisitor(Opcodes.ASM5, cdv2, tester2);
-		ClassMethodVisitor cmv2 = new ClassMethodVisitor(Opcodes.ASM5, cfv2, tester2);
-		
-		creader2.accept(cmv2, ClassReader.EXPAND_FRAMES);
-		t.add(tester2);
+//		IClass tester2 = new ClassRep();
+//		ClassReader creader2 = new ClassReader("test.TestAssociation");
+//		ClassDeclarationVisitor cdv2 = new ClassDeclarationVisitor(Opcodes.ASM5, tester2);
+//		ClassFieldVisitor cfv2 = new ClassFieldVisitor(Opcodes.ASM5, cdv2, tester2);
+//		ClassMethodVisitor cmv2 = new ClassMethodVisitor(Opcodes.ASM5, cfv2, tester2);
+//		
+//		creader2.accept(cmv2, ClassReader.EXPAND_FRAMES);
+//		t[0] = tester2.getName();
 		
 		IClass tester = new ClassRep();
 		ClassReader creader = new ClassReader("test.TestUseAndAssociation");
-		ClassDeclarationVisitor cdv = new ClassDeclarationVisitor(Opcodes.ASM5, tester);
-		ClassFieldVisitor cfv = new ClassFieldVisitor(Opcodes.ASM5, cdv, tester);
-		ClassMethodVisitor cmv = new ClassMethodVisitor(Opcodes.ASM5, cfv, tester);
+		ClassDeclarationVisitor cdv = new ClassDeclarationVisitor(Opcodes.ASM5, tester, t);
+		ClassFieldVisitor cfv = new ClassFieldVisitor(Opcodes.ASM5, cdv, tester, t);
+		ClassMethodVisitor cmv = new ClassMethodVisitor(Opcodes.ASM5, cfv, tester, t);
 		
-		creader.accept(cmv, ClassReader.EXPAND_FRAMES);
-		t.add(tester);
-		
-		
+		creader.accept(cmv, ClassReader.EXPAND_FRAMES);		
 		
 		String ans1 = "[arrowhead=\"onormal\", style=\"solid\"]";
 		String ans2 = "[arrowhead=\"onormal\", style=\"dashed\"]";
 		
 		ArrayList<IArrow> testArrows = tester.getArrows();
-		assertTrue(testArrows.size()==3);
+		for(IArrow a:testArrows){
+			System.out.println(a.toString());
+		}
+		assertTrue(testArrows.size()==2);
 		
 		boolean flag = true;
 		for(IArrow a:testArrows){
