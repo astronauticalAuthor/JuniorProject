@@ -32,6 +32,7 @@ public class MethodInformationVisitor extends MethodVisitor {
 		
 		if (level <= 5) {
 			try {
+//				System.out.println("level is: " + level);
 				//store old methodInformation information
 				String oldClassName = methodInformation.className;
 				String oldMethodName = methodInformation.methodName;

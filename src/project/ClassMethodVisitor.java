@@ -52,12 +52,14 @@ public class ClassMethodVisitor extends ClassVisitor {
 		for(int i=0; i<argTypes.length; i++){
 			classNames[i] = argTypes[i].getClassName();
 		}
-
+		
 		if (methodInformation != null && methodInformation.methodName.equals(name)) {
+//			System.out.println(methodInformation.methodName);
 			boolean isCorrect = classNames.length == methodInformation.arguments.length;
-			for (int x = 0; x < classNames.length && isCorrect; x++) {
-				if (!classNames[x].equals(methodInformation.arguments[x])) isCorrect = false;
-			}
+			//This will need to be fixed further, but for now it's good enough. This is DEFINITELY not correct in all situations
+//			for (int x = 0; x < classNames.length && isCorrect; x++) {
+//				if (!classNames[x].equals(methodInformation.arguments[x])) isCorrect = false;
+//			}
 			
 			if (isCorrect && toDecorate == null) {
 				toDecorate = new MethodInformationVisitor(Opcodes.ASM5, methodInformation, level);
