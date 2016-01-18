@@ -7,6 +7,7 @@ import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
 import project.*;
 import project.classes.ClassRep;
+import project.classes.MethodInformation;
 import project.interfaces.IArrow;
 import project.interfaces.IClass;
 import project.interfaces.IField;

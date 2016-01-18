@@ -6,6 +6,7 @@ import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Type;
 
 import project.classes.Method;
+import project.classes.MethodInformation;
 import project.classes.UseArrow;
 import project.interfaces.IArrow;
 import project.interfaces.IClass;
@@ -40,6 +41,14 @@ public class MethodTraverser extends MethodVisitor {
 			String trimClassName = className.substring(className.lastIndexOf(".")+1);
 			if(trimClassName.equals(owner)){
 				if(trimClassName.equals(this.currentClass.getName())){
+//					MethodInformation info = new MethodInformation();
+//					info.setDesc(desc);
+//					info.setOwner(owner);
+//					info.set
+					//currentclassname
+					//owner of method
+					//method
+					
 					return;
 				}
 				IArrow arrow = new UseArrow();

@@ -2,6 +2,8 @@ package project.interfaces;
 
 import java.util.ArrayList;
 
+import project.classes.MethodInformation;
+
 public interface IMethod {
 
 	public void setName(String methodName);
@@ -14,4 +16,6 @@ public interface IMethod {
 	public String getReturnType();
 	public void setAccess(String symbol);
 	public String getAccess();
+	public void addInfo(MethodInformation info);
+	public ArrayList<MethodInformation> getInfo();
 }

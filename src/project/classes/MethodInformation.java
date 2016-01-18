@@ -1,4 +1,4 @@
-package project;
+package project.classes;
 
 import java.util.ArrayList;
 import java.util.Set;
@@ -10,10 +10,24 @@ public class MethodInformation {
 	public String[] arguments;
 	public String className;
 	
+	private String desc;
+	
 	ArrayList<String> methods;
 	ArrayList<String> classes;
 	ArrayList<String> descriptions;
 	ArrayList<String> currentClasses;
+	
+	public MethodInformation(){
+		
+	}
+
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
+	
+	public String getDesc() {
+		return this.desc;
+	}
 	
 	public MethodInformation(String methodName, String[] arguments, String className) {
 		this.methodName = methodName;
