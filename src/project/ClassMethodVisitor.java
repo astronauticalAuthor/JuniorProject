@@ -7,6 +7,7 @@ import org.objectweb.asm.Type;
 
 import project.classes.ClassRep;
 import project.classes.Method;
+import project.classes.MethodInformation;
 import project.interfaces.IClass;
 import project.interfaces.IMethod;
 

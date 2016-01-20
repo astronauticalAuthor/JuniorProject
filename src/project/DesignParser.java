@@ -8,6 +8,7 @@ import org.objectweb.asm.Opcodes;
 
 import project.classes.ClassRep;
 import project.classes.Generator;
+import project.classes.MethodInformation;
 import project.interfaces.IClass;
 
 public class DesignParser {

@@ -11,11 +11,13 @@ public class Method implements IMethod {
 	private ArrayList<String> parameters;
 	private String returnType;
 	private String access;
+	private ArrayList<MethodInformation> moreInfo;
 	
 	public Method(){
 		this.methodName = "";
 		this.methodType = "";
 		this.parameters = new ArrayList<String>();
+		this.moreInfo = new ArrayList<MethodInformation>();
 	}
 	@Override
 	public void setName(String methodName) {
@@ -65,6 +67,14 @@ public class Method implements IMethod {
 	@Override
 	public String getAccess() {
 		return this.access;
+	}
+	@Override
+	public void addInfo(MethodInformation info) {
+		this.moreInfo.add(info);		
+	}
+	@Override
+	public ArrayList<MethodInformation> getInfo() {
+		return this.moreInfo;
 	}
 
 }
