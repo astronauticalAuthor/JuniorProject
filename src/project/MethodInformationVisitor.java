@@ -3,6 +3,7 @@ package project;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.Type;
 
 import project.classes.ClassRep;
 
@@ -27,7 +28,14 @@ public class MethodInformationVisitor extends MethodVisitor {
 	
 	@Override
 	public void visitMethodInsn(int opcode, String owner, String name, String desc, boolean itf) {
-		methodInformation.addNew(name, owner, desc, methodInformation.className);
+		Type[] argTypes = Type.getArgumentTypes(desc);
+		String[] classNames = new String[argTypes.length];
+		for(int i=0; i<argTypes.length; i++){
+			classNames[i] = argTypes[i].getClassName();
+		}
+		
+		String returnType = Type.getReturnType(desc).getClassName();
+		methodInformation.addNew(name, owner, String.join(",", classNames), methodInformation.className, returnType);
 		
 		if (level <= 5) {
 			try {
@@ -40,15 +48,7 @@ public class MethodInformationVisitor extends MethodVisitor {
 				//set new methodInformation information
 				methodInformation.className = owner;
 				methodInformation.methodName = name;
-				String temp = desc;
-				temp = temp.replace("(L", "").replace(")V", "").replace("(", "");
-				if (!temp.equals("")) {
-					methodInformation.arguments = temp.split(";");
-				}
-				else {
-					String[] empty = {};
-					methodInformation.arguments = empty;
-				}
+				methodInformation.arguments = classNames;
 				
 				//navigate the classreader and methodvisitor
 				ClassRep classRep = new ClassRep();

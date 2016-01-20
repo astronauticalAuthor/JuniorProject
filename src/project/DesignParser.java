@@ -34,7 +34,7 @@ public class DesignParser {
 
 		String className = "java.util.Collections";
 		String methodName = "shuffle";
-		String[] arguments = {"java.util.List"};
+		String[] arguments = {"java.util.List"};		
 		
 		MethodInformation mi = new MethodInformation(methodName, arguments, className);
 		ClassRep cr = new ClassRep();
@@ -46,6 +46,8 @@ public class DesignParser {
 		ClassMethodVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, declVisitor, cr, mi, 1);
 		
 		reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
+		
+//		mi.toString();
 		
 		System.out.println(mi.toString());
 

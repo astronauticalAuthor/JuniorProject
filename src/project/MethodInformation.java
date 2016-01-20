@@ -14,22 +14,25 @@ public class MethodInformation {
 	ArrayList<String> classes;
 	ArrayList<String> descriptions;
 	ArrayList<String> currentClasses;
+	ArrayList<String> returnTypes;
 	
 	public MethodInformation(String methodName, String[] arguments, String className) {
 		this.methodName = methodName;
 		methods = new ArrayList<String>();
 		classes = new ArrayList<String>();
 		descriptions = new ArrayList<String>();
+		returnTypes = new ArrayList<String>();
 		this.arguments = arguments;
 		this.className = className;
 		this.currentClasses = new ArrayList<String>();
 	}
 	
-	public void addNew(String methodName, String className, String description, String currentClass) {
+	public void addNew(String methodName, String className, String description, String currentClass, String ret) {
 		methods.add(methodName);
-		classes.add(className);
+		classes.add(className.replaceAll("\\.", "").replaceAll("/", ""));
 		descriptions.add(description);
-		currentClasses.add(currentClass);
+		currentClasses.add(currentClass.replaceAll("\\.", "").replaceAll("/", ""));
+		returnTypes.add(ret);
 	}
 	
 	@Override
@@ -37,23 +40,20 @@ public class MethodInformation {
 		String ans = "";
 		
 		Set<String> classers = new TreeSet<String>();
+		Set<String> another = new TreeSet<String>();
 		for (int x = 0; x < currentClasses.size(); x++) {
-			if (classers.add(classes.get(x).replaceAll("/", ".") + "x:" + classes.get(x).replaceAll("/", ".") + "[a]\n")) {
-				ans += classes.get(x).replaceAll("/", ".") + "x:" + classes.get(x).replaceAll("/", ".") + "[a]\n";
+			if (classers.add(currentClasses.get(x) + "x:" + currentClasses.get(x) + "[a]\n")) {
+				ans += currentClasses.get(x) + "x:" + currentClasses.get(x) + "[a]\n";
+			}
+			if (!currentClasses.contains(classes.get(x)) && another.add(classes.get(x))) {
+				ans += classes.get(x) + "x:" + classes.get(x) + "[a]\n";
 			}
 		}
 		
 		ans += "\n";
 		
 		for (int x = 0; x < methods.size(); x++) {
-			String temp = descriptions.get(x).substring(2);
-			temp = temp.replaceAll(";L", ",");
-			temp = temp.replace(";", "");
-			temp = temp.replace(")V", "");
-			temp = temp.replaceAll("/", ".");
-			if (temp.equals("V")) temp = "";
-			if (temp.equals("J")) temp = "";
-			ans += currentClasses.get(x).replaceAll("/",  ".") + "x:" + classes.get(x).replaceAll("/", ".") + "x." + methods.get(x) + "(" + temp + ")\n";
+			ans += currentClasses.get(x) + "x:" + returnTypes.get(x) + "=" + classes.get(x) + "x." + methods.get(x) + "(" + descriptions.get(x) + ")\n";
 		}
 		
 		return ans;
