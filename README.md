@@ -40,3 +40,16 @@ Katrina designed and wrote this code for milestone 3, totally 12 hours of work. 
 
 How to Use Our Code
 In Eclipse, edit hte command line arguments to be the classname and the method to analyze. Then, run the program. The text outputted to the console should then be copied and pasted to sdedit, which outputs a picture of the sequence diagram.
+
+--
+Milestone 4
+--
+
+The Design of the Tool
+For creating sequence diagrams, we programmed the ClassMethodVisitor to take a second constructor. This constructor would instantiate a special MethodInformation variable, which would hold method information if we turned on sequence diagrams. The method body scraper in MethodInformationVisitor would then call itself recursively and find go five layers deep to find method calls and then print them in order. This is working properly.
+
+Who Did What
+Katrina designed and wrote the functionality for this milestone, in about an hour. Ian, once functionality was added, designed the design pattern to allow for easy addition of other pattern detection behaviors.
+
+How to Use Our Code
+IN Eclipse, edit the command line arguments to be the proper classes to be analyzed. Then, run the program. The outputted .dot file should then be run through Graphviz on the command line, and outputs a picture file of the UML diagram.

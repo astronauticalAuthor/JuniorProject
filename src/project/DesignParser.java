@@ -54,13 +54,13 @@ public class DesignParser {
 //		
 //		Generator.generateUML(classes);
 
-		String[] arguments = {args[2]};
-		
-		MethodInformation mi = new MethodInformation(args[1], arguments, args[0]);
-		ClassRep cr = new ClassRep();
-
-		
-		Generator.generateUML(classes);
+//		String[] arguments = {args[2]};
+//		
+//		MethodInformation mi = new MethodInformation(args[1], arguments, args[0]);
+//		ClassRep cr = new ClassRep();
+//
+//		
+//		Generator.generateUML(classes);
 
 
 //		String className = "java.util.Collections";

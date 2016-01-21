@@ -7,7 +7,9 @@ import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
 import project.*;
 import project.classes.ClassRep;
+import project.classes.Generator;
 import project.classes.MethodInformation;
+import project.classes.Singleton;
 import project.interfaces.IArrow;
 import project.interfaces.IClass;
 import project.interfaces.IField;
@@ -135,6 +137,62 @@ public class VisitorTest{
 		
 		String ans = mi.toString();
 		System.out.println("answer is: " + ans);
+	}
+	
+	public static void fakeMain(String[] args) throws Exception{
+//		String[] args = {"test.SingletonTest1", "test.SingletonTest2", "test.SingletonTest3"};
+		ArrayList<IClass> classes = new ArrayList<IClass>();
+		 for(String className: args){
+		 	IClass current = new ClassRep();
+			
+		 	ClassReader reader = new ClassReader(className);
+			
+		 	ClassDeclarationVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, current, args);
+		 	ClassFieldVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor, current, args);
+		 	ClassMethodVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor, current, args);
+
+		 	reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);			
+			
+		 	classes.add(current);
+		 }
+	
+		Generator.generateUML(classes);
+	}
+	
+	@Test
+	public void testBasicSingleton() throws Exception {
+		String[] args = {"test.SingletonTest1"};
+		fakeMain(args);
+		ArrayList<IClass> s = Singleton.getSingletons();
+		assertTrue(s.size() == 1);
+		assertEquals(s.get(0).getName(), "test.SingletonTest1");
+	}
+	
+	@Test
+	public void testFakeSingletons() throws Exception {
+		String[] args = {"test.SingletonTest2", "test.SingletonTest3"};
+		fakeMain(args);
+		
+		assertEquals(Singleton.fields.size(), 1);
+		assertEquals(Singleton.methods.size(), 1);
+		assertEquals(Singleton.getSingletons().size(), 0);
+	}
+	
+	@Test
+	public void testSingletonBasics() throws Exception {
+		String[] args = {"test.Singleton1", "test.SingletonTest2", "test.SingletonTest3"};
+		fakeMain(args);
+		
+		ArrayList<IClass> s = Singleton.getSingletons();
+		assertTrue(s.size() <= Singleton.methods.size() && s.size() <= Singleton.fields.size());
+	}
+	
+	@Test
+	public void testEagerSingleton() throws Exception {
+		String[] args = {"test.EagerSingletonTest"};
+		fakeMain(args);
+		
+		assertTrue(Singleton.getSingletons().size() == 1);
 	}
 
 	
