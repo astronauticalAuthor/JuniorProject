@@ -15,7 +15,7 @@ public class DesignParser {
 	public static void main(String[] args) throws IOException{
 
 //		ArrayList<IClass> classes = new ArrayList<IClass>();
-//		args = new String[0];
+////		args = new String[0];
 //		 for(String className: args){
 //		 	IClass current = new ClassRep();
 //			
@@ -33,27 +33,22 @@ public class DesignParser {
 //		
 //		Generator.generateUML(classes);
 
-		String className = "java.util.Collections";
-		String methodName = "shuffle";
-		String[] arguments = {"java.util.List"};		
+		String[] arguments = {args[2]};
 		
-		MethodInformation mi = new MethodInformation(methodName, arguments, className);
+		MethodInformation mi = new MethodInformation(args[1], arguments, args[0]);
 		ClassRep cr = new ClassRep();
 		
 		String method = "java.util.Collections.shuffle(List<T> list)";
 
-		ClassReader reader = new ClassReader(className);
+		ClassReader reader = new ClassReader(args[0]);
 		ClassDeclarationVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, cr);
 		ClassMethodVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, declVisitor, cr, mi, 1);
-		
+//		
 		reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
-		
-//		mi.toString();
 		
 		System.out.println(mi.toString());
 
 //		System.out.println("digraph G{\n rankdir=BT;");
-		
 //		for(IClass c: classes){
 //			
 //			System.out.println("\n" + c.toString(classes));
