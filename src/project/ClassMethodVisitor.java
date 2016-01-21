@@ -106,7 +106,6 @@ public class ClassMethodVisitor extends ClassVisitor {
 		this.currentMethod.setReturnType(retType);
 		
 		this.currentClass.addMethod(this.currentMethod);
-		System.out.println("Reached mine");
 		MethodVisitor mine = new MethodTraverser(Opcodes.ASM5, toDecorate, this.currentClass, this.currentMethod, this.classes);
 		
 		return mine;
