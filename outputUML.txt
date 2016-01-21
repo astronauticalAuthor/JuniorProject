@@ -1,5 +1,6 @@
 digraph G{
  rankdir=BT;
+<<<<<<< HEAD
 DesignParser [shape="record"
 label="{DesignParser||+DesignParser() : void\l
 +main(String[]) : void\l
@@ -10,6 +11,8 @@ DesignParser -> ClassDeclarationVisitor[arrowhead="ovee", style="dashed"];
 DesignParser -> ClassFieldVisitor[arrowhead="ovee", style="dashed"];
 DesignParser -> ClassMethodVisitor[arrowhead="ovee", style="dashed"];
 DesignParser -> Generator[arrowhead="ovee", style="dashed"];
+=======
+>>>>>>> 28559793c913c584107e7de9e6ab16a0a1d47960
 ClassDeclarationVisitor [shape="record"
 label="{ClassDeclarationVisitor|+currentClass : IClass\l
 +classes : String[]\l
@@ -20,7 +23,13 @@ label="{ClassDeclarationVisitor|+currentClass : IClass\l
 ];
 ClassDeclarationVisitor -> ClassVisitor[arrowhead="onormal", style="solid"];
 ClassDeclarationVisitor -> IClass[arrowhead="ovee", style="solid"];
+<<<<<<< HEAD
 ClassDeclarationVisitor -> ExtendArrow[arrowhead="ovee", style="dashed"];
+=======
+ClassDeclarationVisitor -> IClass[arrowhead="ovee", style="dashed"];
+ClassDeclarationVisitor -> ExtendArrow[arrowhead="ovee", style="dashed"];
+ClassDeclarationVisitor -> IArrow[arrowhead="ovee", style="dashed"];
+>>>>>>> 28559793c913c584107e7de9e6ab16a0a1d47960
 ClassDeclarationVisitor -> ImplArrow[arrowhead="ovee", style="dashed"];
 ClassFieldVisitor [shape="record"
 label="{ClassFieldVisitor|+currentClass : IClass\l
@@ -35,7 +44,14 @@ ClassFieldVisitor -> ClassVisitor[arrowhead="onormal", style="solid"];
 ClassFieldVisitor -> IClass[arrowhead="ovee", style="solid"];
 ClassFieldVisitor -> IField[arrowhead="ovee", style="solid"];
 ClassFieldVisitor -> Field[arrowhead="ovee", style="dashed"];
+<<<<<<< HEAD
 ClassFieldVisitor -> AssocArrow[arrowhead="ovee", style="dashed"];
+=======
+ClassFieldVisitor -> IField[arrowhead="ovee", style="dashed"];
+ClassFieldVisitor -> IClass[arrowhead="ovee", style="dashed"];
+ClassFieldVisitor -> AssocArrow[arrowhead="ovee", style="dashed"];
+ClassFieldVisitor -> IArrow[arrowhead="ovee", style="dashed"];
+>>>>>>> 28559793c913c584107e7de9e6ab16a0a1d47960
 ClassMethodVisitor [shape="record"
 label="{ClassMethodVisitor|+currentClass : IClass\l
 +currentMethod : IMethod\l
@@ -51,8 +67,27 @@ level : int\l
 ClassMethodVisitor -> ClassVisitor[arrowhead="onormal", style="solid"];
 ClassMethodVisitor -> IClass[arrowhead="ovee", style="solid"];
 ClassMethodVisitor -> IMethod[arrowhead="ovee", style="solid"];
+<<<<<<< HEAD
 ClassMethodVisitor -> Method[arrowhead="ovee", style="dashed"];
 ClassMethodVisitor -> MethodTraverser[arrowhead="ovee", style="dashed"];
+=======
+ClassMethodVisitor -> MethodInformation[arrowhead="ovee", style="solid"];
+ClassMethodVisitor -> MethodInformationVisitor[arrowhead="ovee", style="dashed"];
+ClassMethodVisitor -> Method[arrowhead="ovee", style="dashed"];
+ClassMethodVisitor -> IClass[arrowhead="ovee", style="dashed"];
+ClassMethodVisitor -> IMethod[arrowhead="ovee", style="dashed"];
+ClassMethodVisitor -> MethodTraverser[arrowhead="ovee", style="dashed"];
+DesignParser [shape="record"
+label="{DesignParser||+DesignParser() : void\l
++main(String[]) : void\l
+}"
+];
+DesignParser -> ClassRep[arrowhead="ovee", style="dashed"];
+DesignParser -> ClassDeclarationVisitor[arrowhead="ovee", style="dashed"];
+DesignParser -> ClassFieldVisitor[arrowhead="ovee", style="dashed"];
+DesignParser -> ClassMethodVisitor[arrowhead="ovee", style="dashed"];
+DesignParser -> Generator[arrowhead="ovee", style="dashed"];
+>>>>>>> 28559793c913c584107e7de9e6ab16a0a1d47960
 MethodInformationVisitor [shape="record"
 label="{MethodInformationVisitor|methodVisitor : MethodVisitor\l
 methodInformation : MethodInformation\l
@@ -63,10 +98,15 @@ level : int\l
 }"
 ];
 MethodInformationVisitor -> MethodVisitor[arrowhead="onormal", style="solid"];
+<<<<<<< HEAD
+=======
+MethodInformationVisitor -> MethodInformation[arrowhead="ovee", style="solid"];
+>>>>>>> 28559793c913c584107e7de9e6ab16a0a1d47960
 MethodInformationVisitor -> MethodInformation[arrowhead="ovee", style="dashed"];
 MethodInformationVisitor -> ClassRep[arrowhead="ovee", style="dashed"];
 MethodInformationVisitor -> ClassDeclarationVisitor[arrowhead="ovee", style="dashed"];
 MethodInformationVisitor -> ClassMethodVisitor[arrowhead="ovee", style="dashed"];
+<<<<<<< HEAD
 MethodInformation [shape="record"
 label="{MethodInformation|+methodName : String\l
 +arguments : String[]\l
@@ -84,6 +124,8 @@ currentClasses : ArrayList\l
 +toString() : String\l
 }"
 ];
+=======
+>>>>>>> 28559793c913c584107e7de9e6ab16a0a1d47960
 MethodTraverser [shape="record"
 label="{MethodTraverser|+currentMethod : IMethod\l
 +currentClass : IClass\l
@@ -96,18 +138,30 @@ label="{MethodTraverser|+currentMethod : IMethod\l
 MethodTraverser -> MethodVisitor[arrowhead="onormal", style="solid"];
 MethodTraverser -> IMethod[arrowhead="ovee", style="solid"];
 MethodTraverser -> IClass[arrowhead="ovee", style="solid"];
+<<<<<<< HEAD
 MethodTraverser -> UseArrow[arrowhead="ovee", style="dashed"];
 AssocArrow [shape="record"
 label="{AssocArrow|+sourceClass : String\l
 +destinClass : String\l
 +selfType : String\l
+=======
+MethodTraverser -> IClass[arrowhead="ovee", style="dashed"];
+MethodTraverser -> UseArrow[arrowhead="ovee", style="dashed"];
+MethodTraverser -> IArrow[arrowhead="ovee", style="dashed"];
+AssocArrow [shape="record"
+label="{AssocArrow|+sourceClass : String\l
++destinClass : String\l
+>>>>>>> 28559793c913c584107e7de9e6ab16a0a1d47960
 |+AssocArrow() : void\l
 +setSource(String) : void\l
 +setDestination(String) : void\l
 +toString() : String\l
+<<<<<<< HEAD
 +getSource() : String\l
 +getDest() : String\l
 +getSelf() : String\l
+=======
+>>>>>>> 28559793c913c584107e7de9e6ab16a0a1d47960
 }"
 ];
 AssocArrow -> IArrow[arrowhead="onormal", style="dashed"];
@@ -146,14 +200,20 @@ ClassRep -> IArrow[arrowhead="ovee", style="solid"];
 ExtendArrow [shape="record"
 label="{ExtendArrow|+sourceClass : String\l
 +destinClass : String\l
+<<<<<<< HEAD
 +selfType : String\l
+=======
+>>>>>>> 28559793c913c584107e7de9e6ab16a0a1d47960
 |+ExtendArrow() : void\l
 +setSource(String) : void\l
 +setDestination(String) : void\l
 +toString() : String\l
+<<<<<<< HEAD
 +getSource() : String\l
 +getDest() : String\l
 +getSelf() : String\l
+=======
+>>>>>>> 28559793c913c584107e7de9e6ab16a0a1d47960
 }"
 ];
 ExtendArrow -> IArrow[arrowhead="onormal", style="dashed"];
@@ -177,6 +237,7 @@ Field -> IField[arrowhead="onormal", style="dashed"];
 Generator [shape="record"
 label="{Generator||+Generator() : void\l
 +generateUML(ArrayList) : void\l
+<<<<<<< HEAD
 -destTest(IArrow) : boolean\l
 }"
 ];
@@ -184,13 +245,27 @@ ImplArrow [shape="record"
 label="{ImplArrow|+sourceClass : String\l
 +destinClass : String\l
 +selfType : String\l
+=======
+}"
+];
+Generator -> IClass[arrowhead="ovee", style="dashed"];
+Generator -> IField[arrowhead="ovee", style="dashed"];
+Generator -> IMethod[arrowhead="ovee", style="dashed"];
+Generator -> IArrow[arrowhead="ovee", style="dashed"];
+ImplArrow [shape="record"
+label="{ImplArrow|+sourceClass : String\l
++destinClass : String\l
+>>>>>>> 28559793c913c584107e7de9e6ab16a0a1d47960
 |+ImplArrow() : void\l
 +setSource(String) : void\l
 +setDestination(String) : void\l
 +toString() : String\l
+<<<<<<< HEAD
 +getSource() : String\l
 +getDest() : String\l
 +getSelf() : String\l
+=======
+>>>>>>> 28559793c913c584107e7de9e6ab16a0a1d47960
 }"
 ];
 ImplArrow -> IArrow[arrowhead="onormal", style="dashed"];
@@ -217,17 +292,45 @@ label="{Method|-methodName : String\l
 }"
 ];
 Method -> IMethod[arrowhead="onormal", style="dashed"];
+<<<<<<< HEAD
 UseArrow [shape="record"
 label="{UseArrow|+sourceClass : String\l
 +destinClass : String\l
 +selfType : String\l
+=======
+Method -> MethodInformation[arrowhead="ovee", style="solid"];
+MethodInformation [shape="record"
+label="{MethodInformation|+methodName : String\l
++arguments : String[]\l
++className : String\l
+-desc : String\l
+methods : ArrayList\l
+classes : ArrayList\l
+descriptions : ArrayList\l
+currentClasses : ArrayList\l
+returnTypes : ArrayList\l
+|+MethodInformation() : void\l
++setDesc(String) : void\l
++getDesc() : String\l
++MethodInformation(String,String[],String) : void\l
++addNew(String,String,String,String,String) : void\l
++toString() : String\l
+}"
+];
+UseArrow [shape="record"
+label="{UseArrow|+sourceClass : String\l
++destinClass : String\l
+>>>>>>> 28559793c913c584107e7de9e6ab16a0a1d47960
 |+UseArrow() : void\l
 +setSource(String) : void\l
 +setDestination(String) : void\l
 +toString() : String\l
+<<<<<<< HEAD
 +getSource() : String\l
 +getDest() : String\l
 +getSelf() : String\l
+=======
+>>>>>>> 28559793c913c584107e7de9e6ab16a0a1d47960
 }"
 ];
 UseArrow -> IArrow[arrowhead="onormal", style="dashed"];
@@ -236,9 +339,12 @@ label="{\<\<interface\>\>\nIArrow|
 |+setSource(String) : void\l
 +setDestination(String) : void\l
 +toString() : String\l
+<<<<<<< HEAD
 +getSource() : String\l
 +getDest() : String\l
 +getSelf() : String\l
+=======
+>>>>>>> 28559793c913c584107e7de9e6ab16a0a1d47960
 }"
 ];
 IClass [shape="record"

@@ -53,6 +53,7 @@ public class ClassMethodVisitor extends ClassVisitor {
 			classNames[i] = argTypes[i].getClassName();
 		}
 		
+
 //		if (methodInformation != null && methodInformation.methodName.equals(name)) {
 ////			System.out.println(methodInformation.methodName);
 //			boolean isCorrect = classNames.length == methodInformation.arguments.length;
@@ -68,6 +69,22 @@ public class ClassMethodVisitor extends ClassVisitor {
 //				toDecorate = new MethodInformationVisitor(Opcodes.ASM5, toDecorate, methodInformation, level);
 //			}
 //		}
+
+		if (methodInformation != null && methodInformation.methodName.equals(name)) {
+			boolean isCorrect = classNames.length == methodInformation.arguments.length;
+			for (int x = 0; x < classNames.length && isCorrect; x++) {
+				if (!classNames[x].equals(methodInformation.arguments[x])) isCorrect = false;
+			}
+			
+			
+			if (isCorrect && toDecorate == null) {
+				toDecorate = new MethodInformationVisitor(Opcodes.ASM5, methodInformation, level);
+			}
+			else if (isCorrect){
+				toDecorate = new MethodInformationVisitor(Opcodes.ASM5, toDecorate, methodInformation, level);
+			}
+		}
+
 		
 		this.currentMethod = new Method();
 		
