@@ -52,7 +52,7 @@ public class ClassDeclarationVisitor extends ClassVisitor {
 		}
 		
 		if((access & Opcodes.ACC_INTERFACE) != 0){
-			currentClass.setIsInterface(true);
+			this.currentClass.setSpecial("interface");
 		}
 		
 		super.visit(version, access, name, signature, superName, interfaces);

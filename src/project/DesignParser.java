@@ -28,7 +28,7 @@ public class DesignParser {
 			
 		 	classes.add(current);
 		 }
-	
+		Singleton.defineSingletons(classes);
 		Generator.generateUML(classes);
 		
 		System.out.println(Singleton.methods);

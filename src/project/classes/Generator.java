@@ -3,15 +3,20 @@ package project.classes;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import project.interfaces.IArrow;
 import project.interfaces.IClass;
 import project.interfaces.IField;
 import project.interfaces.IMethod;
+import project.interfaces.RecordStartBeh;
 
 public class Generator {
-
+	
+	public static RecordBehaviorMap recStarts = new RecordBehaviorMap();
+	
 	public static void generateUML(ArrayList<IClass> classes) throws FileNotFoundException {
 		
 		PrintWriter out = new PrintWriter("./outputUML.txt");
@@ -20,24 +25,23 @@ public class Generator {
 		
 		for(IClass c : classes){
 			
-//			boolean single = false;
-			
-			if(c.getIsInterface()){
-				out.write(c.getName() + " [shape=\"record\"\n");
-				out.write("label=\"{\\<\\<interface\\>\\>\\n");
-				out.write(c.getName() + "|\n");
-//				parsing += this.className + " [shape=\"record\"\n label= \"{\\<\\<interface\\>\\>\\n" + this.className + "|\n";
-			}else if(Singleton.getSingletons().contains(c)){
-//				single = true;
-				out.write(c.getName() + " [shape=\"record\"\n");
-				out.write("color=\"blue\"\n");
-				out.write("label=\"{" + c.getName() + "\\n");
-				out.write("\\<\\<Singleton\\>\\>|\n");
-			}else{
-				out.write(c.getName() + " [shape=\"record\"\n");
-				out.write("label=\"{" + c.getName() + "|");
-//				parsing += this.className + " [shape=\"record\"\nlabel= \"{" + this.className +"|";
-			}
+			recStarts.getBeh(c.getSpecial()).initRecord(c.getName(), out);
+//			if(c.getIsInterface()){
+//				out.write(c.getName() + " [shape=\"record\"\n");
+//				out.write("label=\"{\\<\\<interface\\>\\>\\n");
+//				out.write(c.getName() + "|\n");
+////				parsing += this.className + " [shape=\"record\"\n label= \"{\\<\\<interface\\>\\>\\n" + this.className + "|\n";
+//			}else if(Singleton.getSingletons().contains(c)){
+////				single = true;
+//				out.write(c.getName() + " [shape=\"record\"\n");
+//				out.write("color=\"blue\"\n");
+//				out.write("label=\"{" + c.getName() + "\\n");
+//				out.write("\\<\\<Singleton\\>\\>|\n");
+//			}else{
+//				out.write(c.getName() + " [shape=\"record\"\n");
+//				out.write("label=\"{" + c.getName() + "|");
+////				parsing += this.className + " [shape=\"record\"\nlabel= \"{" + this.className +"|";
+//			}
 			//for each field in a class
 			ArrayList<IField> fields = c.getFields();
 			for(IField f:fields){

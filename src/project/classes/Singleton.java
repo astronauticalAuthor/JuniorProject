@@ -9,11 +9,18 @@ public class Singleton {
 	private static ArrayList<IClass> classes = new ArrayList<IClass>();
 	
 	public static ArrayList<IClass> getSingletons() {
+		return classes;
+	}
+	
+	public static void defineSingletons(ArrayList<IClass> classes2) {
 		for (int x = 0; x < fields.size(); x++) {
 			if (methods.contains(fields.get(x))) {
 				classes.add(fields.get(x));
 			}
 		}
-		return classes;
+		for (IClass c:classes2) {
+			if(classes.contains(c))
+				c.setSpecial("singleton");
+		}
 	}
 }

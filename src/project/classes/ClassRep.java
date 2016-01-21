@@ -14,8 +14,7 @@ public class ClassRep implements IClass {
 	private ArrayList<IMethod> methods;
 	private ArrayList<IField> fields;
 	private ArrayList<String> interfaces;
-	private String parsing = "";
-	private Boolean isInterface = false;
+	private String special;
 	
 	private ArrayList<IArrow> arrows;
 	
@@ -26,6 +25,7 @@ public class ClassRep implements IClass {
 		this.arrows = new ArrayList<IArrow>();
 		this.className = "";
 		this.superClassName = "";
+		this.special = "normal";
 	}
 	
 	@Override
@@ -73,12 +73,6 @@ public class ClassRep implements IClass {
 	}
 
 	@Override
-	public void setIsInterface(boolean b) {
-		this.isInterface = b;
-	}
-	
-
-	@Override
 	public String getName() {
 		return this.className;
 	}
@@ -89,13 +83,13 @@ public class ClassRep implements IClass {
 	}
 
 	@Override
-	public void setParsing(String s) {
-		this.parsing += s;
+	public void setSpecial(String s) {
+		this.special = s;
 	}
 
 	@Override
-	public String getParsing() {
-		return this.parsing;
+	public String getSpecial() {
+		return this.special;
 	}
 
 	@Override
@@ -105,92 +99,7 @@ public class ClassRep implements IClass {
 
 	@Override
 	public ArrayList<IArrow> getArrows() {
-		// TODO Auto-generated method stub
 		return this.arrows;
 	}
-
-	@Override
-	public boolean getIsInterface() {
-		return this.isInterface;
-	}
-	
-
-//	@Override
-//	public String toString(ArrayList<IClass> classes) {
-//		ArrayList<String> classNames = new ArrayList<String>();
-//		
-//		for(IClass c:classes){
-//			classNames.add(c.getName());
-//		}
-//		
-//		if(this.isInterface)
-//			parsing += this.className + " [shape=\"record\"\n label= \"{\\<\\<interface\\>\\>\\n" + this.className + "|\n";
-//		else
-//			parsing += this.className + " [shape=\"record\"\nlabel= \"{" + this.className +"|";
-//		
-//		//for each field in a class
-//		ArrayList<IField> fields = this.getFields();
-//		for(IField f:fields){
-//			parsing += f.getAccess() + f.getName() + " : " + f.getType() + "\\l\n";
-//		}
-//		
-//		//for each method in a class
-//		ArrayList<IMethod> methods = this.getMethods();
-//		if (methods.size() > 0) {
-//			parsing += "|";
-//		}
-//		for(IMethod m:methods){
-//			parsing += "+ " + m.getName() + "(";
-//			ArrayList<String> parameters = new ArrayList<String>(m.getParameters());
-//			while(parameters.size() != 0){
-//				String p = parameters.remove(0);
-//				parsing += p.substring(p.lastIndexOf(".")+1);
-//				if(parameters.size() != 0) parsing += ",";
-//			}
-//			parsing += ") : " + m.getReturnType() + "\\l\n";
-//		}
-//
-//		
-//		parsing += "}\"\n];\n";
-//		
-//		
-//		if(!this.isInterface){
-//			//do association
-//			for (IField f:fields) {
-//				if (classNames.contains(f.getType())) {
-//					parsing += this.className + " -> " + f.getType() + "[arrowhead=\"ovee\", style=\"solid\"];\n";
-//				}
-//			}
-//		
-//		
-//			//do uses (return types and parameter types)
-//			for (IMethod m:methods) {
-//				if (classNames.contains(m.getReturnType())) {
-//					parsing += this.className + " -> " + m.getReturnType() + "[arrowhead=\"ovee\", style=\"dashed\"];\n";
-//				}
-//				ArrayList<String> params = m.getParameters();
-//				for (String p:params) {
-//					if (classNames.contains(p)) {
-//						parsing += this.className + " -> " + p + "[arrowhead=\"ovee\", style=\"dashed\"];\n";
-//					}
-//				}
-//			}
-//		}
-//		
-//		
-//		if (this.superClassName != "") {
-//			if(!this.superClassName.equals("Object"))
-//				parsing += this.className + " -> " + this.superClassName + "[arrowhead=\"onormal\", style=\"solid\"];\n";
-//		}
-//		//interfaces
-//		ArrayList<String> interfaces = this.getInterfaces();
-//		for (int y = 0; y < interfaces.size(); y++) {
-//			parsing += this.className + " -> " + interfaces.get(y) + "[arrowhead=\"onormal\", style=\"dashed\"];\n";
-//		}
-//		
-//		return parsing;
-//	}
-
-	
 
 }
