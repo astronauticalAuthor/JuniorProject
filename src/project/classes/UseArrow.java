@@ -8,6 +8,7 @@ public class UseArrow implements IArrow {
 	
 	public String sourceClass;
 	public String destinClass;
+	public String selfType = "use";
 	
 	@Override
 	public void setSource(String src) {
@@ -23,5 +24,22 @@ public class UseArrow implements IArrow {
 	public String toString(){
 		return this.sourceClass + " -> " + this.destinClass + "[arrowhead=\"ovee\", style=\"dashed\"];\n";
 	}
+
+	@Override
+	public String getSource() {
+		return this.sourceClass;
+	}
+
+	@Override
+	public String getDest() {
+		return this.destinClass;
+	}
+
+	@Override
+	public String getSelf() {
+		return this.selfType;
+	}
+	
+	
 
 }

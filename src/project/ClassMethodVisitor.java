@@ -53,21 +53,21 @@ public class ClassMethodVisitor extends ClassVisitor {
 			classNames[i] = argTypes[i].getClassName();
 		}
 		
-		if (methodInformation != null && methodInformation.methodName.equals(name)) {
-//			System.out.println(methodInformation.methodName);
-			boolean isCorrect = classNames.length == methodInformation.arguments.length;
-			//This will need to be fixed further, but for now it's good enough. This is DEFINITELY not correct in all situations
-//			for (int x = 0; x < classNames.length && isCorrect; x++) {
-//				if (!classNames[x].equals(methodInformation.arguments[x])) isCorrect = false;
+//		if (methodInformation != null && methodInformation.methodName.equals(name)) {
+////			System.out.println(methodInformation.methodName);
+//			boolean isCorrect = classNames.length == methodInformation.arguments.length;
+//			//This will need to be fixed further, but for now it's good enough. This is DEFINITELY not correct in all situations
+////			for (int x = 0; x < classNames.length && isCorrect; x++) {
+////				if (!classNames[x].equals(methodInformation.arguments[x])) isCorrect = false;
+////			}
+//			
+//			if (isCorrect && toDecorate == null) {
+//				toDecorate = new MethodInformationVisitor(Opcodes.ASM5, methodInformation, level);
 //			}
-			
-			if (isCorrect && toDecorate == null) {
-				toDecorate = new MethodInformationVisitor(Opcodes.ASM5, methodInformation, level);
-			}
-			else if (isCorrect){
-				toDecorate = new MethodInformationVisitor(Opcodes.ASM5, toDecorate, methodInformation, level);
-			}
-		}
+//			else if (isCorrect){
+//				toDecorate = new MethodInformationVisitor(Opcodes.ASM5, toDecorate, methodInformation, level);
+//			}
+//		}
 		
 		this.currentMethod = new Method();
 		
@@ -98,7 +98,7 @@ public class ClassMethodVisitor extends ClassVisitor {
 		this.currentMethod.setReturnType(retType);
 		
 		this.currentClass.addMethod(this.currentMethod);
-		
+		System.out.println("Reached mine");
 		MethodVisitor mine = new MethodTraverser(Opcodes.ASM5, toDecorate, this.currentClass, this.currentMethod, this.classes);
 		
 		return mine;

@@ -66,8 +66,16 @@ public class Generator {
 //			parsing += "}\"\n];\n";
 			List<String> arrowsToPrint = new ArrayList<String>();
 			for(IArrow a:c.getArrows()){
-				if(!arrowsToPrint.contains(a.toString()))
-					arrowsToPrint.add(a.toString());
+				String arrowType = a.getSelf();
+				if(!arrowsToPrint.contains(a.toString())){
+					if(arrowType.equals("impl") || arrowType.equals("extend")){
+						arrowsToPrint.add(a.toString());
+					}else if(arrowType.equals("assoc") && destTest(a)){
+						arrowsToPrint.add(a.toString());
+					}else if(arrowType.equals("use") && !destTest(a)){
+						arrowsToPrint.add(a.toString());
+					}
+				}	
 			}
 			for(String a:arrowsToPrint){
 				out.write(a);
@@ -79,4 +87,12 @@ public class Generator {
 		out.close();
 	}
 
+	private static boolean destTest(IArrow a){
+		boolean ia = a.getDest().equals("IArrow");
+		boolean ic = a.getDest().equals("IClass");
+		boolean iF = a.getDest().equals("IField");
+		boolean im = a.getDest().equals("IMethod");
+		return ia || ic || iF || im;
+		
+	}
 }
