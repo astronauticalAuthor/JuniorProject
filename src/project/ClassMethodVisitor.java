@@ -8,6 +8,7 @@ import org.objectweb.asm.Type;
 import project.classes.ClassRep;
 import project.classes.Method;
 import project.classes.MethodInformation;
+import project.classes.Singleton;
 import project.interfaces.IClass;
 import project.interfaces.IMethod;
 
@@ -52,6 +53,13 @@ public class ClassMethodVisitor extends ClassVisitor {
 		for(int i=0; i<argTypes.length; i++){
 			classNames[i] = argTypes[i].getClassName();
 		}
+		
+		//check to see if it's a singleton class
+		String returnType = Type.getReturnType(desc).getClassName();
+		if ((name.contains("getInstance") && (access & Opcodes.ACC_STATIC) != 0) && returnType.contains(currentClass.getName())) {
+			Singleton.methods.add(currentClass);
+		}
+		//
 		
 		if (methodInformation != null && methodInformation.methodName.equals(name)) {
 			boolean isCorrect = classNames.length == methodInformation.arguments.length;

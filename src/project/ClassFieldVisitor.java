@@ -7,6 +7,7 @@ import org.objectweb.asm.Type;
 
 import project.classes.AssocArrow;
 import project.classes.Field;
+import project.classes.Singleton;
 import project.interfaces.IArrow;
 import project.interfaces.IClass;
 import project.interfaces.IField;
@@ -38,6 +39,12 @@ public class ClassFieldVisitor extends ClassVisitor {
 		
 		String type = Type.getType(desc).getClassName();
 		this.currentField.setType(type);
+		
+		//check to see if it's a singleton
+		if (type.contains(currentClass.getName()) && (access & Opcodes.ACC_STATIC) != 0) {
+			Singleton.fields.add(currentClass);
+		}
+		//
 		
 		String sign = null;
 		if(signature != null){
