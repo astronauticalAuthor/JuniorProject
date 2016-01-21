@@ -13,18 +13,26 @@ import project.interfaces.IMethod;
 public class Generator {
 
 	public static void generateUML(ArrayList<IClass> classes) throws FileNotFoundException {
-		// TODO Auto-generated method stub
 		
 		PrintWriter out = new PrintWriter("./outputUML.txt");
 		
 		out.write("digraph G{\n rankdir=BT;\n");
 		
 		for(IClass c : classes){
+			
+//			boolean single = false;
+			
 			if(c.getIsInterface()){
 				out.write(c.getName() + " [shape=\"record\"\n");
 				out.write("label=\"{\\<\\<interface\\>\\>\\n");
 				out.write(c.getName() + "|\n");
 //				parsing += this.className + " [shape=\"record\"\n label= \"{\\<\\<interface\\>\\>\\n" + this.className + "|\n";
+			}else if(Singleton.getSingletons().contains(c)){
+//				single = true;
+				out.write(c.getName() + " [shape=\"record\"\n");
+				out.write("color=\"blue\"\n");
+				out.write("label=\"{" + c.getName() + "\\n");
+				out.write("\\<\\<Singleton\\>\\>|\n");
 			}else{
 				out.write(c.getName() + " [shape=\"record\"\n");
 				out.write("label=\"{" + c.getName() + "|");
@@ -61,7 +69,8 @@ public class Generator {
 //				}
 //				parsing += ") : " + m.getReturnType() + "\\l\n";
 			}
-
+//			if(single)
+//				out.write("}\"\n]);
 			out.write("}\"\n];\n");
 //			parsing += "}\"\n];\n";
 			List<String> arrowsToPrint = new ArrayList<String>();
