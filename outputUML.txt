@@ -1,5 +1,6 @@
 digraph G{
  rankdir=BT;
+<<<<<<< HEAD
 SingletonTest1 [shape="record"
 label="{SingletonTest1|+s : SingletonTest1\l
 |+SingletonTest1() : void\l
@@ -17,6 +18,401 @@ SingletonTest2 -> SingletonTest2[arrowhead="ovee", style="solid"];
 SingletonTest3 [shape="record"
 label="{SingletonTest3||+SingletonTest3() : void\l
 +getInstance() : SingletonTest3\l
+=======
+<<<<<<< HEAD
+DesignParser [shape="record"
+label="{DesignParser||+DesignParser() : void\l
++main(String[]) : void\l
+}"
+];
+DesignParser -> ClassRep[arrowhead="ovee", style="dashed"];
+DesignParser -> ClassDeclarationVisitor[arrowhead="ovee", style="dashed"];
+DesignParser -> ClassFieldVisitor[arrowhead="ovee", style="dashed"];
+DesignParser -> ClassMethodVisitor[arrowhead="ovee", style="dashed"];
+DesignParser -> Generator[arrowhead="ovee", style="dashed"];
+=======
+>>>>>>> 28559793c913c584107e7de9e6ab16a0a1d47960
+ClassDeclarationVisitor [shape="record"
+label="{ClassDeclarationVisitor|+currentClass : IClass\l
++classes : String[]\l
+|+ClassDeclarationVisitor(int,IClass,String[]) : void\l
++ClassDeclarationVisitor(int,IClass) : void\l
++visit(int,int,String,String,String,String[]) : void\l
+}"
+];
+ClassDeclarationVisitor -> ClassVisitor[arrowhead="onormal", style="solid"];
+ClassDeclarationVisitor -> IClass[arrowhead="ovee", style="solid"];
+<<<<<<< HEAD
+ClassDeclarationVisitor -> ExtendArrow[arrowhead="ovee", style="dashed"];
+=======
+ClassDeclarationVisitor -> IClass[arrowhead="ovee", style="dashed"];
+ClassDeclarationVisitor -> ExtendArrow[arrowhead="ovee", style="dashed"];
+ClassDeclarationVisitor -> IArrow[arrowhead="ovee", style="dashed"];
+>>>>>>> 28559793c913c584107e7de9e6ab16a0a1d47960
+ClassDeclarationVisitor -> ImplArrow[arrowhead="ovee", style="dashed"];
+ClassFieldVisitor [shape="record"
+label="{ClassFieldVisitor|+currentClass : IClass\l
++currentField : IField\l
++classes : String[]\l
+|+ClassFieldVisitor(int,ClassVisitor,IClass,String[]) : void\l
++ClassFieldVisitor(int,ClassDeclarationVisitor,IClass) : void\l
++visitField(int,String,String,String,Object) : FieldVisitor\l
+}"
+];
+ClassFieldVisitor -> ClassVisitor[arrowhead="onormal", style="solid"];
+ClassFieldVisitor -> IClass[arrowhead="ovee", style="solid"];
+ClassFieldVisitor -> IField[arrowhead="ovee", style="solid"];
+ClassFieldVisitor -> Field[arrowhead="ovee", style="dashed"];
+<<<<<<< HEAD
+ClassFieldVisitor -> AssocArrow[arrowhead="ovee", style="dashed"];
+=======
+ClassFieldVisitor -> IField[arrowhead="ovee", style="dashed"];
+ClassFieldVisitor -> IClass[arrowhead="ovee", style="dashed"];
+ClassFieldVisitor -> AssocArrow[arrowhead="ovee", style="dashed"];
+ClassFieldVisitor -> IArrow[arrowhead="ovee", style="dashed"];
+>>>>>>> 28559793c913c584107e7de9e6ab16a0a1d47960
+ClassMethodVisitor [shape="record"
+label="{ClassMethodVisitor|+currentClass : IClass\l
++currentMethod : IMethod\l
++classes : String[]\l
++methodInformation : MethodInformation\l
+level : int\l
+|+ClassMethodVisitor(int,ClassVisitor,IClass,String[]) : void\l
++ClassMethodVisitor(int,ClassVisitor,ClassRep,MethodInformation,int) : void\l
++ClassMethodVisitor(int,ClassVisitor,IClass) : void\l
++visitMethod(int,String,String,String,String[]) : MethodVisitor\l
+}"
+];
+ClassMethodVisitor -> ClassVisitor[arrowhead="onormal", style="solid"];
+ClassMethodVisitor -> IClass[arrowhead="ovee", style="solid"];
+ClassMethodVisitor -> IMethod[arrowhead="ovee", style="solid"];
+<<<<<<< HEAD
+ClassMethodVisitor -> Method[arrowhead="ovee", style="dashed"];
+ClassMethodVisitor -> MethodTraverser[arrowhead="ovee", style="dashed"];
+=======
+ClassMethodVisitor -> MethodInformation[arrowhead="ovee", style="solid"];
+ClassMethodVisitor -> MethodInformationVisitor[arrowhead="ovee", style="dashed"];
+ClassMethodVisitor -> Method[arrowhead="ovee", style="dashed"];
+ClassMethodVisitor -> IClass[arrowhead="ovee", style="dashed"];
+ClassMethodVisitor -> IMethod[arrowhead="ovee", style="dashed"];
+ClassMethodVisitor -> MethodTraverser[arrowhead="ovee", style="dashed"];
+DesignParser [shape="record"
+label="{DesignParser||+DesignParser() : void\l
++main(String[]) : void\l
+}"
+];
+DesignParser -> ClassRep[arrowhead="ovee", style="dashed"];
+DesignParser -> ClassDeclarationVisitor[arrowhead="ovee", style="dashed"];
+DesignParser -> ClassFieldVisitor[arrowhead="ovee", style="dashed"];
+DesignParser -> ClassMethodVisitor[arrowhead="ovee", style="dashed"];
+DesignParser -> Generator[arrowhead="ovee", style="dashed"];
+>>>>>>> 28559793c913c584107e7de9e6ab16a0a1d47960
+MethodInformationVisitor [shape="record"
+label="{MethodInformationVisitor|methodVisitor : MethodVisitor\l
+methodInformation : MethodInformation\l
+level : int\l
+|+MethodInformationVisitor(int,MethodVisitor,MethodInformation,int) : void\l
++MethodInformationVisitor(int,MethodInformation,int) : void\l
++visitMethodInsn(int,String,String,String,boolean) : void\l
+}"
+];
+MethodInformationVisitor -> MethodVisitor[arrowhead="onormal", style="solid"];
+<<<<<<< HEAD
+=======
+MethodInformationVisitor -> MethodInformation[arrowhead="ovee", style="solid"];
+>>>>>>> 28559793c913c584107e7de9e6ab16a0a1d47960
+MethodInformationVisitor -> MethodInformation[arrowhead="ovee", style="dashed"];
+MethodInformationVisitor -> ClassRep[arrowhead="ovee", style="dashed"];
+MethodInformationVisitor -> ClassDeclarationVisitor[arrowhead="ovee", style="dashed"];
+MethodInformationVisitor -> ClassMethodVisitor[arrowhead="ovee", style="dashed"];
+<<<<<<< HEAD
+MethodInformation [shape="record"
+label="{MethodInformation|+methodName : String\l
++arguments : String[]\l
++className : String\l
+-desc : String\l
+methods : ArrayList\l
+classes : ArrayList\l
+descriptions : ArrayList\l
+currentClasses : ArrayList\l
+|+MethodInformation() : void\l
++setDesc(String) : void\l
++getDesc() : String\l
++MethodInformation(String,String[],String) : void\l
++addNew(String,String,String,String) : void\l
++toString() : String\l
+}"
+];
+=======
+>>>>>>> 28559793c913c584107e7de9e6ab16a0a1d47960
+MethodTraverser [shape="record"
+label="{MethodTraverser|+currentMethod : IMethod\l
++currentClass : IClass\l
++classes : String[]\l
+|+MethodTraverser(int,Method) : void\l
++MethodTraverser(int,MethodVisitor,IClass,IMethod,String[]) : void\l
++visitMethodInsn(int,String,String,String,boolean) : void\l
+}"
+];
+MethodTraverser -> MethodVisitor[arrowhead="onormal", style="solid"];
+MethodTraverser -> IMethod[arrowhead="ovee", style="solid"];
+MethodTraverser -> IClass[arrowhead="ovee", style="solid"];
+<<<<<<< HEAD
+MethodTraverser -> UseArrow[arrowhead="ovee", style="dashed"];
+AssocArrow [shape="record"
+label="{AssocArrow|+sourceClass : String\l
++destinClass : String\l
++selfType : String\l
+=======
+MethodTraverser -> IClass[arrowhead="ovee", style="dashed"];
+MethodTraverser -> UseArrow[arrowhead="ovee", style="dashed"];
+MethodTraverser -> IArrow[arrowhead="ovee", style="dashed"];
+AssocArrow [shape="record"
+label="{AssocArrow|+sourceClass : String\l
++destinClass : String\l
+>>>>>>> 28559793c913c584107e7de9e6ab16a0a1d47960
+|+AssocArrow() : void\l
++setSource(String) : void\l
++setDestination(String) : void\l
++toString() : String\l
+<<<<<<< HEAD
++getSource() : String\l
++getDest() : String\l
++getSelf() : String\l
+=======
+>>>>>>> 28559793c913c584107e7de9e6ab16a0a1d47960
+}"
+];
+AssocArrow -> IArrow[arrowhead="onormal", style="dashed"];
+ClassRep [shape="record"
+label="{ClassRep|-className : String\l
+-superClassName : String\l
+-methods : ArrayList\l
+-fields : ArrayList\l
+-interfaces : ArrayList\l
+-parsing : String\l
+-isInterface : Boolean\l
+-arrows : ArrayList\l
+|+ClassRep() : void\l
++addMethod(IMethod) : void\l
++addField(IField) : void\l
++setName(String) : void\l
++setSuper(String) : void\l
++setInterfaces(String[]) : void\l
++getFields() : ArrayList\l
++getMethods() : ArrayList\l
++getInterfaces() : ArrayList\l
++setIsInterface(boolean) : void\l
++getName() : String\l
++getSuper() : String\l
++setParsing(String) : void\l
++getParsing() : String\l
++addArrow(IArrow) : void\l
++getArrows() : ArrayList\l
++getIsInterface() : boolean\l
+}"
+];
+ClassRep -> IClass[arrowhead="onormal", style="dashed"];
+ClassRep -> IMethod[arrowhead="ovee", style="solid"];
+ClassRep -> IField[arrowhead="ovee", style="solid"];
+ClassRep -> IArrow[arrowhead="ovee", style="solid"];
+ExtendArrow [shape="record"
+label="{ExtendArrow|+sourceClass : String\l
++destinClass : String\l
+<<<<<<< HEAD
++selfType : String\l
+=======
+>>>>>>> 28559793c913c584107e7de9e6ab16a0a1d47960
+|+ExtendArrow() : void\l
++setSource(String) : void\l
++setDestination(String) : void\l
++toString() : String\l
+<<<<<<< HEAD
++getSource() : String\l
++getDest() : String\l
++getSelf() : String\l
+=======
+>>>>>>> 28559793c913c584107e7de9e6ab16a0a1d47960
+}"
+];
+ExtendArrow -> IArrow[arrowhead="onormal", style="dashed"];
+Field [shape="record"
+label="{Field|-fieldName : String\l
+-fieldType : String\l
+-access : String\l
+-sign : String\l
+|+Field() : void\l
++setName(String) : void\l
++setType(String) : void\l
++setAccess(String) : void\l
++getName() : String\l
++getType() : String\l
++getAccess() : String\l
++setSignature(String) : void\l
++getSignature() : String\l
+}"
+];
+Field -> IField[arrowhead="onormal", style="dashed"];
+Generator [shape="record"
+label="{Generator||+Generator() : void\l
++generateUML(ArrayList) : void\l
+<<<<<<< HEAD
+-destTest(IArrow) : boolean\l
+}"
+];
+ImplArrow [shape="record"
+label="{ImplArrow|+sourceClass : String\l
++destinClass : String\l
++selfType : String\l
+=======
+}"
+];
+Generator -> IClass[arrowhead="ovee", style="dashed"];
+Generator -> IField[arrowhead="ovee", style="dashed"];
+Generator -> IMethod[arrowhead="ovee", style="dashed"];
+Generator -> IArrow[arrowhead="ovee", style="dashed"];
+ImplArrow [shape="record"
+label="{ImplArrow|+sourceClass : String\l
++destinClass : String\l
+>>>>>>> 28559793c913c584107e7de9e6ab16a0a1d47960
+|+ImplArrow() : void\l
++setSource(String) : void\l
++setDestination(String) : void\l
++toString() : String\l
+<<<<<<< HEAD
++getSource() : String\l
++getDest() : String\l
++getSelf() : String\l
+=======
+>>>>>>> 28559793c913c584107e7de9e6ab16a0a1d47960
+}"
+];
+ImplArrow -> IArrow[arrowhead="onormal", style="dashed"];
+Method [shape="record"
+label="{Method|-methodName : String\l
+-methodType : String\l
+-parameters : ArrayList\l
+-returnType : String\l
+-access : String\l
+-moreInfo : ArrayList\l
+|+Method() : void\l
++setName(String) : void\l
++setType(String) : void\l
++setReturnType(String) : void\l
++addParameter(String) : void\l
++getName() : String\l
++getType() : String\l
++getParameters() : ArrayList\l
++getReturnType() : String\l
++setAccess(String) : void\l
++getAccess() : String\l
++addInfo(MethodInformation) : void\l
++getInfo() : ArrayList\l
+}"
+];
+Method -> IMethod[arrowhead="onormal", style="dashed"];
+<<<<<<< HEAD
+UseArrow [shape="record"
+label="{UseArrow|+sourceClass : String\l
++destinClass : String\l
++selfType : String\l
+=======
+Method -> MethodInformation[arrowhead="ovee", style="solid"];
+MethodInformation [shape="record"
+label="{MethodInformation|+methodName : String\l
++arguments : String[]\l
++className : String\l
+-desc : String\l
+methods : ArrayList\l
+classes : ArrayList\l
+descriptions : ArrayList\l
+currentClasses : ArrayList\l
+returnTypes : ArrayList\l
+|+MethodInformation() : void\l
++setDesc(String) : void\l
++getDesc() : String\l
++MethodInformation(String,String[],String) : void\l
++addNew(String,String,String,String,String) : void\l
++toString() : String\l
+}"
+];
+UseArrow [shape="record"
+label="{UseArrow|+sourceClass : String\l
++destinClass : String\l
+>>>>>>> 28559793c913c584107e7de9e6ab16a0a1d47960
+|+UseArrow() : void\l
++setSource(String) : void\l
++setDestination(String) : void\l
++toString() : String\l
+<<<<<<< HEAD
++getSource() : String\l
++getDest() : String\l
++getSelf() : String\l
+=======
+>>>>>>> 28559793c913c584107e7de9e6ab16a0a1d47960
+}"
+];
+UseArrow -> IArrow[arrowhead="onormal", style="dashed"];
+IArrow [shape="record"
+label="{\<\<interface\>\>\nIArrow|
+|+setSource(String) : void\l
++setDestination(String) : void\l
++toString() : String\l
+<<<<<<< HEAD
++getSource() : String\l
++getDest() : String\l
++getSelf() : String\l
+=======
+>>>>>>> 28559793c913c584107e7de9e6ab16a0a1d47960
+}"
+];
+IClass [shape="record"
+label="{\<\<interface\>\>\nIClass|
+|+addMethod(IMethod) : void\l
++addField(IField) : void\l
++setName(String) : void\l
++setSuper(String) : void\l
++setInterfaces(String[]) : void\l
++getName() : String\l
++getSuper() : String\l
++getFields() : ArrayList\l
++getMethods() : ArrayList\l
++getInterfaces() : ArrayList\l
++setIsInterface(boolean) : void\l
++getIsInterface() : boolean\l
++setParsing(String) : void\l
++getParsing() : String\l
++addArrow(IArrow) : void\l
++getArrows() : ArrayList\l
+}"
+];
+IField [shape="record"
+label="{\<\<interface\>\>\nIField|
+|+setName(String) : void\l
++setType(String) : void\l
++setAccess(String) : void\l
++getName() : String\l
++getType() : String\l
++getAccess() : String\l
++setSignature(String) : void\l
++getSignature() : String\l
+}"
+];
+IMethod [shape="record"
+label="{\<\<interface\>\>\nIMethod|
+|+setName(String) : void\l
++setType(String) : void\l
++setReturnType(String) : void\l
++addParameter(String) : void\l
++getName() : String\l
++getType() : String\l
++getParameters() : ArrayList\l
++getReturnType() : String\l
++setAccess(String) : void\l
++getAccess() : String\l
++addInfo(MethodInformation) : void\l
++getInfo() : ArrayList\l
+>>>>>>> 187fd4cd547773f3d3624f96fbfff37ed5921d61
 }"
 ];
 }

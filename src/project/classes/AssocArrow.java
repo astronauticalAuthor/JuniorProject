@@ -8,6 +8,7 @@ public class AssocArrow implements IArrow {
 	
 	public String sourceClass;
 	public String destinClass;
+	public String selfType = "assoc";
 	
 	@Override
 	public void setSource(String src) {
@@ -24,4 +25,19 @@ public class AssocArrow implements IArrow {
 		return this.sourceClass + " -> " + this.destinClass + "[arrowhead=\"ovee\", style=\"solid\"];\n";
 	}
 
+	@Override
+	public String getSource() {
+		return this.sourceClass;
+	}
+
+	@Override
+	public String getDest() {
+		return this.destinClass;
+	}
+	
+	@Override
+	public String getSelf() {
+		return this.selfType;
+	}
+	
 }

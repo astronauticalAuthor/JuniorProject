@@ -75,6 +75,7 @@ public class ClassMethodVisitor extends ClassVisitor {
 				toDecorate = new MethodInformationVisitor(Opcodes.ASM5, toDecorate, methodInformation, level);
 			}
 		}
+
 		
 		this.currentMethod = new Method();
 		
@@ -105,7 +106,7 @@ public class ClassMethodVisitor extends ClassVisitor {
 		this.currentMethod.setReturnType(retType);
 		
 		this.currentClass.addMethod(this.currentMethod);
-		
+		System.out.println("Reached mine");
 		MethodVisitor mine = new MethodTraverser(Opcodes.ASM5, toDecorate, this.currentClass, this.currentMethod, this.classes);
 		
 		return mine;
