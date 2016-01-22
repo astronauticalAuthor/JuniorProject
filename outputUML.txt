@@ -1,24 +1,16 @@
 digraph G{
  rankdir=BT;
-SingletonTest1 [shape="record"
-color="blue"
-label="{SingletonTest1
-
-\<\<Singleton\>\>|
-+s : SingletonTest1\l
-|+SingletonTest1() : void\l
-+getInstance() : SingletonTest1\l
-}"
-];
-SingletonTest2 [shape="record"
-label="{SingletonTest2|+test : SingletonTest2\l
-|<clinit>() : void\l
-+SingletonTest2() : void\l
-}"
-];
-SingletonTest3 [shape="record"
-label="{SingletonTest3||+SingletonTest3() : void\l
-+getInstance() : SingletonTest3\l
+ChocolateBoiler [shape="record"
+label="{ChocolateBoiler|-empty : boolean\l
+-boiled : boolean\l
+-chocolateBoiler : ChocolateBoiler\l
+|+ChocolateBoiler() : void\l
++getInstance() : ChocolateBoiler\l
++fill() : void\l
++drain() : void\l
++boil() : void\l
++isEmpty() : boolean\l
++isBoiled() : boolean\l
 }"
 ];
 }
