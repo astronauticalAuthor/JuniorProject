@@ -28,7 +28,7 @@ public class DesignParser {
 			
 		 	classes.add(current);
 		 }
-	
+		Singleton.defineSingletons(classes);
 		Generator.generateUML(classes);
 		
 		System.out.println(Singleton.methods);
@@ -36,12 +36,14 @@ public class DesignParser {
 		System.out.println(Singleton.getSingletons());
 //
 //		String[] arguments = {args[2]};
-//		
-//		MethodInformation mi = new MethodInformation(args[1], arguments, args[0]);
-//		ClassRep cr = new ClassRep();
 
 		
 		Generator.generateUML(classes);
+
+//		String[] arguments = {args[2]};
+//		
+//		MethodInformation mi = new MethodInformation(args[1], arguments, args[0]);
+//		ClassRep cr = new ClassRep();
 
 
 //		String className = "java.util.Collections";
