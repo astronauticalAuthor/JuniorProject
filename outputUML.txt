@@ -1,10 +1,19 @@
 digraph G{
  rankdir=BT;
-DesignParser [shape="record"
-label="{DesignParser||+DesignParser() : void\l
-+main(String[]) : void\l
+ChocolateBoiler [shape="record"
+label="{ChocolateBoiler|-empty : boolean\l
+-boiled : boolean\l
+-chocolateBoiler : ChocolateBoiler\l
+|+ChocolateBoiler() : void\l
++getInstance() : ChocolateBoiler\l
++fill() : void\l
++drain() : void\l
++boil() : void\l
++isEmpty() : boolean\l
++isBoiled() : boolean\l
 }"
 ];
+
 DesignParser -> ClassRep[arrowhead="ovee", style="dashed"];
 DesignParser -> ClassDeclarationVisitor[arrowhead="ovee", style="dashed"];
 DesignParser -> ClassFieldVisitor[arrowhead="ovee", style="dashed"];
@@ -324,4 +333,5 @@ label="{SingletonBehavior||+SingletonBehavior() : void\l
 }"
 ];
 SingletonBehavior -> RecordStartBeh[arrowhead="onormal", style="dashed"];
+
 }

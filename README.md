@@ -46,10 +46,10 @@ Milestone 4
 --
 
 The Design of the Tool
-For creating sequence diagrams, we programmed the ClassMethodVisitor to take a second constructor. This constructor would instantiate a special MethodInformation variable, which would hold method information if we turned on sequence diagrams. The method body scraper in MethodInformationVisitor would then call itself recursively and find go five layers deep to find method calls and then print them in order. This is working properly.
+For identifying the a Singleton, the ClassMethodVisitor and ClassFieldVisitor now contain checks for static methods and fields unique to Singletons and store respective classes in separate lists based on the visitor. In order to ensure that a Singleton is found, another class has been made to combine the two lists and if there is an intersection, the analyzed class will be added to a third list solely composed of Singletons. 
 
 Who Did What
-Katrina designed and wrote the functionality for this milestone, in about an hour. Ian, once functionality was added, designed the design pattern to allow for easy addition of other pattern detection behaviors.
+Katrina designed and wrote the functionality for this milestone, in about an hour. Ian, once functionality was added, designed the design pattern to allow for easy addition of other pattern detection behaviors; this took about an hour and a half. Tests were written by Katrina, where test classes were made to be used by the automated testing. UML is created by code; no Singletons are present in project's source code.
 
 How to Use Our Code
 IN Eclipse, edit the command line arguments to be the proper classes to be analyzed. Then, run the program. The outputted .dot file should then be run through Graphviz on the command line, and outputs a picture file of the UML diagram.

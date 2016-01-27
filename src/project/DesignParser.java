@@ -34,33 +34,16 @@ public class DesignParser {
 		System.out.println(Singleton.methods);
 		System.out.println(Singleton.fields);
 		System.out.println(Singleton.getSingletons());
-
-//		ArrayList<IClass> classes = new ArrayList<IClass>();
-////		args = new String[0];
-//		 for(String className: args){
-//		 	IClass current = new ClassRep();
-//			
-//		 	ClassReader reader = new ClassReader(className);
-//			
-//		 	ClassDeclarationVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, current, args);
-//		 	ClassFieldVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor, current, args);
-//		 	ClassMethodVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor, current, args);
-//			
 //
-//		 	reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);			
-//			
-//		 	classes.add(current);
-//		 }
-//		
-//		Generator.generateUML(classes);
+//		String[] arguments = {args[2]};
+
+		
+		Generator.generateUML(classes);
 
 //		String[] arguments = {args[2]};
 //		
 //		MethodInformation mi = new MethodInformation(args[1], arguments, args[0]);
 //		ClassRep cr = new ClassRep();
-//
-//		
-//		Generator.generateUML(classes);
 
 
 //		String className = "java.util.Collections";
