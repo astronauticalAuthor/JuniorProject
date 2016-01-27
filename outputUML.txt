@@ -11,7 +11,6 @@ DesignParser -> ClassFieldVisitor[arrowhead="ovee", style="dashed"];
 DesignParser -> ClassMethodVisitor[arrowhead="ovee", style="dashed"];
 DesignParser -> Singleton[arrowhead="ovee", style="dashed"];
 DesignParser -> Generator[arrowhead="ovee", style="dashed"];
-DesignParser -> MethodInformation[arrowhead="ovee", style="dashed"];
 ClassDeclarationVisitor [shape="record"
 label="{ClassDeclarationVisitor|+currentClass : IClass\l
 +classes : String[]\l
@@ -238,7 +237,7 @@ UseArrow -> IArrow[arrowhead="onormal", style="dashed"];
 Singleton [shape="record"
 label="{Singleton|+fields : ArrayList\l
 +methods : ArrayList\l
--classes : ArrayList\l
++classes : ArrayList\l
 |<clinit>() : void\l
 +Singleton() : void\l
 +getSingletons() : ArrayList\l
