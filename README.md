@@ -53,3 +53,16 @@ Katrina designed and wrote the functionality for this milestone, in about an hou
 
 How to Use Our Code
 IN Eclipse, edit the command line arguments to be the proper classes to be analyzed. Then, run the program. The outputted .dot file should then be run through Graphviz on the command line, and outputs a picture file of the UML diagram.
+
+--
+Milestone 5
+--
+
+The Design of the Tool
+There was major refactoring for this milestone, with UML patterns abstracted out into seperate classes in order to keep track of them and add modularity to the code. These methods will keep track of static ArrayLists of classes, and then a method can be invoked to obtain these classes for when the UML diagram is being printed out for coloring and printing.
+
+Who Did What
+Katrina designed the requirements for this milestone, wrote the tests and README, and Ian implemented the code and algorithm. It took about ten hours of work.
+
+How to Use Our Code
+In Eclipse, edit the command line arguments so they point to whatever classes you'd like to generate a diagram for. Then, run the code and paste the contents of the output file into GraphViz.
