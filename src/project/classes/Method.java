@@ -3,6 +3,7 @@ package project.classes;
 import java.util.ArrayList;
 
 import project.interfaces.IMethod;
+import project.interfaces.IVisitor;
 
 public class Method implements IMethod {
 
@@ -12,6 +13,7 @@ public class Method implements IMethod {
 	private String returnType;
 	private String access;
 	private ArrayList<MethodInformation> moreInfo;
+	private int moreAccess;
 	
 	public Method(){
 		this.methodName = "";
@@ -75,6 +77,21 @@ public class Method implements IMethod {
 	@Override
 	public ArrayList<MethodInformation> getInfo() {
 		return this.moreInfo;
+	}
+	@Override
+	public void accept(IVisitor v) {
+		v.preVisit(this);
+		v.visit(this);
+		v.postVisit(this);
+		
+	}
+	@Override
+	public void setAdditionalAccess(int access) {
+		this.moreAccess = access;
+	}
+	@Override
+	public int getAdditionalAccess() {
+		return this.moreAccess;
 	}
 
 }

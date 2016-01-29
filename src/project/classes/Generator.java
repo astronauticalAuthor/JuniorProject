@@ -3,29 +3,26 @@ package project.classes;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import project.interfaces.IArrow;
 import project.interfaces.IClass;
 import project.interfaces.IField;
 import project.interfaces.IMethod;
-import project.interfaces.RecordStartBeh;
+import project.interfaces.IWrapper;
 
 public class Generator {
 	
-	public static RecordBehaviorMap recStarts = new RecordBehaviorMap();
 	
-	public static void generateUML(ArrayList<IClass> classes) throws FileNotFoundException {
+	public static void generateUML(IWrapper classWrap) throws FileNotFoundException {
 		
 		PrintWriter out = new PrintWriter("./outputUML.txt");
 		
 		out.write("digraph G{\n rankdir=BT;\n");
 		
-		for(IClass c : classes){
+		ArrayList<IClass> classNames = classWrap.getClasses();
+		for(IClass c : classNames){
 			
-			recStarts.getBeh(c.getSpecial()).initRecord(c.getName(), out);
+			RecordBehaviorMap.getBeh(c.getSpecial()).initRecord(c.getName(), out, c);
 //			if(c.getIsInterface()){
 //				out.write(c.getName() + " [shape=\"record\"\n");
 //				out.write("label=\"{\\<\\<interface\\>\\>\\n");
@@ -83,7 +80,7 @@ public class Generator {
 				if(!arrowsToPrint.contains(a.toString())){
 					if(arrowType.equals("impl") || arrowType.equals("extend")){
 						arrowsToPrint.add(a.toString());
-					}else if(arrowType.equals("assoc") && destTest(a)){
+					}else if(arrowType.equals("assoc")){
 						arrowsToPrint.add(a.toString());
 					}else if(arrowType.equals("use") && !destTest(a)){
 						arrowsToPrint.add(a.toString());

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import project.classes.MethodInformation;
 
-public interface IMethod {
+public interface IMethod extends ITraverser{
 
 	public void setName(String methodName);
 	public void setType(String type);
@@ -18,4 +18,6 @@ public interface IMethod {
 	public String getAccess();
 	public void addInfo(MethodInformation info);
 	public ArrayList<MethodInformation> getInfo();
+	public void setAdditionalAccess(int access);
+	public int getAdditionalAccess();
 }

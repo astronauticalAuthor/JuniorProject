@@ -1,23 +1,25 @@
 package project;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.Opcodes;
 
 import project.classes.ClassRep;
 import project.classes.Generator;
-import project.classes.MethodInformation;
-import project.classes.Singleton;
+import project.classes.MyWrapper;
+import project.detectors.DetectSingleton;
 import project.interfaces.IClass;
+import project.interfaces.IWrapper;
 
 public class DesignParser {
 	public static void main(String[] args) throws IOException{
-		ArrayList<IClass> classes = new ArrayList<IClass>();
-		 for(String className: args){
-		 	IClass current = new ClassRep();
-			
+		IWrapper classWrap = new MyWrapper();
+//		ArrayList<IClass> classes = new ArrayList<IClass>();
+		String[] args1 = new String[1];
+		args1[0] = "ChocolateFactory.ChocolateBoiler";
+		for(String className: args){
+			IClass current = new ClassRep();
+				
 		 	ClassReader reader = new ClassReader(className);
 			
 		 	ClassDeclarationVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, current, args);
@@ -26,19 +28,27 @@ public class DesignParser {
 
 		 	reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);			
 			
-		 	classes.add(current);
-		 }
-		Singleton.defineSingletons(classes);
-		Generator.generateUML(classes);
+		 	classWrap.addClass(current);
+		}
+		DetectSingleton detectSingle = new DetectSingleton();
+		detectSingle.detect(classWrap);
+//		DetectAdapter detectAda = new DetectAdapter();
+//		detectAda.detect(classes);
+//		DetectDecorator detectDecor = new DetectDecorator();
+//		detectDecor.detect(classes);
+
 		
-		System.out.println(Singleton.methods);
-		System.out.println(Singleton.fields);
-		System.out.println(Singleton.getSingletons());
+//		SingletonContainer.defineSingletons(classes);
+		Generator.generateUML(classWrap);
+		
+//		System.out.println(SingletonContainer.methods);
+//		System.out.println(SingletonContainer.fields);
+//		System.out.println(SingletonContainer.getSingletons());
 //
 //		String[] arguments = {args[2]};
 
 		
-		Generator.generateUML(classes);
+//		Generator.generateUML(classes);
 
 //		String[] arguments = {args[2]};
 //		

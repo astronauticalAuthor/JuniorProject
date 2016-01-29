@@ -7,7 +7,6 @@ import org.objectweb.asm.Type;
 
 import project.classes.AssocArrow;
 import project.classes.Field;
-import project.classes.Singleton;
 import project.interfaces.IArrow;
 import project.interfaces.IClass;
 import project.interfaces.IField;
@@ -22,6 +21,7 @@ public class ClassFieldVisitor extends ClassVisitor {
 		super(arg0, arg1);
 		this.currentClass = current;
 		this.classes = args;
+
 	}
 	
 	public ClassFieldVisitor(int arg0, ClassDeclarationVisitor arg1, IClass current) {
@@ -40,11 +40,12 @@ public class ClassFieldVisitor extends ClassVisitor {
 		String type = Type.getType(desc).getClassName();
 		this.currentField.setType(type);
 		
-		//check to see if it's a singleton
-		if (type.contains(currentClass.getName()) && (access & Opcodes.ACC_STATIC) != 0) {
-			Singleton.fields.add(currentClass);
-		}
+		//refactor for future detection
+//		if (type.contains(currentClass.getName()) && (access & Opcodes.ACC_STATIC) != 0) {
+//			SingletonContainer.fields.add(currentClass);
+//		}
 		//
+//		this.detector.fieldDetect(access, name, type, currentClass, this.classes);
 		
 		String sign = null;
 		if(signature != null){
@@ -62,6 +63,9 @@ public class ClassFieldVisitor extends ClassVisitor {
 		}
 		
 		this.currentField.setAccess(symbol);
+		this.currentField.setAdditionalAccess(access);
+		
+//		this.detector.fieldDetect(access, name, type, currentClass, this.classes);
 		
 		this.currentClass.addField(this.currentField);
 		

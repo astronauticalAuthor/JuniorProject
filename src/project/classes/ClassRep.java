@@ -6,6 +6,8 @@ import project.interfaces.IArrow;
 import project.interfaces.IClass;
 import project.interfaces.IField;
 import project.interfaces.IMethod;
+import project.interfaces.ITraverser;
+import project.interfaces.IVisitor;
 
 public class ClassRep implements IClass {
 	
@@ -17,6 +19,7 @@ public class ClassRep implements IClass {
 	private String special;
 	
 	private ArrayList<IArrow> arrows;
+	private String special2;
 	
 	public ClassRep(){
 		this.methods = new ArrayList<IMethod>();
@@ -26,6 +29,7 @@ public class ClassRep implements IClass {
 		this.className = "";
 		this.superClassName = "";
 		this.special = "normal";
+		this.special2 = "normal";
 	}
 	
 	@Override
@@ -84,12 +88,19 @@ public class ClassRep implements IClass {
 
 	@Override
 	public void setSpecial(String s) {
-		this.special = s;
+		if(this.special.equals("interface")) {
+			this.special2 = s;
+		};
 	}
 
 	@Override
 	public String getSpecial() {
 		return this.special;
+	}
+	
+	@Override
+	public String getSpecial2() {
+		return this.special2;
 	}
 
 	@Override
@@ -100,6 +111,21 @@ public class ClassRep implements IClass {
 	@Override
 	public ArrayList<IArrow> getArrows() {
 		return this.arrows;
+	}
+
+	@Override
+	public void accept(IVisitor v) {
+		v.preVisit(this);
+		for(IField f: this.fields){
+			ITraverser traverser = (ITraverser) f;
+			traverser.accept(v);
+		}
+		v.visit(this);
+		for(IMethod m: this.methods){
+			ITraverser traverser = (ITraverser) m;
+			traverser.accept(v);
+		}
+		v.postVisit(this);
 	}
 
 }

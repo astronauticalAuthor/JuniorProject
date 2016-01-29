@@ -2,7 +2,7 @@ package project.interfaces;
 
 import java.util.ArrayList;
 
-public interface IClass {
+public interface IClass extends ITraverser{
 
 	public void addMethod(IMethod method);
 	public void addField(IField field);
@@ -21,4 +21,5 @@ public interface IClass {
 	public ArrayList<IArrow> getArrows();
 	public void setSpecial(String s);
 	public String getSpecial();
+	String getSpecial2();
 }

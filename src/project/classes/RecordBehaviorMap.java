@@ -1,28 +1,34 @@
 package project.classes;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
-
+import project.behaviors.AdapteeBehavior;
+import project.behaviors.AdapterBehavior;
+import project.behaviors.ComponentBehavior;
+import project.behaviors.DecoratorBehavior;
 import project.behaviors.InterfaceBehavior;
 import project.behaviors.NormBehavior;
 import project.behaviors.SingletonBehavior;
-import project.interfaces.IClass;
-import project.interfaces.RecordStartBeh;
+import project.behaviors.TargetBehavior;
+import project.interfaces.RecordBehavior;
 
 public class RecordBehaviorMap {
 
-	public Map<String, RecordStartBeh> recstarts = new HashMap<String, RecordStartBeh>();
+	public static Map<String, RecordBehavior> behaviors = new HashMap<String, RecordBehavior>();
 	
 	public RecordBehaviorMap() {
-		recstarts.put("normal", new NormBehavior());
-		recstarts.put("interface", new InterfaceBehavior());
-		recstarts.put("singleton", new SingletonBehavior());
+		behaviors.put("normal", new NormBehavior());
+		behaviors.put("interface", new InterfaceBehavior());
+		behaviors.put("singleton", new SingletonBehavior());
+		behaviors.put("adapter", new AdapterBehavior());
+		behaviors.put("adaptee", new AdapteeBehavior());
+		behaviors.put("target", new TargetBehavior());
+		behaviors.put("component", new ComponentBehavior());
+		behaviors.put("decorator", new DecoratorBehavior());
 	}
 
-	public RecordStartBeh getBeh(String special) {
-		return this.recstarts.get(special);
+	public static RecordBehavior getBeh(String special) {
+		return behaviors.get(special);
 	}
 
 }

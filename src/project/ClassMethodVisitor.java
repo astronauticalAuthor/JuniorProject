@@ -8,7 +8,6 @@ import org.objectweb.asm.Type;
 import project.classes.ClassRep;
 import project.classes.Method;
 import project.classes.MethodInformation;
-import project.classes.Singleton;
 import project.interfaces.IClass;
 import project.interfaces.IMethod;
 
@@ -48,23 +47,24 @@ public class ClassMethodVisitor extends ClassVisitor {
 		MethodVisitor toDecorate = super.visitMethod(access, name, desc, signature, exceptions);
 		
 		Type[] argTypes = Type.getArgumentTypes(desc);
-		String[] classNames = new String[argTypes.length];
+		String[] paramNames = new String[argTypes.length];
 		
 		for(int i=0; i<argTypes.length; i++){
-			classNames[i] = argTypes[i].getClassName();
+			paramNames[i] = argTypes[i].getClassName();
 		}
 		
+	
+		//refactor for future use
 		//check to see if it's a singleton class
-		String returnType = Type.getReturnType(desc).getClassName();
-		if ((name.contains("getInstance") && (access & Opcodes.ACC_STATIC) != 0) && returnType.contains(currentClass.getName())) {
-			Singleton.methods.add(currentClass);
-		}
-		//
+//		String returnType = Type.getReturnType(desc).getClassName();
+		
+		
+		
 		
 		if (methodInformation != null && methodInformation.methodName.equals(name)) {
-			boolean isCorrect = classNames.length == methodInformation.arguments.length;
-			for (int x = 0; x < classNames.length && isCorrect; x++) {
-				if (!classNames[x].equals(methodInformation.arguments[x])) isCorrect = false;
+			boolean isCorrect = paramNames.length == methodInformation.arguments.length;
+			for (int x = 0; x < paramNames.length && isCorrect; x++) {
+				if (!paramNames[x].equals(methodInformation.arguments[x])) isCorrect = false;
 			}
 			
 			
@@ -95,15 +95,18 @@ public class ClassMethodVisitor extends ClassVisitor {
 			symbol = "#";
 		}
 		this.currentMethod.setAccess(symbol);
+		this.currentMethod.setAdditionalAccess(access);
 		
 		this.currentMethod.setType(signature);
 		
-		for (int x = 0; x < classNames.length; x++) {
-			this.currentMethod.addParameter(classNames[x]);
+		for (int x = 0; x < paramNames.length; x++) {
+			this.currentMethod.addParameter(paramNames[x]);
 		}
 		
 		String retType = Type.getReturnType(desc).getClassName();
 		this.currentMethod.setReturnType(retType);
+		
+//		this.detector.methodDetect(name, paramNames, access, returnType, currentClass, this.classes);
 		
 		this.currentClass.addMethod(this.currentMethod);
 		MethodVisitor mine = new MethodTraverser(Opcodes.ASM5, toDecorate, this.currentClass, this.currentMethod, this.classes);

@@ -9,6 +9,7 @@ public class ExtendArrow implements IArrow {
 	public String sourceClass;
 	public String destinClass;
 	public String selfType = "extend";
+	public String additionalProps = "";
 	
 	@Override
 	public void setSource(String src) {
@@ -22,7 +23,7 @@ public class ExtendArrow implements IArrow {
 
 	@Override
 	public String toString(){
-		return this.sourceClass + " -> " + this.destinClass + "[arrowhead=\"onormal\", style=\"solid\"];\n";
+		return this.sourceClass + " -> " + this.destinClass + "[arrowhead=\"ovee\", style=\"solid\""+this.additionalProps+"];\n";
 	}
 
 	@Override
@@ -38,6 +39,11 @@ public class ExtendArrow implements IArrow {
 	@Override
 	public String getSelf() {
 		return this.selfType;
+	}
+
+	@Override
+	public void addProperty(String string) {
+		this.additionalProps += string;
 	}
 	
 }

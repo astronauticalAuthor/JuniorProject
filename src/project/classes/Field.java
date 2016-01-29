@@ -1,6 +1,7 @@
 package project.classes;
 
 import project.interfaces.IField;
+import project.interfaces.IVisitor;
 
 public class Field implements IField {
 
@@ -8,6 +9,7 @@ public class Field implements IField {
 	private String fieldType;
 	private String access;
 	private String sign;
+	private int moreAccess;
 	
 	public Field(){
 		this.fieldName = "";
@@ -52,5 +54,21 @@ public class Field implements IField {
 	public String getSignature() {
 		return this.sign;
 	}
+	@Override
+	public void accept(IVisitor v) {
+		v.preVisit(this);
+		v.visit(this);
+		v.postVisit(this);
+	}
+	@Override
+	public void setAdditionalAccess(int access) {
+		this.moreAccess = access;
+	}
+	@Override
+	public int getAdditionalAccess() {
+		return this.moreAccess;
+	}
+	
+	
 
 }

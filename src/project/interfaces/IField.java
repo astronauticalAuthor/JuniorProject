@@ -1,6 +1,6 @@
 package project.interfaces;
 
-public interface IField {
+public interface IField extends ITraverser {
 
 	public void setName(String fieldName);
 	public void setType(String fieldType);
@@ -10,4 +10,6 @@ public interface IField {
 	public String getAccess();
 	public void setSignature(String sign);
 	public String getSignature();
+	public void setAdditionalAccess(int access);
+	public int getAdditionalAccess();
 }

@@ -1,12 +1,7 @@
 package project;
 
-import java.util.ArrayList;
-
 import org.objectweb.asm.MethodVisitor;
-import org.objectweb.asm.Type;
-
 import project.classes.Method;
-import project.classes.MethodInformation;
 import project.classes.UseArrow;
 import project.interfaces.IArrow;
 import project.interfaces.IClass;
@@ -37,8 +32,9 @@ public class MethodTraverser extends MethodVisitor {
 //		System.out.println("Name: " + name);
 		
 		
+		
 		for(String className : this.classes){
-			ArrayList<IArrow> arrows = this.currentClass.getArrows();
+//			ArrayList<IArrow> arrows = this.currentClass.getArrows();
 			String trimClassName = className.substring(className.lastIndexOf(".")+1);
 			if(trimClassName.equals(owner)){
 				if(trimClassName.equals(this.currentClass.getName())){
