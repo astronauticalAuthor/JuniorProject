@@ -5,11 +5,11 @@ import org.objectweb.asm.FieldVisitor;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 
-import project.classes.AssocArrow;
-import project.classes.Field;
-import project.interfaces.IArrow;
-import project.interfaces.IClass;
-import project.interfaces.IField;
+import arrows.AssocArrow;
+import classes.Field;
+import interfaces.IArrow;
+import interfaces.IClass;
+import interfaces.IField;
 
 public class ClassFieldVisitor extends ClassVisitor {
 	
@@ -40,20 +40,11 @@ public class ClassFieldVisitor extends ClassVisitor {
 		String type = Type.getType(desc).getClassName();
 		this.currentField.setType(type);
 		
-		//refactor for future detection
-//		if (type.contains(currentClass.getName()) && (access & Opcodes.ACC_STATIC) != 0) {
-//			SingletonContainer.fields.add(currentClass);
-//		}
-		//
-//		this.detector.fieldDetect(access, name, type, currentClass, this.classes);
-		
 		String sign = null;
 		if(signature != null){
 			sign = Type.getType(signature).getClassName();
 		}
 		this.currentField.setSignature(sign);
-		
-		System.out.println(sign);
 		
 		String symbol = "";
 		if((access & Opcodes.ACC_PRIVATE) != 0){
@@ -66,8 +57,6 @@ public class ClassFieldVisitor extends ClassVisitor {
 		
 		this.currentField.setAccess(symbol);
 		this.currentField.setAdditionalAccess(access);
-		
-//		this.detector.fieldDetect(access, name, type, currentClass, this.classes);
 		
 		this.currentClass.addField(this.currentField);
 		

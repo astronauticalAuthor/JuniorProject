@@ -5,8 +5,8 @@ import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 
-import project.classes.ClassRep;
-import project.classes.MethodInformation;
+import classes.ClassRep;
+import classes.MethodInformation;
 
 public class MethodInformationVisitor extends MethodVisitor {
 	

@@ -3,11 +3,12 @@ package project;
 import java.util.ArrayList;
 
 import org.objectweb.asm.MethodVisitor;
-import project.classes.Method;
-import project.classes.UseArrow;
-import project.interfaces.IArrow;
-import project.interfaces.IClass;
-import project.interfaces.IMethod;
+
+import arrows.UseArrow;
+import classes.Method;
+import interfaces.IArrow;
+import interfaces.IClass;
+import interfaces.IMethod;
 
 public class MethodTraverser extends MethodVisitor {
 
@@ -29,25 +30,11 @@ public class MethodTraverser extends MethodVisitor {
 
 	public void visitMethodInsn(int opcode, String owner, String name, String desc, boolean itf){
 		owner = owner.substring(owner.lastIndexOf("/")+1);
-//		name = name.substring(name.lastIndexOf(ch)
-//		System.out.println("Owner: " + owner);
-//		System.out.println("Name: " + name);
-		
-		
 		
 		for(String className : this.classes){
-//			ArrayList<IArrow> arrows = this.currentClass.getArrows();
 			String trimClassName = className.substring(className.lastIndexOf(".")+1);
 			if(trimClassName.equals(owner)){
 				if(trimClassName.equals(this.currentClass.getName())){
-//					MethodInformation info = new MethodInformation();
-//					info.setDesc(desc);
-//					info.setOwner(owner);
-//					info.set
-					//currentclassname
-					//owner of method
-					//method
-					
 					return;
 				}
 				
@@ -55,40 +42,22 @@ public class MethodTraverser extends MethodVisitor {
 				for(int i = 0; i<this.currentClass.getArrows().size();i++) {
 					assocOwners.add(this.currentClass.getArrows().get(i).getDest());
 				}
-				IArrow arrow = new UseArrow();
-				arrow.setSource(this.currentClass.getName());
-				arrow.setDestination(owner);
-//				System.out.println(arrow.toString());
+				IArrow arrow1 = new UseArrow();
+				arrow1.setSource(this.currentClass.getName());
+				arrow1.setDestination(owner);
 				if(!assocOwners.contains(owner))
-					this.currentClass.addArrow(arrow);
+					this.currentClass.addArrow(arrow1);
+			}
+			
+			for(String p:this.currentMethod.getParameters()) {
+				IArrow arrow2 = new UseArrow();
+				arrow2.setSource(this.currentClass.getName());
+				arrow2.setDestination(p);
+				if(!this.currentClass.getArrows().contains(arrow2) && trimClassName.equals(p)) {
+					this.currentClass.addArrow(arrow2);
+				}
 			}
 		}
 	}
 
-//	public void visitMethodInsn(int opcode, String owner, String name, String desc, boolean itf){
-//		owner = owner.substring(owner.lastIndexOf("/")+1);
-////		name = name.substring(name.lastIndexOf(ch)
-////		System.out.println("Owner: " + owner);
-////		System.out.println("Name: " + name);
-//		
-//		
-//		for(String className : this.classes){
-//			ArrayList<IArrow> arrows = this.currentClass.getArrows();
-//			String trimClassName = className.substring(className.lastIndexOf(".")+1);
-//			if(trimClassName.equals(owner)){
-//				if(trimClassName.equals(this.currentClass.getName())){
-//					return;
-//				}
-//				IArrow arrow = new UseArrow();
-//				arrow.setSource(this.currentClass.getName());
-//				arrow.setDestination(owner);
-////				System.out.println(arrow.toString());
-//				this.currentClass.addArrow(arrow);
-//			}
-//		}
-//	}
-	
-	
-	//visitTypeInsn
-	//visifFieldInsn
 }

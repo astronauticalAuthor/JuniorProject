@@ -1,126 +1,52 @@
 digraph G{
  rankdir=BT;
-DecryptionInputStream [shape="record"
-fillcolor="green"
-style="filled"
-label="{DecryptionInputStream\n\<\<decorator\>\>
-|
--decryptor : IDecryption\l
-|+DecryptionInputStream(InputStream,IDecryption) : void\l
-+read() : int\l
-+read(byte[],int,int) : int\l
-}"
-];
-DecryptionInputStream -> FilterInputStream[arrowhead="onormal", style="solid"];
-DecryptionInputStream -> IDecryption[arrowhead="ovee", style="solid"];
-EncryptionOutputStream [shape="record"
-fillcolor="green"
-style="filled"
-label="{EncryptionOutputStream\n\<\<decorator\>\>
-|
--encryptor : IEncryption\l
-|+EncryptionOutputStream(OutputStream,IEncryption) : void\l
+OutputStreamWriter [shape="record"
+label="{OutputStreamWriter|-se : StreamEncoder\l
+|+OutputStreamWriter(OutputStream,String) : void\l
++OutputStreamWriter(OutputStream) : void\l
++OutputStreamWriter(OutputStream,Charset) : void\l
++OutputStreamWriter(OutputStream,CharsetEncoder) : void\l
++getEncoding() : String\l
+flushBuffer() : void\l
 +write(int) : void\l
-}"
-];
-EncryptionOutputStream -> FilterOutputStream[arrowhead="onormal", style="solid"];
-EncryptionOutputStream -> IEncryption[arrowhead="ovee", style="solid"];
-IDecryption [shape="record"
-label="{\<\<interface\>\>\nIDecryption|
-|+decrypt(char) : char\l
-}"
-];
-IEncryption [shape="record"
-label="{\<\<interface\>\>\nIEncryption|
-|+encrypt(char) : char\l
-}"
-];
-SubstitutionCipher [shape="record"
-label="{SubstitutionCipher|-encryptionKey : char[]\l
--decryptionKey : char[]\l
-|+SubstitutionCipher() : void\l
-+encrypt(char) : char\l
-+decrypt(char) : char\l
-}"
-];
-SubstitutionCipher -> IEncryption[arrowhead="onormal", style="dashed"];
-SubstitutionCipher -> IDecryption[arrowhead="onormal", style="dashed"];
-TextEditorApp [shape="record"
-label="{TextEditorApp||+TextEditorApp() : void\l
-+main(String[]) : void\l
-}"
-];
-TextEditorApp -> SubstitutionCipher[arrowhead="ovee", style="dashed"];
-TextEditorApp -> DecryptionInputStream[arrowhead="ovee", style="dashed"];
-TextEditorApp -> EncryptionOutputStream[arrowhead="ovee", style="dashed"];
-OutputStream [shape="record"
-fillcolor="green"
-style="filled"
-label="{OutputStream\n\<\<component\>\>
-|
-|+OutputStream() : void\l
-+write(int) : void\l
-+write(byte[]) : void\l
-+write(byte[],int,int) : void\l
++write(char[],int,int) : void\l
++write(String,int,int) : void\l
 +flush() : void\l
 +close() : void\l
 }"
 ];
-OutputStream -> Closeable[arrowhead="onormal", style="dashed"];
-OutputStream -> Flushable[arrowhead="onormal", style="dashed"];
-FilterOutputStream [shape="record"
-fillcolor="green"
-style="filled"
-label="{FilterOutputStream\n\<\<decorator\>\>
-|
-#out : OutputStream\l
-|+FilterOutputStream(OutputStream) : void\l
+OutputStreamWriter -> Writer[arrowhead="onormal", style="solid"];
+Writer [shape="record"
+label="{Writer|-writeBuffer : char[]\l
+-WRITE_BUFFER_SIZE : int\l
+#lock : Object\l
+|#Writer() : void\l
+#Writer(Object) : void\l
 +write(int) : void\l
-+write(byte[]) : void\l
-+write(byte[],int,int) : void\l
++write(char[]) : void\l
++write(char[],int,int) : void\l
++write(String) : void\l
++write(String,int,int) : void\l
++append(CharSequence) : Writer\l
++append(CharSequence,int,int) : Writer\l
++append(char) : Writer\l
 +flush() : void\l
 +close() : void\l
++append(char) : Appendable\l
++append(CharSequence,int,int) : Appendable\l
++append(CharSequence) : Appendable\l
 }"
 ];
-FilterOutputStream -> OutputStream[arrowhead="onormal", style="solid"];
-FilterOutputStream -> OutputStream[arrowhead="ovee", style="solid"xlabel="\<\<decorates\>\>"];
-InputStream [shape="record"
-fillcolor="green"
-style="filled"
-label="{InputStream\n\<\<component\>\>
-|
--MAX_SKIP_BUFFER_SIZE : int\l
-|+InputStream() : void\l
-+read() : int\l
-+read(byte[]) : int\l
-+read(byte[],int,int) : int\l
-+skip(long) : long\l
-+available() : int\l
-+close() : void\l
-+mark(int) : void\l
-+reset() : void\l
-+markSupported() : boolean\l
+Writer -> Appendable[arrowhead="onormal", style="dashed"];
+Writer -> Closeable[arrowhead="onormal", style="dashed"];
+Writer -> Flushable[arrowhead="onormal", style="dashed"];
+FileWriter [shape="record"
+label="{FileWriter||+FileWriter(String) : void\l
++FileWriter(String,boolean) : void\l
++FileWriter(File) : void\l
++FileWriter(File,boolean) : void\l
++FileWriter(FileDescriptor) : void\l
 }"
 ];
-InputStream -> Closeable[arrowhead="onormal", style="dashed"];
-FilterInputStream [shape="record"
-fillcolor="green"
-style="filled"
-label="{FilterInputStream\n\<\<decorator\>\>
-|
-#in : InputStream\l
-|#FilterInputStream(InputStream) : void\l
-+read() : int\l
-+read(byte[]) : int\l
-+read(byte[],int,int) : int\l
-+skip(long) : long\l
-+available() : int\l
-+close() : void\l
-+mark(int) : void\l
-+reset() : void\l
-+markSupported() : boolean\l
-}"
-];
-FilterInputStream -> InputStream[arrowhead="onormal", style="solid"];
-FilterInputStream -> InputStream[arrowhead="ovee", style="solid"xlabel="\<\<decorates\>\>"];
+FileWriter -> OutputStreamWriter[arrowhead="onormal", style="solid"];
 }

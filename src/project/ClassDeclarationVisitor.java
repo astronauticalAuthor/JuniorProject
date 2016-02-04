@@ -3,10 +3,10 @@ package project;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
 
-import project.classes.ExtendArrow;
-import project.classes.ImplArrow;
-import project.interfaces.IArrow;
-import project.interfaces.IClass;
+import arrows.ExtendArrow;
+import arrows.ImplArrow;
+import interfaces.IArrow;
+import interfaces.IClass;
 
 public class ClassDeclarationVisitor extends ClassVisitor {
 	

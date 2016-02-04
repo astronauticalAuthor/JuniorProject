@@ -5,15 +5,16 @@ import org.junit.Test;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
+
+import classes.ClassRep;
+import classes.Generator;
+import classes.MethodInformation;
+import classes.Singleton;
+import interfaces.IArrow;
+import interfaces.IClass;
+import interfaces.IField;
+import interfaces.IMethod;
 import project.*;
-import project.classes.ClassRep;
-import project.classes.Generator;
-import project.classes.MethodInformation;
-import project.classes.Singleton;
-import project.interfaces.IArrow;
-import project.interfaces.IClass;
-import project.interfaces.IField;
-import project.interfaces.IMethod;
 
 import java.io.*;
 import java.util.ArrayList;

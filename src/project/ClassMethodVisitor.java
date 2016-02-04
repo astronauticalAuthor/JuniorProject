@@ -5,11 +5,11 @@ import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 
-import project.classes.ClassRep;
-import project.classes.Method;
-import project.classes.MethodInformation;
-import project.interfaces.IClass;
-import project.interfaces.IMethod;
+import classes.ClassRep;
+import classes.Method;
+import classes.MethodInformation;
+import interfaces.IClass;
+import interfaces.IMethod;
 
 public class ClassMethodVisitor extends ClassVisitor {
 	
@@ -40,10 +40,7 @@ public class ClassMethodVisitor extends ClassVisitor {
 
 	@Override
 	public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions){
-		//decorate this? no
-		//new class visitor
-		//visitMehtodInsn?
-		//Signature Reader?
+
 		MethodVisitor toDecorate = super.visitMethod(access, name, desc, signature, exceptions);
 		
 		Type[] argTypes = Type.getArgumentTypes(desc);
@@ -52,14 +49,6 @@ public class ClassMethodVisitor extends ClassVisitor {
 		for(int i=0; i<argTypes.length; i++){
 			paramNames[i] = argTypes[i].getClassName();
 		}
-		
-	
-		//refactor for future use
-		//check to see if it's a singleton class
-//		String returnType = Type.getReturnType(desc).getClassName();
-		
-		
-		
 		
 		if (methodInformation != null && methodInformation.methodName.equals(name)) {
 			boolean isCorrect = paramNames.length == methodInformation.arguments.length;
@@ -106,7 +95,6 @@ public class ClassMethodVisitor extends ClassVisitor {
 		String retType = Type.getReturnType(desc).getClassName();
 		this.currentMethod.setReturnType(retType);
 		
-//		this.detector.methodDetect(name, paramNames, access, returnType, currentClass, this.classes);
 		
 		this.currentClass.addMethod(this.currentMethod);
 		MethodVisitor mine = new MethodTraverser(Opcodes.ASM5, toDecorate, this.currentClass, this.currentMethod, this.classes);

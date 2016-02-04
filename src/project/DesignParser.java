@@ -4,14 +4,14 @@ import java.io.IOException;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.Opcodes;
 
-import project.classes.ClassRep;
-import project.classes.Generator;
-import project.classes.MyWrapper;
-import project.detectors.DetectAdapter;
-import project.detectors.DetectDecorator;
-import project.detectors.DetectSingleton;
-import project.interfaces.IClass;
-import project.interfaces.IWrapper;
+import classes.ClassRep;
+import classes.Generator;
+import classes.MyWrapper;
+import detectors.DetectAdapter;
+import detectors.DetectDecorator;
+import detectors.DetectSingleton;
+import interfaces.IClass;
+import interfaces.IWrapper;
 
 public class DesignParser {
 	public static void main(String[] args) throws IOException{
@@ -32,6 +32,8 @@ public class DesignParser {
 			
 		 	classWrap.addClass(current);
 		}
+		
+		//create class to run all detectors (facade?)
 		DetectSingleton detectSingle = new DetectSingleton();
 		detectSingle.detect(classWrap);
 		DetectAdapter detectAda = new DetectAdapter();
@@ -39,8 +41,6 @@ public class DesignParser {
 		DetectDecorator detectDecor = new DetectDecorator();
 		detectDecor.detect(classWrap);
 
-		
-//		SingletonContainer.defineSingletons(classes);
 		Generator.generateUML(classWrap);
 		
 //		System.out.println(SingletonContainer.methods);
@@ -75,14 +75,6 @@ public class DesignParser {
 //		
 //		System.out.println(mi.toString());
 
-
-//		System.out.println("digraph G{\n rankdir=BT;");
-//		for(IClass c: classes){
-//			
-//			System.out.println("\n" + c.toString(classes));
-//			
-//		}
-//		System.out.println("}");
 			
 		
 	}
