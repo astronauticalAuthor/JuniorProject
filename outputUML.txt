@@ -1,19 +1,126 @@
 digraph G{
  rankdir=BT;
-ChocolateBoiler [shape="record"
-color="blue"
-label="{ChocolateBoiler\n\<\<Singleton\>\>|
--empty : boolean\l
--boiled : boolean\l
--chocolateBoiler : ChocolateBoiler\l
-|+ChocolateBoiler() : void\l
-+getInstance() : ChocolateBoiler\l
-+fill() : void\l
-+drain() : void\l
-+boil() : void\l
-+isEmpty() : boolean\l
-+isBoiled() : boolean\l
+DecryptionInputStream [shape="record"
+fillcolor="green"
+style="filled"
+label="{DecryptionInputStream\n\<\<decorator\>\>
+|
+-decryptor : IDecryption\l
+|+DecryptionInputStream(InputStream,IDecryption) : void\l
++read() : int\l
++read(byte[],int,int) : int\l
 }"
 ];
-ChocolateBoiler -> ChocolateBoiler[arrowhead="ovee", style="solid"];
+DecryptionInputStream -> FilterInputStream[arrowhead="onormal", style="solid"];
+DecryptionInputStream -> IDecryption[arrowhead="ovee", style="solid"];
+EncryptionOutputStream [shape="record"
+fillcolor="green"
+style="filled"
+label="{EncryptionOutputStream\n\<\<decorator\>\>
+|
+-encryptor : IEncryption\l
+|+EncryptionOutputStream(OutputStream,IEncryption) : void\l
++write(int) : void\l
+}"
+];
+EncryptionOutputStream -> FilterOutputStream[arrowhead="onormal", style="solid"];
+EncryptionOutputStream -> IEncryption[arrowhead="ovee", style="solid"];
+IDecryption [shape="record"
+label="{\<\<interface\>\>\nIDecryption|
+|+decrypt(char) : char\l
+}"
+];
+IEncryption [shape="record"
+label="{\<\<interface\>\>\nIEncryption|
+|+encrypt(char) : char\l
+}"
+];
+SubstitutionCipher [shape="record"
+label="{SubstitutionCipher|-encryptionKey : char[]\l
+-decryptionKey : char[]\l
+|+SubstitutionCipher() : void\l
++encrypt(char) : char\l
++decrypt(char) : char\l
+}"
+];
+SubstitutionCipher -> IEncryption[arrowhead="onormal", style="dashed"];
+SubstitutionCipher -> IDecryption[arrowhead="onormal", style="dashed"];
+TextEditorApp [shape="record"
+label="{TextEditorApp||+TextEditorApp() : void\l
++main(String[]) : void\l
+}"
+];
+TextEditorApp -> SubstitutionCipher[arrowhead="ovee", style="dashed"];
+TextEditorApp -> DecryptionInputStream[arrowhead="ovee", style="dashed"];
+TextEditorApp -> EncryptionOutputStream[arrowhead="ovee", style="dashed"];
+OutputStream [shape="record"
+fillcolor="green"
+style="filled"
+label="{OutputStream\n\<\<component\>\>
+|
+|+OutputStream() : void\l
++write(int) : void\l
++write(byte[]) : void\l
++write(byte[],int,int) : void\l
++flush() : void\l
++close() : void\l
+}"
+];
+OutputStream -> Closeable[arrowhead="onormal", style="dashed"];
+OutputStream -> Flushable[arrowhead="onormal", style="dashed"];
+FilterOutputStream [shape="record"
+fillcolor="green"
+style="filled"
+label="{FilterOutputStream\n\<\<decorator\>\>
+|
+#out : OutputStream\l
+|+FilterOutputStream(OutputStream) : void\l
++write(int) : void\l
++write(byte[]) : void\l
++write(byte[],int,int) : void\l
++flush() : void\l
++close() : void\l
+}"
+];
+FilterOutputStream -> OutputStream[arrowhead="onormal", style="solid"];
+FilterOutputStream -> OutputStream[arrowhead="ovee", style="solid"xlabel="\<\<decorates\>\>"];
+InputStream [shape="record"
+fillcolor="green"
+style="filled"
+label="{InputStream\n\<\<component\>\>
+|
+-MAX_SKIP_BUFFER_SIZE : int\l
+|+InputStream() : void\l
++read() : int\l
++read(byte[]) : int\l
++read(byte[],int,int) : int\l
++skip(long) : long\l
++available() : int\l
++close() : void\l
++mark(int) : void\l
++reset() : void\l
++markSupported() : boolean\l
+}"
+];
+InputStream -> Closeable[arrowhead="onormal", style="dashed"];
+FilterInputStream [shape="record"
+fillcolor="green"
+style="filled"
+label="{FilterInputStream\n\<\<decorator\>\>
+|
+#in : InputStream\l
+|#FilterInputStream(InputStream) : void\l
++read() : int\l
++read(byte[]) : int\l
++read(byte[],int,int) : int\l
++skip(long) : long\l
++available() : int\l
++close() : void\l
++mark(int) : void\l
++reset() : void\l
++markSupported() : boolean\l
+}"
+];
+FilterInputStream -> InputStream[arrowhead="onormal", style="solid"];
+FilterInputStream -> InputStream[arrowhead="ovee", style="solid"xlabel="\<\<decorates\>\>"];
 }

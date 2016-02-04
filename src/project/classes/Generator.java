@@ -9,9 +9,11 @@ import project.interfaces.IClass;
 import project.interfaces.IField;
 import project.interfaces.IMethod;
 import project.interfaces.IWrapper;
+import project.interfaces.RecordBehavior;
 
 public class Generator {
 	
+	public static RecordBehaviorMap recBehaviors = new RecordBehaviorMap();
 	
 	public static void generateUML(IWrapper classWrap) throws FileNotFoundException {
 		
@@ -22,7 +24,10 @@ public class Generator {
 		ArrayList<IClass> classNames = classWrap.getClasses();
 		for(IClass c : classNames){
 			
-			RecordBehaviorMap.getBeh(c.getSpecial()).initRecord(c.getName(), out, c);
+			recBehaviors.getBeh(c.getSpecial()).initRecord(c.getName(), out, c);
+//			RecordBehavior found = recBehaviors.getBeh(c.getSpecial());
+//			System.out.println(found.getClass());
+			
 //			if(c.getIsInterface()){
 //				out.write(c.getName() + " [shape=\"record\"\n");
 //				out.write("label=\"{\\<\\<interface\\>\\>\\n");

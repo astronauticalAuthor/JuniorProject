@@ -53,6 +53,8 @@ public class ClassFieldVisitor extends ClassVisitor {
 		}
 		this.currentField.setSignature(sign);
 		
+		System.out.println(sign);
+		
 		String symbol = "";
 		if((access & Opcodes.ACC_PRIVATE) != 0){
 			symbol = "-";
@@ -79,7 +81,7 @@ public class ClassFieldVisitor extends ClassVisitor {
 					arrow.setDestination(param);
 					this.currentClass.addArrow(arrow);
 				}
-			}else{
+			}
 				if(className.substring(className.lastIndexOf(".")+1).equals(this.currentField.getType())){
 					IArrow arrow = new AssocArrow();
 					arrow.setSource(this.currentClass.getName());
@@ -87,7 +89,7 @@ public class ClassFieldVisitor extends ClassVisitor {
 					this.currentClass.addArrow(arrow);
 				}
 			}
-		}
+		
 		
 		return toDecorate;
 	}

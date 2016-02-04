@@ -7,6 +7,8 @@ import org.objectweb.asm.Opcodes;
 import project.classes.ClassRep;
 import project.classes.Generator;
 import project.classes.MyWrapper;
+import project.detectors.DetectAdapter;
+import project.detectors.DetectDecorator;
 import project.detectors.DetectSingleton;
 import project.interfaces.IClass;
 import project.interfaces.IWrapper;
@@ -32,10 +34,10 @@ public class DesignParser {
 		}
 		DetectSingleton detectSingle = new DetectSingleton();
 		detectSingle.detect(classWrap);
-//		DetectAdapter detectAda = new DetectAdapter();
-//		detectAda.detect(classes);
-//		DetectDecorator detectDecor = new DetectDecorator();
-//		detectDecor.detect(classes);
+		DetectAdapter detectAda = new DetectAdapter();
+		detectAda.detect(classWrap);
+		DetectDecorator detectDecor = new DetectDecorator();
+		detectDecor.detect(classWrap);
 
 		
 //		SingletonContainer.defineSingletons(classes);

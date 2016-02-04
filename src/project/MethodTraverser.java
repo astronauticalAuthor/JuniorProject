@@ -1,5 +1,7 @@
 package project;
 
+import java.util.ArrayList;
+
 import org.objectweb.asm.MethodVisitor;
 import project.classes.Method;
 import project.classes.UseArrow;
@@ -48,11 +50,17 @@ public class MethodTraverser extends MethodVisitor {
 					
 					return;
 				}
+				
+				ArrayList<String> assocOwners = new ArrayList<String>();
+				for(int i = 0; i<this.currentClass.getArrows().size();i++) {
+					assocOwners.add(this.currentClass.getArrows().get(i).getDest());
+				}
 				IArrow arrow = new UseArrow();
 				arrow.setSource(this.currentClass.getName());
 				arrow.setDestination(owner);
 //				System.out.println(arrow.toString());
-				this.currentClass.addArrow(arrow);
+				if(!assocOwners.contains(owner))
+					this.currentClass.addArrow(arrow);
 			}
 		}
 	}

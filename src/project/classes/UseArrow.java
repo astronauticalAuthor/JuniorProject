@@ -23,7 +23,7 @@ public class UseArrow implements IArrow {
 	
 	@Override
 	public String toString(){
-		return this.sourceClass + " -> " + this.destinClass + "[arrowhead=\"ovee\", style=\"solid\""+this.additionalProps+"];\n";
+		return this.sourceClass + " -> " + this.destinClass + "[arrowhead=\"ovee\", style=\"dashed\""+this.additionalProps+"];\n";
 	}
 
 	@Override

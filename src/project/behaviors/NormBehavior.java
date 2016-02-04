@@ -14,8 +14,18 @@ public class NormBehavior implements RecordBehavior {
 	}
 	
 	@Override
-	public void secondaryRecord(PrintWriter out) {
+	public void recMods(PrintWriter out) {
 		out.write("");
 	}
+
+	@Override
+	public void secondaryLabel(PrintWriter out) {
+		out.write("");
+	}
+	
+//	@Override
+//	public void secondaryRecord(PrintWriter out) {
+//		out.write("");
+//	}
 
 }

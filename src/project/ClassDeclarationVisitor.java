@@ -35,14 +35,14 @@ public class ClassDeclarationVisitor extends ClassVisitor {
 		this.currentClass.setSuper(superName);
 		this.currentClass.setInterfaces(interfaces);
 		
-		if (this.currentClass.getSuper() != "") {
+		
 			if(!this.currentClass.getSuper().equals("Object")){
 				IArrow superArrow = new ExtendArrow();
 				superArrow.setSource(this.currentClass.getName());
 				superArrow.setDestination(this.currentClass.getSuper());
 				this.currentClass.addArrow(superArrow);
 			}
-		}
+		
 		
 		for(String i : this.currentClass.getInterfaces()){
 			IArrow interArrow = new ImplArrow();

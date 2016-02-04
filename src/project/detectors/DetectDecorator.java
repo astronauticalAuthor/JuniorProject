@@ -77,6 +77,7 @@ public class DetectDecorator implements IDetector {
 					this.isDecorator = false;
 					this.interfaces = this.currentClass.getInterfaces();
 					this.currentSuper = this.currentClass.getSuper();
+					
 				});
 	}
 
@@ -94,18 +95,32 @@ public class DetectDecorator implements IDetector {
 					ArrayList<IClass> classes = w.getClasses();
 					
 					//set subclass decorators
-					for(IClass c: this.decorators) {
-						for(IArrow a: c.getArrows()) {
+					
+					for(IClass c: classes) {
+						for (IArrow a: c.getArrows()) {
 							if(a.getSelf().equals("extend")) {
-								String temp = a.getDest();
-								for (IClass c2:classes) {
-									if(c2.getName().equals(temp)){
-										c2.setSpecial("decorator");
+								for(IClass c2: this.decorators) {
+									if(a.getDest().equals(c2.getName())) {
+										c.setSpecial("decorator");
 									}
 								}
 							}
 						}
 					}
+					
+					
+//					for(IClass c: this.decorators) {
+//						for(IArrow a: c.getArrows()) {
+//							if(a.getSelf().equals("extend")) {
+//								String temp = a.getSource();
+//								for (IClass c2:classes) {
+//									if(c2.getName().equals(temp)){
+//										c2.setSpecial("decorator");
+//									}
+//								}
+//							}
+//						}
+//					}
 					
 					for(String comps:this.components) {
 						for(IClass c2:classes) {

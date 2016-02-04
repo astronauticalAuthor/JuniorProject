@@ -42,7 +42,7 @@ public class DetectAdapter implements IDetector{
 				(ITraverser t) -> {
 					IField f = (IField) t;
 					for(IClass c:classes) {
-						if(c.getName().equals(f.getType())) {
+						if(c.getName().equals(f.getType()) && !f.getType().equals(this.superClass)) {
 							this.uniFieldClass = c;
 						}
 					}
@@ -56,7 +56,7 @@ public class DetectAdapter implements IDetector{
 					IMethod m = (IMethod) t;
 					if(m.getName().equals(this.curClass.getName())) {
 						for(String p:m.getParameters()){
-							if(this.uniFieldClass.getName().equals(p)){
+							if(this.superClass != null && this.uniFieldClass != null && this.uniFieldClass.getName().equals(p)){
 								this.triples.add(new AdapterTriple(this.curClass.getName(), this.uniFieldClass.getName(), this.superClass));
 							}
 						}
@@ -72,9 +72,9 @@ public class DetectAdapter implements IDetector{
 					if(c.getInterfaces().size() == 1 && (c.getSuper().equals("Object") || c.getSuper().equals(""))) {
 						this.superClass = c.getInterfaces().get(0);
 					}
-					if(c.getInterfaces().size() == 0 && !(c.getSuper().equals("Object") || c.getSuper().equals(""))) {
-						this.superClass = c.getSuper();
-					}
+//					if(c.getInterfaces().size() == 0 && !(c.getSuper().equals("Object") || c.getSuper().equals(""))) {
+//						this.superClass = c.getSuper();
+//					}
 				});
 	}
 	
@@ -108,8 +108,8 @@ public class DetectAdapter implements IDetector{
 							if (temp.equals(trip.getA1())) {
 								c.setSpecial("adapter");
 								for (IArrow a:c.getArrows()) {
-									if (a.getDest().equals(trip.getA2())) {
-										a.addProperty("xlabel=\"\\<\\<adapts\\>\\>\"");
+									if (a.getSelf().equals("assoc") && a.getDest().equals(trip.getA2())) {
+										a.addProperty(", xlabel=\"\\<\\<adapts\\>\\>\"");
 									}
 								}								
 							}else if (temp.equals(trip.getA2())) {

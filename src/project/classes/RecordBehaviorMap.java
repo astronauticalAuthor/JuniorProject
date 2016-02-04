@@ -14,7 +14,7 @@ import project.interfaces.RecordBehavior;
 
 public class RecordBehaviorMap {
 
-	public static Map<String, RecordBehavior> behaviors = new HashMap<String, RecordBehavior>();
+	public Map<String, RecordBehavior> behaviors = new HashMap<String, RecordBehavior>();
 	
 	public RecordBehaviorMap() {
 		behaviors.put("normal", new NormBehavior());
@@ -27,8 +27,8 @@ public class RecordBehaviorMap {
 		behaviors.put("decorator", new DecoratorBehavior());
 	}
 
-	public static RecordBehavior getBeh(String special) {
-		return behaviors.get(special);
+	public RecordBehavior getBeh(String special) {
+		return this.behaviors.get(special);
 	}
 
 }

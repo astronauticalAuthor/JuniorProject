@@ -90,7 +90,8 @@ public class ClassRep implements IClass {
 	public void setSpecial(String s) {
 		if(this.special.equals("interface")) {
 			this.special2 = s;
-		};
+		} else
+			this.special = s;
 	}
 
 	@Override

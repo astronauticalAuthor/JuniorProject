@@ -16,9 +16,17 @@ public class SingletonBehavior implements RecordBehavior {
 	}
 
 	@Override
-	public void secondaryRecord(PrintWriter out) {
+	public void recMods(PrintWriter out) {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void secondaryLabel(PrintWriter out) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+
 
 }
