@@ -3,11 +3,10 @@ package test;
 import java.util.ArrayList;
 
 public class MyComposite extends MyComponent{
-	
-	ArrayList<MyComponent> components;
+	ArrayList<MyComponent> comps;
 	
 	public MyComposite() {
-		components = new ArrayList<MyComponent>();
+		comps = new ArrayList<MyComponent>();
 	}
 	
 	@Override

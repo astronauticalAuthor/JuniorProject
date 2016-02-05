@@ -11,6 +11,7 @@ import classes.Generator;
 import classes.MethodInformation;
 import classes.MyWrapper;
 import detectors.DetectAdapter;
+import detectors.DetectComposite;
 import detectors.DetectDecorator;
 import detectors.DetectSingleton;
 import interfaces.IArrow;
@@ -286,6 +287,36 @@ public class VisitorTest{
 			if (a.getName().equals("test.IComponent")) assertEquals(a.getSpecial(), "component");
 			if (a.getName().equals("test.AbstractDecorator")) assertEquals(a.getSpecial(), "decorator");
 			if (a.getName().equals("test.ConcreteDecorator")) assertEquals(a.getSpecial(), "decorator");
+		}
+	}
+	
+	@Test
+	public void milestone6Cases() throws Exception {
+		String args1[] = {"javax.swing.JWindow", "java.awt.Window", "java.awt.Frame", "javax.swing.JFrame"};
+		IWrapper w = fakeMain(args1);
+		DetectComposite d1 = new DetectComposite();
+		d1.detect(w);
+		
+		for (IClass a : w.getClasses()) {
+			if (a.getName().equals("javax.swing.JWindow")) assertNotEquals(a.getSpecial(), "composite");
+			if (a.getName().equals("javax.swing.Window")) assertNotEquals(a.getSpecial(), "component");
+			if (a.getName().equals("javax.swing.Frame")) assertNotEquals(a.getSpecial(), "leaf");
+			if (a.getName().equals("javax.swing.JFrame")) assertNotEquals(a.getSpecial(), "leaf");
+		}
+	}
+	
+	@Test
+	public void testDetectComposite() throws Exception {
+		String args[] = {"test.MyComponent", "test.MyComposite", "test.LeafA", "test.LeafB"};
+		IWrapper w = fakeMain(args);
+		DetectComposite d = new DetectComposite();
+		d.detect(w);
+		
+		for (IClass a : w.getClasses()) {
+			if (a.getName().equals("test.MyComposite")) assertEquals(a.getSpecial(), "composite");
+			if (a.getName().equals("test.MyComponent")) assertEquals(a.getSpecial(), "component");
+			if (a.getName().equals("test.LeafA")) assertEquals(a.getSpecial(), "leaf");
+			if (a.getName().equals("test.LeafB")) assertEquals(a.getSpecial(), "leaf");
 		}
 	}
 

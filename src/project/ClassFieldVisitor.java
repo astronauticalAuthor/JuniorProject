@@ -61,7 +61,7 @@ public class ClassFieldVisitor extends ClassVisitor {
 		this.currentClass.addField(this.currentField);
 		
 		for(String className : this.classes){
-			if(signature != null){
+			if(sign != null){
 				String[] temp = sign.split("<");
 				String param = temp[1].substring(temp[1].lastIndexOf(".")+1);
 				if(className.substring(className.lastIndexOf(".")+1).equals(param)){
