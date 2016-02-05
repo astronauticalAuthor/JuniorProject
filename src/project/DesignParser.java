@@ -8,6 +8,7 @@ import classes.ClassRep;
 import classes.Generator;
 import classes.MyWrapper;
 import detectors.DetectAdapter;
+import detectors.DetectComposite;
 import detectors.DetectDecorator;
 import detectors.DetectSingleton;
 import interfaces.IClass;
@@ -40,6 +41,8 @@ public class DesignParser {
 		detectAda.detect(classWrap);
 		DetectDecorator detectDecor = new DetectDecorator();
 		detectDecor.detect(classWrap);
+		DetectComposite detectCompos = new DetectComposite();
+		detectCompos.detect(classWrap);
 
 		Generator.generateUML(classWrap);
 		

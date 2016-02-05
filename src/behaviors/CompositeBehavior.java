@@ -5,24 +5,24 @@ import java.io.PrintWriter;
 import interfaces.IClass;
 import interfaces.RecordBehavior;
 
-public class ComponentBehavior implements RecordBehavior {
+public class CompositeBehavior implements RecordBehavior {
 
 	@Override
 	public void initRecord(String cName, PrintWriter out, IClass c) {
 		out.write(cName + " [shape=\"record\"\n");
-		out.write("fillcolor=\"green\"\nstyle=\"filled\"\n");
-		out.write("label=\"{"+cName+"\\n\\<\\<Component\\>\\>\n");
+		out.write("fillcolor=\"yellow\"\nstyle=\"filled\"\n");
+		out.write("label=\"{"+cName+"\\n\\<\\<Composite\\>\\>\n");
 		out.write("|\n");
 	}
 
 	@Override
 	public void recMods(PrintWriter out) {
-		out.write("fillcolor=\"green\"\nstyle=\"filled\"\n");
+		//dint do nuffin
 	}
 
 	@Override
 	public void secondaryLabel(PrintWriter out) {
-		out.write("\n\\<\\<Component\\>\\>\n");
+		//dint do nuffin
 	}
 
 }

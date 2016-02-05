@@ -6,8 +6,11 @@ import java.util.Map;
 import behaviors.AdapteeBehavior;
 import behaviors.AdapterBehavior;
 import behaviors.ComponentBehavior;
+import behaviors.CompositeBehavior;
+import behaviors.CompositeComponentBehavior;
 import behaviors.DecoratorBehavior;
 import behaviors.InterfaceBehavior;
+import behaviors.LeafBehavior;
 import behaviors.NormBehavior;
 import behaviors.SingletonBehavior;
 import behaviors.TargetBehavior;
@@ -26,6 +29,9 @@ public class RecordBehaviorMap {
 		behaviors.put("target", new TargetBehavior());
 		behaviors.put("component", new ComponentBehavior());
 		behaviors.put("decorator", new DecoratorBehavior());
+		behaviors.put("leaf", new LeafBehavior());
+		behaviors.put("composite", new CompositeBehavior());
+		behaviors.put("cmpscomp", new CompositeComponentBehavior());		
 	}
 
 	public RecordBehavior getBeh(String special) {
