@@ -62,10 +62,12 @@ public class DetectComposite implements IDetector {
 				Field.class, 
 				(ITraverser t) -> {
 					IField f = (IField) t;
+					if(f.getSignature() != null) {
 					if(f.getSignature().equals(this.superClazz)) {
 						this.hasDSComponent = true;
 					}else {
 						this.hasDSComponent = false;
+					}
 					}
 				});
 	}
