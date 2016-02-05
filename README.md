@@ -66,3 +66,16 @@ Katrina designed the requirements for this milestone, wrote the tests and README
 
 How to Use Our Code
 In Eclipse, edit the command line arguments so they point to whatever classes you'd like to generate a diagram for. Then, run the code and paste the contents of the output file into GraphViz.
+
+--
+Milestone 6
+--
+
+The Design of our Tool
+Because of the major refactoring from the last milestone, this milestone was able to be implemented under the same design with little trouble! The Composite pattern follows the same design pattern as the other detectors, and was able to be fit right in next to all of the other classes.
+
+Who Did What
+Katrina and Ian worked together to design the needs for the algorithm, and then Ian programmed and explained to Katrina how he implemented the code. Katrina wrote the tests and updated the README. It took about six hours of work.
+
+How to Use Our Code
+In Eclipse, edit the command line arguments so they point to whatever classes you'd like to generate a diagram for. Then, run the code and paste the contents of the output file into GraphViz.
