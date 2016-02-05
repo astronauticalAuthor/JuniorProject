@@ -39,8 +39,8 @@ public class DesignParser {
 		detectSingle.detect(classWrap);
 		DetectAdapter detectAda = new DetectAdapter();
 		detectAda.detect(classWrap);
-		DetectDecorator detectDecor = new DetectDecorator();
-		detectDecor.detect(classWrap);
+//		DetectDecorator detectDecor = new DetectDecorator();
+//		detectDecor.detect(classWrap);
 		DetectComposite detectCompos = new DetectComposite();
 		detectCompos.detect(classWrap);
 
