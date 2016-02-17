@@ -191,7 +191,7 @@ mixOnValidating() : void\l
 }"
 ];
 Container -> Component[arrowhead="onormal", style="solid"];
-Container -> Component[arrowhead="ovee", style="solid"];
+Container -> Component[arrowhead="ovee", style="solid"xlabel="\<\<decorates\>\>"];
 Container -> Component[arrowhead="ovee", style="dashed"];
 Container -> Container[arrowhead="ovee", style="dashed"];
 Container -> Container[arrowhead="ovee", style="solid"];
