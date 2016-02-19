@@ -1,6 +1,6 @@
 {
-"Singletons" : "",
+"Singletons" : "ChocolateBoiler ChocolateBoiler VisitType EagerSingletonTest SingletonTest1 ",
 "Adapters" : "",
-"Decorators" : "",
-"Composites" : ""
+"Decorators" : "MethodInformationVisitor AbstractDecorator ConcreteDecorator ",
+"Composites" : "MyComposite "
 }

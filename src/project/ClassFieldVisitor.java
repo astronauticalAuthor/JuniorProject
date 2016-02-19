@@ -35,7 +35,10 @@ public class ClassFieldVisitor extends ClassVisitor {
 	public ClassFieldVisitor(int asm5, ClassDeclarationVisitor declVisitor, IClass current, List<String> classes) {
 		super(asm5, declVisitor);
 		this.currentClass = current;
-		this.classes = (String[]) classes.toArray();
+		this.classes = new String[classes.size()];
+		for (int i = 0; i< classes.size(); i++) {
+			this.classes[i] = classes.get(i);
+		}
 	}
 
 	@Override

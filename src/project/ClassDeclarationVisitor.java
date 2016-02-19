@@ -33,7 +33,11 @@ public class ClassDeclarationVisitor extends ClassVisitor {
 	public ClassDeclarationVisitor(int asm5, IClass current, List<String> classes) {
 		super(asm5);
 		this.currentClass = current;
-		this.classes = (String[]) classes.toArray();
+		this.classes = new String[classes.size()];
+		for (int i = 0; i< classes.size(); i++) {
+			this.classes[i] = classes.get(i);
+		}
+		
 	}
 
 	@Override
