@@ -11,13 +11,14 @@ import interfaces.IField;
 import interfaces.IMethod;
 import interfaces.IWrapper;
 
-public class Generator {
+public class UMLGenerator {
 	
 	public static RecordBehaviorMap recBehaviors = new RecordBehaviorMap();
 	
-	public static void generateUML(IWrapper classWrap) throws FileNotFoundException {
+	public static void generate(IWrapper classWrap) throws FileNotFoundException {
 		
 		PrintWriter out = new PrintWriter("./outputUML.txt");
+//		PrintWriter out = new PrintWriter("./outputUML.dot");
 		
 		out.write("digraph G{\n rankdir=BT;\n");
 		

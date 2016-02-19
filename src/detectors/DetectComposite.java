@@ -63,13 +63,11 @@ public class DetectComposite implements IDetector {
 					IField f = (IField) t;
 					if(f.getSignature() != null && this.superClazz != null) {
 						String sign = f.getSignature().substring(f.getSignature().lastIndexOf(".")+1);
-						System.out.println("sign trigger");
 						if(sign.equals(this.superClazz.getName())) {
 							this.hasDSComponent = true;
 						}
 					}
 					if(this.superClazz != null && f.getType() != null) {
-						System.out.println("type trigger");
 						String tempType = f.getType();
 						if (tempType.contains("[]")) {
 							tempType = tempType.substring(0, tempType.length()-2);
@@ -94,7 +92,6 @@ public class DetectComposite implements IDetector {
 						}
 							
 						if(this.hasMethodCount >= 2) {
-							System.out.println("TRIGGERED_1");
 							this.composites.add(this.currentClass.getName());
 							this.components.add(this.superClazz.getName());
 							this.hasDSComponent = false;
@@ -124,8 +121,6 @@ public class DetectComposite implements IDetector {
 							}
 						}
 					}
-					System.out.println("name=" +c.getName());
-					System.out.print("super=" +c.getSuper()+"\n");
 					
 				});
 	}
@@ -141,15 +136,12 @@ public class DetectComposite implements IDetector {
 					for(IClass c : clazzez) {
 						if(this.composites.contains(c.getName())) {
 							c.setSpecial("composite");
-							System.out.println("TRIGGERED_2");
 						}
 						if(this.components.contains(c.getName())) {
 							c.setSpecial("cmpscomp");
-							System.out.println("TRIGGERED_3");
 						}
 						if(!c.getSpecial().equals("composite") && this.components.contains(c.getSuper())) {
 							c.setSpecial("leaf");
-							System.out.println("TRIGGERED_4");
 						}
 					}
 				});

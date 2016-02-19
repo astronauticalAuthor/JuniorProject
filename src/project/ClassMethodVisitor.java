@@ -1,5 +1,7 @@
 package project;
 
+import java.util.List;
+
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
@@ -36,6 +38,12 @@ public class ClassMethodVisitor extends ClassVisitor {
 		super(arg0, arg1);
 		this.currentClass = current;
 		this.classes = new String[0];
+	}
+
+	public ClassMethodVisitor(int asm5, ClassFieldVisitor fieldVisitor, IClass current, List<String> classes) {
+		super(asm5, fieldVisitor);
+		this.currentClass = current;
+		this.classes = (String[]) classes.toArray();
 	}
 
 	@Override

@@ -5,29 +5,48 @@ import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.Opcodes;
 
 import classes.ClassRep;
-import classes.Generator;
+import classes.DetectionHandler;
+import classes.JSONGenerator;
 import classes.MyWrapper;
+import classes.UMLGenerator;
+import configAndGUI.Config;
 import detectors.DetectAdapter;
 import detectors.DetectComposite;
 import detectors.DetectDecorator;
 import detectors.DetectSingleton;
 import interfaces.IClass;
+import interfaces.IDetector;
 import interfaces.IWrapper;
 
 public class DesignParser {
-	public static void main(String[] args) throws IOException{
+	//
+	public static void parse(Config config, String[] args) throws IOException{
+		//
+		//output that its initializing
+		//mod loading bar if it exists
 		IWrapper classWrap = new MyWrapper();
-//		ArrayList<IClass> classes = new ArrayList<IClass>();
-		String[] args1 = new String[1];
-		args1[0] = "ChocolateFactory.ChocolateBoiler";
-		for(String className: args){
+		
+
+		
+//		for(String p :config.PHASES) {
+			//output that its running some phase
+			//mod loading bar
+//			IDetector phase = PhaseMap.phases.get(p);
+//			if(phase != null) {
+//				phase.detect(classWrap);
+//			}
+//		}
+		
+		//return classWrap;
+		
+		for(String className: config.CLASSES){
 			IClass current = new ClassRep();
 				
 		 	ClassReader reader = new ClassReader(className);
 			
-		 	ClassDeclarationVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, current, args);
-		 	ClassFieldVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor, current, args);
-		 	ClassMethodVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor, current, args);
+		 	ClassDeclarationVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, current, config.CLASSES);
+		 	ClassFieldVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor, current, config.CLASSES);
+		 	ClassMethodVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor, current, config.CLASSES);
 
 		 	reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);			
 			
@@ -35,16 +54,16 @@ public class DesignParser {
 		}
 		
 		//create class to run all detectors (facade?)
-		DetectSingleton detectSingle = new DetectSingleton();
-		detectSingle.detect(classWrap);
-		DetectAdapter detectAda = new DetectAdapter();
-		detectAda.detect(classWrap);
-		DetectDecorator detectDecor = new DetectDecorator();
-		detectDecor.detect(classWrap);
-		DetectComposite detectCompos = new DetectComposite();
-		detectCompos.detect(classWrap);
-
-		Generator.generateUML(classWrap);
+		//methods called from outside of jar?
+		// now obsolete
+		DetectionHandler detectHandle = new DetectionHandler(classWrap);
+		detectHandle.detect();
+		
+		
+		//called from outside of jar?
+		JSONGenerator.generate(classWrap);
+		//output.txt has been created and can be extracted for loading the checkboxes
+		UMLGenerator.generate(classWrap);
 		
 //		System.out.println(SingletonContainer.methods);
 //		System.out.println(SingletonContainer.fields);

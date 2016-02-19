@@ -1,5 +1,7 @@
 package project;
 
+import java.util.List;
+
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
 
@@ -28,6 +30,12 @@ public class ClassDeclarationVisitor extends ClassVisitor {
 		this.classes = empty;
 	}
 	
+	public ClassDeclarationVisitor(int asm5, IClass current, List<String> classes) {
+		super(asm5);
+		this.currentClass = current;
+		this.classes = (String[]) classes.toArray();
+	}
+
 	@Override
 	public void visit(int version, int access, String name, String signature, String superName, String[] interfaces){
 				
