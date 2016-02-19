@@ -79,3 +79,10 @@ Katrina and Ian worked together to design the needs for the algorithm, and then 
 
 How to Use Our Code
 In Eclipse, edit the command line arguments so they point to whatever classes you'd like to generate a diagram for. Then, run the code and paste the contents of the output file into GraphViz.
+
+--
+Milestone 7
+--
+To make changes to our code:
+To add a detector: create new IDetector, which follows the visitor pattern, with all necessary requirements to validly detect what you are looking for. Add the new "phase" to the PhaseMap.
+To add a new behavior to display in UML:  create new RecordBehavior with all properties you wish to add, must be valid for plain text read by GraphViz. Add new behavior to RecordBehaviorMap.
