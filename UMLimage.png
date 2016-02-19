@@ -1,0 +1,26 @@
+digraph G {
+	graph [bb="0,0,227,190",
+		rankdir=BT
+	];
+	node [label="\N"];
+	ChocolateBoiler	 [height=2.6389,
+		label="{ChocolateBoiler|-empty : boolean\l
+-boiled : boolean\l
+-chocolateBoiler : ChocolateBoiler\l
+|+ChocolateBoiler() : void\l
++getInstance() : \
+ChocolateBoiler\l
++fill() : void\l
++drain() : void\l
++boil() : void\l
++isEmpty() : boolean\l
++isBoiled() : boolean\l
+}",
+		pos="104.5,95",
+		rects="0,166.5,209,189.5 0,113.5,209,166.5 0,0.5,209,113.5",
+		shape=record,
+		width=2.9028];
+	ChocolateBoiler -> ChocolateBoiler	 [arrowhead=ovee,
+		pos="e,209.05,124.52 209.05,65.483 219.99,71.245 227,81.084 227,95 227,105 223.38,112.9 217.28,118.69",
+		style=solid];
+}

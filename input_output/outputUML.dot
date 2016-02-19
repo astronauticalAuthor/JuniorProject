@@ -1,0 +1,17 @@
+digraph G{
+ rankdir=BT;
+ChocolateBoiler [shape="record"
+label="{ChocolateBoiler|-empty : boolean\l
+-boiled : boolean\l
+-chocolateBoiler : ChocolateBoiler\l
+|+ChocolateBoiler() : void\l
++getInstance() : ChocolateBoiler\l
++fill() : void\l
++drain() : void\l
++boil() : void\l
++isEmpty() : boolean\l
++isBoiled() : boolean\l
+}"
+];
+ChocolateBoiler -> ChocolateBoiler[arrowhead="ovee", style="solid"];
+}

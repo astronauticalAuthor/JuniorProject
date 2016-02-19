@@ -19,12 +19,20 @@ app.get('/analyze', function(req, res) {
 	exec(cmd, function(err, stdout, stderr) {
 		if (err) throw err
 			
-		fs.readFile('./patternOutput.txt', function(err, data) {
+		fs.readFile('./input_output/JSONoutput.txt', function(err, data) {
 			if (err) throw err
 
+			console.log(data)
 			res.writeHead(200, {"Content-Type": "text/plain"})
 			res.write(data)
-			res.end()
+
+			cmd = 'C:/\"Program Files (x86)\"/Graphviz2.38/bin/dot.exe input_output/outputUML.dot -o UMLimage.png'
+			exec(cmd, function(err, stdout, stderr) {
+				if (err) throw err
+
+				res.sendFile(path.join(__dirname + '/UMLimage.png'))
+				res.end()
+			})
 		})
 	})
 })
@@ -32,7 +40,7 @@ app.get('/analyze', function(req, res) {
 app.get('/config', function(req, res) {
 	//call the config creation executable
 	console.log('Made it to the config server API endpoint')
-	var cmd = 'java -jar Config.jar'
+	var cmd = 'java -jar Config.jar originalConfig.txt'
 	exec(cmd, function(err, stdout, stderr) {
 		if (err) throw err
 	})
