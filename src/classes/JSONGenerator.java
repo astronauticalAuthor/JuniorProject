@@ -19,7 +19,7 @@ public class JSONGenerator {
 		
 		fillLists(classWrap);
 		
-		PrintWriter out = new PrintWriter("./output.txt");
+		PrintWriter out = new PrintWriter("./input_output/JSONoutput.txt");
 		
 		
 		out.write("{\n\"Singletons\" : [");

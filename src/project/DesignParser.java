@@ -10,6 +10,8 @@ import classes.JSONGenerator;
 import classes.MyWrapper;
 import classes.UMLGenerator;
 import configAndGUI.Config;
+import configAndGUI.ConfigParser;
+import configAndGUI.Loader;
 import detectors.DetectAdapter;
 import detectors.DetectComposite;
 import detectors.DetectDecorator;
@@ -20,26 +22,28 @@ import interfaces.IWrapper;
 
 public class DesignParser {
 	//
-	public static void parse(Config config, String[] args) throws IOException{
+	public static void main(String[] args) throws IOException{
 		//
 		//output that its initializing
 		//mod loading bar if it exists
+		Config config = ConfigParser.parse("./input_output/config.txt");
+		
 		IWrapper classWrap = new MyWrapper();
 		
 
 		
-//		for(String p :config.PHASES) {
+		for(String p : config.PHASES) {
 			//output that its running some phase
 			//mod loading bar
-//			IDetector phase = PhaseMap.phases.get(p);
-//			if(phase != null) {
-//				phase.detect(classWrap);
-//			}
-//		}
+			IDetector phase = PhaseMap.phases.get(p);
+			if(phase != null) {
+				phase.detect(classWrap);
+			}
+		}
 		
 		//return classWrap;
 		
-		for(String className: config.CLASSES){
+		for(String className: config.getClasses()){
 			IClass current = new ClassRep();
 				
 		 	ClassReader reader = new ClassReader(className);
@@ -56,14 +60,14 @@ public class DesignParser {
 		//create class to run all detectors (facade?)
 		//methods called from outside of jar?
 		// now obsolete
-		DetectionHandler detectHandle = new DetectionHandler(classWrap);
-		detectHandle.detect();
+//		DetectionHandler detectHandle = new DetectionHandler(classWrap);
+//		detectHandle.detect();
 		
 		
 		//called from outside of jar?
 		JSONGenerator.generate(classWrap);
 		//output.txt has been created and can be extracted for loading the checkboxes
-		UMLGenerator.generate(classWrap);
+//		UMLGenerator.generate(classWrap);
 		
 //		System.out.println(SingletonContainer.methods);
 //		System.out.println(SingletonContainer.fields);
