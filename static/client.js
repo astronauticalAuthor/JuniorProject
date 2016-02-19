@@ -35,10 +35,12 @@ function analyze() {
 
 function setupCheckboxes(classes) {
 	jQuery.each(classes, function(key, val) {
-		$('#classSelection').append(key + '<br />')
-		val.split(' ').forEach(function(str) {
-			$('#classSelection').append('<input type="checkbox" class="cb" value="' + str + '" checked />' + str + '<br />')
-		})
+		if (val != undefined && val != "") {
+			$('#classSelection').append(key + '<br />')
+			val.split(' ').forEach(function(str) {
+				$('#classSelection').append('<input type="checkbox" class="cb" value="' + str + '" checked />' + str + '<br />')
+			})
+		}
 	})
 }
 
