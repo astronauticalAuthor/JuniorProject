@@ -16,9 +16,9 @@ public class PhaseMap {
 	static{
 		phases = new HashMap<>();
 		phases.put("Loading", null);
-		phases.put("Decorator-Detection", new DetectDecorator());
-		phases.put("Singleton-Detection", new DetectSingleton());
-		phases.put("Adapter-Detection", new DetectAdapter());
-		phases.put("Composite-Detection", new DetectComposite());
+		phases.put("Decorator", new DetectDecorator());
+		phases.put("Singleton", new DetectSingleton());
+		phases.put("Adapter", new DetectAdapter());
+		phases.put("Composite", new DetectComposite());
 	}
 }
