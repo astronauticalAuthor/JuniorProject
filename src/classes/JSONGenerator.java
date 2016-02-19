@@ -27,19 +27,19 @@ public class JSONGenerator {
 		for (int i = 0; i<singletons.size();i++) {
 			out.write(singletons.get(i).getName()+ " ");
 		}
-		out.write("\"\n");
+		out.write("\",\n");
 		
 		out.write("\"Adapters\" : \"");
 		for (int i = 0; i<adapters.size();i++) {
 			out.write(adapters.get(i).getName()+ " ");
 		}
-		out.write("\"\n");
+		out.write("\",\n");
 		
 		out.write("\"Decorators\" : \"");
 		for (int i = 0; i<decorators.size();i++) {
 			out.write(decorators.get(i).getName()+ " ");
 		}
-		out.write("\"\n");
+		out.write("\",\n");
 		
 		out.write("\"Composites\" : \"");
 		for (int i = 0; i<composites.size();i++) {
