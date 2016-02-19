@@ -2,6 +2,11 @@ package arrows;
 
 import interfaces.IArrow;
 
+/**
+ * 
+ * Arrow representation of usage of classes and interfaces by classes.
+ *
+ */
 public class UseArrow implements IArrow {
 
 	//[arrowhead=\"ovee\", style=\"dashed\"]

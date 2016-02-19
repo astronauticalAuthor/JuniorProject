@@ -2,6 +2,11 @@ package arrows;
 
 import interfaces.IArrow;
 
+/**
+ * Arrow representation of extension of classes by classes.
+ * 
+ *
+ */
 public class ExtendArrow implements IArrow {
 
 	//[arrowhead=\"onormal\", style=\"solid\"]

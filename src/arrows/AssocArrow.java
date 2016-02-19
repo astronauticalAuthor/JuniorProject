@@ -2,6 +2,11 @@ package arrows;
 
 import interfaces.IArrow;
 
+/**
+ * Representation of association between classes and interfaces in UML
+ * 
+ *
+ */
 public class AssocArrow implements IArrow {
 
 	//[arrowhead=\"ovee\", style=\"solid\"]

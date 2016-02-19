@@ -22,41 +22,48 @@ public class JSONGenerator {
 		PrintWriter out = new PrintWriter("./input_output/JSONoutput.txt");
 		
 		
-		out.write("{\n\"Singletons\" : [");
+		out.write("{\n");
+		out.write("\"Singletons\" : \"");
 		for (int i = 0; i<singletons.size();i++) {
-			if(i != singletons.size()-1)
-				out.write(singletons.get(i).getName() + ", ");
-			else
-				out.write(singletons.get(i).getName());
+			out.write(singletons.get(i).getName()+ " ");
+//			if(i != singletons.size()-1)
+//				out.write(singletons.get(i).getName() + ", ");
+//			else
+//				out.write(singletons.get(i).getName());
 		}
-		out.write("\n]\n}");
+		out.write("\"\n");
 		
-		out.write("{\n\"Adapters\" : [");
+		out.write("\"Adapters\" : \"");
 		for (int i = 0; i<adapters.size();i++) {
-			if(i != adapters.size()-1)
-				out.write(adapters.get(i).getName() + ", ");
-			else
-				out.write(adapters.get(i).getName());
+			out.write(adapters.get(i).getName()+ " ");
+//			if(i != adapters.size()-1)
+//				out.write(adapters.get(i).getName() + ", ");
+//			else
+//				out.write(adapters.get(i).getName());
 		}
-		out.write("\n]\n}");
+		out.write("\"\n");
 		
-		out.write("{\n\"Decorators\" : [");
+		out.write("\"Decorators\" : \"");
 		for (int i = 0; i<decorators.size();i++) {
-			if(i != decorators.size()-1)
-				out.write(decorators.get(i).getName() + ", ");
-			else
-				out.write(decorators.get(i).getName());
+			out.write(decorators.get(i).getName()+ " ");
+//			if(i != decorators.size()-1)
+//				out.write(decorators.get(i).getName() + ", ");
+//			else
+//				out.write(decorators.get(i).getName());
 		}
-		out.write("\n]\n}");
+		out.write("\"\n");
 		
-		out.write("{\n\"Composites\" : [");
+		out.write("\"Composites\" : \"");
 		for (int i = 0; i<composites.size();i++) {
-			if(i != composites.size()-1)
-				out.write(composites.get(i).getName() + ", ");
-			else
-				out.write(composites.get(i).getName());
+			out.write(composites.get(i).getName()+ " ");
+//			if(i != composites.size()-1)
+//				out.write(composites.get(i).getName() + ", ");
+//			else
+//				out.write(composites.get(i).getName());
 		}
-		out.write("\n]\n}");
+		
+		out.write("\"\n");
+		out.write("}");
 		
 		out.close();
 	}

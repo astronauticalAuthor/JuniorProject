@@ -2,6 +2,11 @@ package arrows;
 
 import interfaces.IArrow;
 
+/**
+ * 
+ * Arrow representation of implementation of interfaces by classes.
+ *
+ */
 public class ImplArrow implements IArrow {
 
 	//[arrowhead=\"onormal\", style=\"dashed\"]
