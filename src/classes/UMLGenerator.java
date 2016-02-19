@@ -18,7 +18,7 @@ public class UMLGenerator {
 	public static void generate(IWrapper classWrap) throws FileNotFoundException {
 		
 //		PrintWriter out = new PrintWriter("./outputUML.txt");
-		PrintWriter out = new PrintWriter("./outputUML.dot");
+		PrintWriter out = new PrintWriter("./input_output/outputUML.dot");
 		
 		out.write("digraph G{\n rankdir=BT;\n");
 		
