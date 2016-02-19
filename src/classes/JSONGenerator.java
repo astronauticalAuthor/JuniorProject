@@ -26,40 +26,24 @@ public class JSONGenerator {
 		out.write("\"Singletons\" : \"");
 		for (int i = 0; i<singletons.size();i++) {
 			out.write(singletons.get(i).getName()+ " ");
-//			if(i != singletons.size()-1)
-//				out.write(singletons.get(i).getName() + ", ");
-//			else
-//				out.write(singletons.get(i).getName());
 		}
 		out.write("\"\n");
 		
 		out.write("\"Adapters\" : \"");
 		for (int i = 0; i<adapters.size();i++) {
 			out.write(adapters.get(i).getName()+ " ");
-//			if(i != adapters.size()-1)
-//				out.write(adapters.get(i).getName() + ", ");
-//			else
-//				out.write(adapters.get(i).getName());
 		}
 		out.write("\"\n");
 		
 		out.write("\"Decorators\" : \"");
 		for (int i = 0; i<decorators.size();i++) {
 			out.write(decorators.get(i).getName()+ " ");
-//			if(i != decorators.size()-1)
-//				out.write(decorators.get(i).getName() + ", ");
-//			else
-//				out.write(decorators.get(i).getName());
 		}
 		out.write("\"\n");
 		
 		out.write("\"Composites\" : \"");
 		for (int i = 0; i<composites.size();i++) {
 			out.write(composites.get(i).getName()+ " ");
-//			if(i != composites.size()-1)
-//				out.write(composites.get(i).getName() + ", ");
-//			else
-//				out.write(composites.get(i).getName());
 		}
 		
 		out.write("\"\n");
