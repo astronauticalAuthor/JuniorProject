@@ -34,33 +34,12 @@ function analyze() {
 }
 
 function setupCheckboxes(classes) {
-	if (classes.Singleton != undefined) {
-		$('#classSelection').append('Singleton<br />')
-		classes.Singleton.split(' ').forEach(function(str) {
+	jQuery.each(classes, function(key, val) {
+		$('#classSelection').append(key + '<br />')
+		val.split(' ').forEach(function(str) {
 			$('#classSelection').append('<input type="checkbox" class="cb" value="' + str + '" checked />' + str + '<br />')
 		})
-	}
-	
-	if (classes.Decorator != undefined) {
-		$('#classSelection').append('Decorator<br />')
-		classes.Decorator.split(' ').forEach(function(str) {
-			$('#classSelection').append('<input type="checkbox" class="cb" value="' + str + '" checked />' + str + '<br />')
-		})
-	}
-
-	if (classes.Adapter != undefined) {
-		$('#classSelection').append('Adapter<br />')
-		classes.Adapter.split(' ').forEach(function(str) {
-			$('#classSelection').append('<input type="checkbox" class="cb" value="' + str + '" checked />' + str + '<br />')
-		})
-	}
-
-	if (classes.Composite != undefined) {
-		$('#classSelection').append('Composite<br />')
-		classes.Composite.split(' ').forEach(function(str) {
-			$('#classSelection').append('<input type="checkbox" class="cb" value="' + str + '" checked />' + str + '<br />')
-		})
-	}
+	})
 }
 
 function refreshPicture() {
@@ -71,7 +50,10 @@ function refreshPicture() {
 function config() {
 	$.ajax({
 		type: 'GET',
-		url: '/config'
+		url: '/config',
+		success: function(data) {
+			$('#analyze').removeAttr('disabled')
+		}
 	})
 }
 

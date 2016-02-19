@@ -18,7 +18,7 @@ app.get('/analyze', function(req, res) {
 	var cmd = 'java -jar DesignParser.jar'
 	exec(cmd, function(err, stdout, stderr) {
 		if (err) throw err
-			
+		
 		fs.readFile('./input_output/JSONoutput.txt', function(err, data) {
 			if (err) throw err
 
@@ -43,6 +43,8 @@ app.get('/config', function(req, res) {
 	var cmd = 'java -jar Config.jar originalConfig.txt'
 	exec(cmd, function(err, stdout, stderr) {
 		if (err) throw err
+
+		res.end()
 	})
 })
 
@@ -51,6 +53,8 @@ app.post('/updateUML', function(req, res) {
 	var cmd = 'java -jar DesignParser.jar'
 	exec(cmd, function(err, stdout, stderr) {
 		if (err) throw err
+
+		res.end()
 	})
 })
 

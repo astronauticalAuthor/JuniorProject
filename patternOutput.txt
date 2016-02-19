@@ -1,6 +1,0 @@
-{
-	"Singleton": "aaa eee jjj lll",
-	"Decorator": "bbb iii kkk vvv",
-	"Adapter": "ccc ddd nnn mmm zzz ooo ppp",
-	"Composite": "fff ggg qqq www xxx hhh"
-}
