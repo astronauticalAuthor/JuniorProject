@@ -1,0 +1,65 @@
+.inactive {
+	height: 0px;
+	overflow: hidden;
+	display: block;
+}
+
+#setupScreen {
+	width: 40%;
+	border-radius: 5px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.setHeightSetup {
+	height: 300px;
+	border: 3px solid black;
+}
+
+.organizesetup {
+	margin-left: auto;
+	margin-right: auto;
+	width: 250px;
+	margin-top: 50px;
+}
+
+button {
+	width: 100px;
+	margin: 10px;
+	border-radius: 5px;
+	height: 30px;
+}
+
+#classSelection {
+	width: 20%;
+	border-right: 3px solid black;
+	height: 100vh;
+	overflow: scroll;
+}
+
+#pictureArea {
+	#width: 80%;
+	overflow: scroll;
+	height: 100vh;
+}
+
+#mainScreen {
+	margin-top: -8px;
+}
+
+#loadingBarText {
+	width: 100%;
+	text-align: center;
+}
+
+#loadingBarBar {
+	width: 250px;
+	height: 15px;
+	border: 1px solid black;
+}
+
+#lbf {
+	width: 0%;
+	height: 15px;
+	background-color: black;
+}
