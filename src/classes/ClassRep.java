@@ -44,7 +44,8 @@ public class ClassRep implements IClass {
 
 	@Override
 	public void setName(String className) {
-		this.className = className.substring(className.lastIndexOf("/")+1);
+		String clazz = className.replace("$", "/");
+		this.className = clazz.substring(clazz.lastIndexOf("/")+1);
 	}
 
 	@Override

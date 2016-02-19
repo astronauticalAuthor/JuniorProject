@@ -46,6 +46,10 @@ public class ClassFieldVisitor extends ClassVisitor {
 		FieldVisitor toDecorate = super.visitField(access, name, desc, signature, value);
 		this.currentField = new Field();
 		
+		if (name.contains("this")|| name.contains("lambda")) {
+			return null;
+		}
+		
 		this.currentField.setName(name);
 		
 		String type = Type.getType(desc).getClassName();

@@ -81,6 +81,8 @@ public class ClassMethodVisitor extends ClassVisitor {
 		
 		if(name.equals("<init>")){
 			this.currentMethod.setName(this.currentClass.getName());
+		}else if (name.contains("this")|| name.contains("lambda")) {
+			return null;
 		}else{
 			this.currentMethod.setName(name);
 		}

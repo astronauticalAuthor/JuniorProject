@@ -23,7 +23,8 @@ public class UseArrow implements IArrow {
 
 	@Override
 	public void setDestination(String dest) {
-		this.destinClass = dest;
+		String clazz = dest.replace("$", "/");
+		this.destinClass = clazz.substring(clazz.lastIndexOf("/")+1);
 	}
 	
 	@Override
