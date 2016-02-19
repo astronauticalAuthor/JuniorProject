@@ -1,5 +1,5 @@
-Input-Folder: src
+Input-Folder: C:/Users/kerrickm/Documents/sophomore/"winter quarter"/"junior project"/workspace/JuniorProject/bin
 Input-Classes: ChocolateFactory.ChocolateBoiler
 Output-Directory: ./input_output
 Dot-Path: C:/Program Files (x86)/Graphviz2.38/bin/dot.exe
-Phases: Singleton,Decorator,Adapter,Composite
+Phases: Loading,Singleton,Decorator,Adapter,Composite

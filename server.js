@@ -26,7 +26,7 @@ app.get('/analyze', function(req, res) {
 			res.writeHead(200, {"Content-Type": "text/plain"})
 			res.write(data)
 
-			cmd = 'C:/\"Program Files (x86)\"/Graphviz2.38/bin/dot.exe input_output/outputUML.dot -o UMLimage.png'
+			cmd = 'C:/\"Program Files (x86)\"/Graphviz2.38/bin/dot.exe input_output/outputUML.gv -o static/UMLimage.png'
 			exec(cmd, function(err, stdout, stderr) {
 				if (err) throw err
 
