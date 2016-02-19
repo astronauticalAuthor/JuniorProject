@@ -67,7 +67,7 @@ public class DesignParser {
 		//called from outside of jar?
 		JSONGenerator.generate(classWrap);
 		//output.txt has been created and can be extracted for loading the checkboxes
-//		UMLGenerator.generate(classWrap);
+		UMLGenerator.generate(classWrap);
 		
 //		System.out.println(SingletonContainer.methods);
 //		System.out.println(SingletonContainer.fields);

@@ -1,0 +1,6 @@
+{
+"Singletons" : "",
+"Adapters" : "",
+"Decorators" : "",
+"Composites" : ""
+}

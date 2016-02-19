@@ -9,7 +9,7 @@ function updateUML() {
 	$.ajax({
 		type: 'POST',
 		url: '/updateUML',
-		data: {"data": toSend.join("\n")}
+		data: {"data": toSend.join("\n")},
 		success: function(data) {
 			refreshPicture()
 		}
@@ -25,6 +25,7 @@ function analyze() {
 			setupCheckboxes(parsedData)
 			var arr = parsedData.Singleton + ' ' + parsedData.Decorator + ' ' + parsedData.Adapter + ' ' + parsedData.Composite
 			// runLoadingBar(arr.split(' '))
+			refreshPicture()
 			$('#setupScreen').addClass('inactive')
 			$('#setupScreen').removeClass('setHeightSetup')
 			$('#mainScreen').removeClass('inactive')
@@ -33,25 +34,33 @@ function analyze() {
 }
 
 function setupCheckboxes(classes) {
-	$('#classSelection').append('Singleton<br />')
-	classes.Singleton.split(' ').forEach(function(str) {
+	if (classes.Singleton != undefined) {
+		$('#classSelection').append('Singleton<br />')
+		classes.Singleton.split(' ').forEach(function(str) {
 			$('#classSelection').append('<input type="checkbox" class="cb" value="' + str + '" checked />' + str + '<br />')
-	})
+		})
+	}
+	
+	if (classes.Decorator != undefined) {
+		$('#classSelection').append('Decorator<br />')
+		classes.Decorator.split(' ').forEach(function(str) {
+			$('#classSelection').append('<input type="checkbox" class="cb" value="' + str + '" checked />' + str + '<br />')
+		})
+	}
 
-	$('#classSelection').append('Decorator<br />')
-	classes.Decorator.split(' ').forEach(function(str) {
-		$('#classSelection').append('<input type="checkbox" class="cb" value="' + str + '" checked />' + str + '<br />')
-	})
+	if (classes.Adapter != undefined) {
+		$('#classSelection').append('Adapter<br />')
+		classes.Adapter.split(' ').forEach(function(str) {
+			$('#classSelection').append('<input type="checkbox" class="cb" value="' + str + '" checked />' + str + '<br />')
+		})
+	}
 
-	$('#classSelection').append('Adapter<br />')
-	classes.Adapter.split(' ').forEach(function(str) {
-		$('#classSelection').append('<input type="checkbox" class="cb" value="' + str + '" checked />' + str + '<br />')
-	})
-
-	$('#classSelection').append('Composite<br />')
-	classes.Composite.split(' ').forEach(function(str) {
-		$('#classSelection').append('<input type="checkbox" class="cb" value="' + str + '" checked />' + str + '<br />')
-	})
+	if (classes.Composite != undefined) {
+		$('#classSelection').append('Composite<br />')
+		classes.Composite.split(' ').forEach(function(str) {
+			$('#classSelection').append('<input type="checkbox" class="cb" value="' + str + '" checked />' + str + '<br />')
+		})
+	}
 }
 
 function refreshPicture() {

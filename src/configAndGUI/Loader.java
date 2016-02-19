@@ -9,8 +9,11 @@ import java.util.Arrays;
 
 public class Loader {
 
-	public static void main(String[] args) throws FileNotFoundException {
-		loadFile(args[0]);
+	public static void main(String[] args) {
+		try {
+			loadFile(args[0]);
+		}
+		catch (Exception e) {}
 	}
 	
 	public static void loadFile(String file) throws FileNotFoundException {
