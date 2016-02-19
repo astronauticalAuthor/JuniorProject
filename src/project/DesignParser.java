@@ -1,6 +1,11 @@
 package project;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.Opcodes;
 
@@ -21,69 +26,58 @@ import interfaces.IDetector;
 import interfaces.IWrapper;
 
 public class DesignParser {
+	private static List<File> DirFiles;
+
 	//
 	public static void main(String[] args) throws IOException{
-		//
-		//output that its initializing
-		//mod loading bar if it exists
 		Config config = ConfigParser.parse("./input_output/config.txt");
+		
+		List<String> classes = new ArrayList<>();
+		for (String className : config.getClasses()) {
+			classes.add(className);
+		}
 		
 		IWrapper classWrap = new MyWrapper();
 		
-
-		
-		for(String p : config.PHASES) {
-			//output that its running some phase
-			//mod loading bar
+		for(String p : config.getPhases()) {
 			IDetector phase = PhaseMap.phases.get(p);
 			if(phase != null) {
 				phase.detect(classWrap);
+			}else {
+				if (config.getInputDir() != null) {
+					DirFiles = new ArrayList<File>();
+					File dir = new File(config.getInputDir());
+					retrieveFiles(dir);
+					for (File file : DirFiles){
+						classes.add(file.getPath().split("bin\\\\")[1].replace(".class","").replace("\\", "."));
+					}
+				}
+				for(String className: classes){
+					IClass current = new ClassRep();
+						
+				 	ClassReader reader = new ClassReader(className);
+					
+				 	ClassDeclarationVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, current, classes);
+				 	ClassFieldVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor, current, classes);
+				 	ClassMethodVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor, current, classes);
+
+				 	reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);			
+					
+				 	classWrap.addClass(current);
+				}
 			}
 		}
 		
-		//return classWrap;
-		
-		for(String className: config.getClasses()){
-			IClass current = new ClassRep();
-				
-		 	ClassReader reader = new ClassReader(className);
-			
-		 	ClassDeclarationVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, current, config.CLASSES);
-		 	ClassFieldVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor, current, config.CLASSES);
-		 	ClassMethodVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor, current, config.CLASSES);
-
-		 	reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);			
-			
-		 	classWrap.addClass(current);
-		}
-		
-		//create class to run all detectors (facade?)
-		//methods called from outside of jar?
-		// now obsolete
-//		DetectionHandler detectHandle = new DetectionHandler(classWrap);
-//		detectHandle.detect();
-		
-		
-		//called from outside of jar?
 		JSONGenerator.generate(classWrap);
-		//output.txt has been created and can be extracted for loading the checkboxes
 		UMLGenerator.generate(classWrap);
-		
-//		System.out.println(SingletonContainer.methods);
-//		System.out.println(SingletonContainer.fields);
-//		System.out.println(SingletonContainer.getSingletons());
-//
-//		String[] arguments = {args[2]};
 
-		
+//		String[] arguments = {args[2]};	
 //		Generator.generateUML(classes);
-
 //		String[] arguments = {args[2]};
 //		
 //		MethodInformation mi = new MethodInformation(args[1], arguments, args[0]);
 //		ClassRep cr = new ClassRep();
-
-
+//
 //		String className = "java.util.Collections";
 //		String methodName = "shuffle";
 //		String[] arguments = {"java.util.List"};
@@ -100,8 +94,17 @@ public class DesignParser {
 //		reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
 //		
 //		System.out.println(mi.toString());
+	}
 
-			
-		
+	private static void retrieveFiles(File dir) {
+		for (File files : dir.listFiles()) {
+			if (files.isDirectory()) {
+				retrieveFiles(files);
+			} else {
+				if (files.getName().endsWith(".class")){
+					DirFiles.add(files);
+				}
+			}
+		}
 	}
 }
